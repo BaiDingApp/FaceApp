@@ -7,11 +7,21 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView"
+    <Button
+        android:id="@+id/action_my_information"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/me_page"/>
+        android:padding = "16dp"
+        android:layout_marginBottom="20dp"
+        android:textSize="20sp"
+        android:text="@string/my_information"/>
+
+    <Button
+        android:id="@+id/action_all_other_rate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding = "16dp"
+        android:textSize="20sp"
+        android:text="@string/all_other_rate"/>
 
 </LinearLayout>

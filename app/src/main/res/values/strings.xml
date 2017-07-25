@@ -19,4 +19,14 @@
     <string name="introduction_recommendation">今日推荐功能</string>
     <string name="my_information">我的信息</string>
     <string name="all_other_rate">历轮别人眼中的我</string>
+
+    <!-- Button on the My Information (Single and NoSingle) Page -->
+    <string name="warning_my_information">请完善以下信息以方便我们向你作高度个性化的约会推荐</string>
+    <string name="basic_information">基本信息</string>
+    <string name="face_information">脸部信息</string>
+    <string name="hate_information">Hate信息</string>
+    <string name="love_information">Love信息</string>
+    <string name="elimination_rules">Elimination Rules</string>
+    <string name="face_preference_survey">照片约会意愿调查</string>
+    <string name="resume_preference_survey">简历约会意愿调查</string>
 </resources>
