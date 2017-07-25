@@ -13,6 +13,7 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity {
 
     private static final String KEY_INDEX = "page_index";
+    private static boolean mIsSingle = true;
     private int mPageIndex = 0;
 
     @Override
@@ -77,10 +78,14 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_me:
                 mPageIndex = 3;
                 // Action to perform when Me Menu item is selected
-                pushFragment(new MeSinglePageFragment());
+                // Push different fragments for different Me Pages
+                if (mIsSingle) {
+                    pushFragment(new MeSinglePageFragment());
+                } else {
+                    pushFragment(new MePageFragment());
+                }
                 break;
         }
-
     }
 
     /**
