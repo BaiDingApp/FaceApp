@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/darker_gray"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/red"
+        android:text="@string/warning_my_information"/>
+
+    <Button
+        android:id="@+id/action_basic_information_single"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding = "16dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="8dp"
+        android:textSize="20sp"
+        android:text="@string/basic_information" />
+
+    <Button
+        android:id="@+id/action_face_information"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding = "16dp"
+        android:layout_marginBottom="6dp"
+        android:textSize="20sp"
+        android:text="@string/face_information" />
+
+    <Button
+        android:id="@+id/action_hate_information"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding = "16dp"
+        android:layout_marginBottom="6dp"
+        android:textSize="20sp"
+        android:text="@string/hate_information" />
+
+    <Button
+        android:id="@+id/action_love_information"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding = "16dp"
+        android:layout_marginBottom="6dp"
+        android:textSize="20sp"
+        android:text="@string/love_information" />
+
+    <Button
+        android:id="@+id/action_elimination_rules"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding = "16dp"
+        android:layout_marginBottom="6dp"
+        android:textSize="20sp"
+        android:text="@string/elimination_rules" />
+
+    <Button
+        android:id="@+id/action_face_survey"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding = "16dp"
+        android:layout_marginBottom="6dp"
+        android:textSize="20sp"
+        android:text="@string/face_preference_survey" />
+
+    <Button
+        android:id="@+id/action_resume_survey"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding = "16dp"
+        android:textSize="20sp"
+        android:text="@string/resume_preference_survey" />
+
+</LinearLayout>
