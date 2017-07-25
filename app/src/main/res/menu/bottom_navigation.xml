@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/action_face"
+        android:icon="@drawable/ic_face_page"
+        android:title="@string/face_page"/>
+
+    <item
+        android:id="@+id/action_resume"
+        android:icon="@drawable/ic_resume_page"
+        android:title="@string/resume_page"/>
+
+    <item
+        android:id="@+id/action_game"
+        android:icon="@drawable/ic_game_page"
+        android:title="@string/game_page"/>
+
+    <item
+        android:id="@+id/action_me"
+        android:icon="@drawable/ic_me_page"
+        android:title="@string/me_page"/>
+
+</menu>
