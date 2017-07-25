@@ -7,4 +7,16 @@
     <string name="game_page">游戏</string>
     <string name="me_page">我</string>
 
+    <!-- Button on the Face Page -->
+    <string name="input_rate">读人</string>
+    <string name="output_rate">别人眼中的我</string>
+    <string name="predict_impression">人工神入 预测第一印象</string>
+
+    <!-- Button on the Me Single Page -->
+    <string name="today_recommendation">今日推荐</string>
+    <string name="open_recommendation">开通</string>
+    <string name="close_recommendation">暂停</string>
+    <string name="introduction_recommendation">今日推荐功能</string>
+    <string name="my_information">我的信息</string>
+    <string name="all_other_rate">历轮别人眼中的我</string>
 </resources>

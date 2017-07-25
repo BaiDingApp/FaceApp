@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_me:
                 mPageIndex = 3;
                 // Action to perform when Me Menu item is selected
-                pushFragment(new MePageFragment());
+                pushFragment(new MeSinglePageFragment());
                 break;
         }
 
