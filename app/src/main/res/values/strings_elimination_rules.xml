@@ -8,4 +8,7 @@
     <string name="elimination_age">比我大5岁： </string>
     <string name="elimination_height">身高低于1.6米： </string>
     <string name="elimination_wife_family">要求男方入赘： </string>
+
+    <string name="yes">是</string>
+    <string name="no">否</string>
 </resources>
