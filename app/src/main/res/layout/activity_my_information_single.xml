@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:textColor="@color/red"
-        android:text="@string/warning_my_information"/>
+        android:text="@string/statement_my_information"/>
 
     <Button
         android:id="@+id/action_basic_information_single"

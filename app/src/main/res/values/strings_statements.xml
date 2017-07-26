@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="statement_face_info_activity">
+        说明：
+        \"今日推荐\" 功能不需要正面照片，只需要脸部特征信息。
+        你可以选择\"上传正面照片\" 让App帮你测量脸部特征（这张照片不会被其他用户看到以保护你的隐私），
+        也可以选择自己测量脸部特征，然后上传。
+    </string>
+
+    <string name="statement_elimination_rules_activity">
+        请在下面的选项上选 \"是\"（表明你绝不考虑和具有该特征的女士约会）
+        或 \"否\"（表明你会考虑和具有该特征的女士约会）
+    </string>
+</resources>

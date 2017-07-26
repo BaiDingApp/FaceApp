@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="elimination_career">事业上强过我： </string>
+    <string name="elimination_after_marriage">婚后期望做家庭主妇： </string>
+    <string name="elimination_housework">不会做饭也不会做家务： </string>
+    <string name="elimination_smoking">抽烟： </string>
+    <string name="elimination_kids">不要小孩儿： </string>
+    <string name="elimination_age">比我大5岁： </string>
+    <string name="elimination_height">身高低于1.6米： </string>
+    <string name="elimination_wife_family">要求男方入赘： </string>
+</resources>

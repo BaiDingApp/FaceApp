@@ -25,7 +25,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MyInformationSingleActivity"></activity>
+        <activity android:name=".MyInformationSingleActivity" />
+        <activity android:name=".BasicInformationDefaultActivity" />
+        <activity android:name=".BasicInformationSingleActivity" />
+        <activity android:name=".FaceInformationActivity" />
+        <activity android:name=".EliminationRulesActivity"></activity>
     </application>
 
 </manifest>

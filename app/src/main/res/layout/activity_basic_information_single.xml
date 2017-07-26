@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:fillViewport="false">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="0">
+
+        <TableRow
+            android:padding="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/basic_birth"
+                android:textSize="16sp"/>
+            <EditText
+                android:id="@+id/action_birth_year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="**** 年 ** 月"/>
+        </TableRow>
+        <View
+            android:layout_height="1dp"
+            android:background="#FF909090" />
+
+
+        <TableRow
+            android:padding="10sp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/basic_education"
+                android:textSize="16sp"/>
+            <Spinner
+                android:id="@+id/action_basic_education"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/spinner_education_levels"/>
+        </TableRow>
+        <View
+            android:layout_height="1dp"
+            android:background="#FF909090" />
+
+
+        <TableRow
+            android:padding="10sp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/basic_occupation"
+                android:textSize="16sp"/>
+            <Spinner
+                android:id="@+id/action_basic_occupation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/spinner_occupations"/>
+        </TableRow>
+        <View
+            android:layout_height="1dp"
+            android:background="#FF909090" />
+
+
+        <TableRow
+            android:padding="10sp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/basic_birth_place"
+                android:textSize="16sp"/>
+            <Spinner
+                android:id="@+id/action_basic_birth_place"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/spinner_place"/>
+        </TableRow>
+        <View
+            android:layout_height="1dp"
+            android:background="#FF909090" />
+
+
+        <TableRow
+            android:padding="10sp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/basic_work_place"
+                android:textSize="16sp"/>
+            <Spinner
+                android:id="@+id/action_basic_work_place"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/spinner_place"/>
+        </TableRow>
+        <View
+            android:layout_height="1dp"
+            android:background="#FF909090" />
+
+
+        <TableRow
+            android:padding="10sp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/basic_oversea"
+                android:textSize="16sp"/>
+            <Spinner
+                android:id="@+id/action_basic_oversea"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/spinner_yes_no"/>
+        </TableRow>
+        <View
+            android:layout_height="1dp"
+            android:background="#FF909090" />
+
+
+        <TableRow
+            android:padding="10sp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/basic_single"
+                android:textSize="16sp"/>
+            <Spinner
+                android:id="@+id/action_basic_single"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/spinner_yes_no"/>
+        </TableRow>
+        <View
+            android:layout_height="1dp"
+            android:background="#FF909090" />
+
+
+        <TableRow
+            android:padding="10sp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/basic_religion"
+                android:textSize="16sp"/>
+            <Spinner
+                android:id="@+id/action_basic_religion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/spinner_yes_no"/>
+        </TableRow>
+        <View
+            android:layout_height="1dp"
+            android:background="#FF909090" />
+
+
+        <TableRow
+            android:padding="10sp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/basic_pet"
+                android:textSize="16sp"/>
+            <Spinner
+                android:id="@+id/action_basic_pet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/spinner_yes_no"/>
+        </TableRow>
+
+    </TableLayout>
+
+</ScrollView>

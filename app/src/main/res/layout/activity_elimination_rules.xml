@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:fillViewport="false">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="0">
+
+        <TableRow
+            android:padding="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/elimination_career"
+                android:textSize="16sp"/>
+        </TableRow>
+        <View
+            android:layout_height="1dp"
+            android:background="#FF909090" />
+
+
+        <TableRow
+            android:padding="10sp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/elimination_after_marriage"
+                android:textSize="16sp"/>
+        </TableRow>
+        <View
+            android:layout_height="1dp"
+            android:background="#FF909090" />
+
+
+        <TableRow
+            android:padding="10sp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/elimination_housework"
+                android:textSize="16sp"/>
+        </TableRow>
+        <View
+            android:layout_height="1dp"
+            android:background="#FF909090" />
+
+
+        <TableRow
+            android:padding="10sp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/elimination_smoking"
+                android:textSize="16sp"/>
+        </TableRow>
+        <View
+            android:layout_height="1dp"
+            android:background="#FF909090" />
+
+
+        <TableRow
+            android:padding="10sp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/elimination_kids"
+                android:textSize="16sp"/>
+        </TableRow>
+        <View
+            android:layout_height="1dp"
+            android:background="#FF909090" />
+
+
+        <TableRow
+            android:padding="10sp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/elimination_age"
+                android:textSize="16sp"/>
+        </TableRow>
+        <View
+            android:layout_height="1dp"
+            android:background="#FF909090" />
+
+
+        <TableRow
+            android:padding="10sp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/elimination_height"
+                android:textSize="16sp"/>
+        </TableRow>
+        <View
+            android:layout_height="1dp"
+            android:background="#FF909090" />
+
+
+        <TableRow
+            android:padding="10sp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/elimination_wife_family"
+                android:textSize="16sp"/>
+        </TableRow>
+
+    </TableLayout>
+
+</ScrollView>
