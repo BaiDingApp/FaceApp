@@ -1,5 +1,6 @@
 package com.baidingapp.faceapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -34,8 +35,8 @@ public class FacePageFragment extends Fragment {
         mOutputRateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO
-                Toast.makeText(getActivity(),"Hi, 别人眼中的我", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), OutputRateFaceActivity.class);
+                startActivity(intent);
             }
         });
 
