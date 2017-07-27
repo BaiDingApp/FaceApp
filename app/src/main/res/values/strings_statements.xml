@@ -11,4 +11,8 @@
         请在下面的选项上选 \"是\"（表明你绝不考虑和具有该特征的女士约会）
         或 \"否\"（表明你会考虑和具有该特征的女士约会）
     </string>
+
+    <string name="statement_love_hate">
+        请问你是否：
+    </string>
 </resources>

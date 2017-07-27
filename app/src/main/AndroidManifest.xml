@@ -29,7 +29,9 @@
         <activity android:name=".BasicInformationDefaultActivity" />
         <activity android:name=".BasicInformationSingleActivity" />
         <activity android:name=".FaceInformationActivity" />
-        <activity android:name=".EliminationRulesActivity"></activity>
+        <activity android:name=".EliminationRulesActivity" />
+        <activity android:name=".SelfLoveInformationActivity" />
+        <activity android:name=".SelfHateInformationActivity"></activity>
     </application>
 
 </manifest>
