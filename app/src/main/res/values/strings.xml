@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">FaceApp</string>
 
+    <!-- General -->
+    <string name="submit">提交</string>
+
     <!-- Bottom Navigation Menu Items -->
     <string name="face_page">知面</string>
     <string name="resume_page">知人</string>

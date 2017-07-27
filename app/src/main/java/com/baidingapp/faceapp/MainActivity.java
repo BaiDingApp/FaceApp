@@ -1,5 +1,7 @@
 package com.baidingapp.faceapp;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -12,14 +14,20 @@ import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String KEY_INDEX = "page_index";
-    private static boolean mIsSingle = true;
+    private static final String KEY_INDEX =
+            "com.baidingapp.faceapp.page_index";
+    private static final String EXTRA_SINGLE =
+            "com.baidingapp.faceapp.single_status";
+    private boolean mIsSingle;
     private int mPageIndex = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Get the Single variable from the BasicInformationDefault activity
+        mIsSingle = getIntent().getBooleanExtra(EXTRA_SINGLE, false);
 
         if (savedInstanceState != null) {
             mPageIndex = savedInstanceState.getInt(KEY_INDEX, 0);
@@ -110,6 +118,12 @@ public class MainActivity extends AppCompatActivity {
     public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
         savedInstanceState.putInt(KEY_INDEX, mPageIndex);
+    }
+
+    public static Intent newIntent (Context packageContext, boolean mIsSingle) {
+        Intent intent = new Intent(packageContext, MainActivity.class);
+        intent.putExtra(EXTRA_SINGLE, mIsSingle);
+        return intent;
     }
 }
 

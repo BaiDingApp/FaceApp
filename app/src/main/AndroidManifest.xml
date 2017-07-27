@@ -18,7 +18,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".BasicInformationDefaultActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,7 +26,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MyInformationSingleActivity" />
-        <activity android:name=".BasicInformationDefaultActivity" />
+        <activity android:name=".MainActivity" />
         <activity android:name=".BasicInformationSingleActivity" />
         <activity android:name=".FaceInformationActivity" />
         <activity android:name=".EliminationRulesActivity" />
