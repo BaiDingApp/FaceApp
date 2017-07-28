@@ -44,8 +44,8 @@ public class FacePageFragment extends Fragment {
         mPredictImpressionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO
-                Toast.makeText(getActivity(),"Hi, 预测第一印象", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), PredictImprssionFaceActivity.class);
+                startActivity(intent);
             }
         });
 

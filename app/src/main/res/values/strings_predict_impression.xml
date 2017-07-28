@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="basic_age">年龄: </string>
+
+    <!-- Age intervals -->
+    <string-array name="spinner_age_interval">
+        <item>请选择</item>
+        <item>20岁及以下</item>
+        <item>21-25岁</item>
+        <item>26-30岁</item>
+        <item>31-35岁</item>
+        <item>36-40岁</item>
+        <item>41-45岁</item>
+        <item>46-50岁</item>
+        <item>51-55岁</item>
+        <item>56-60岁</item>
+        <item>60岁以上</item>
+    </string-array>
+
+    <string name="predict_impression_face">人工神入预测TA对你的第一印象</string>
+    <string name="who_is_it">请告诉我们TA是谁？</string>
+
+    <!-- Social traits of face -->
+    <string name="attractiveness">有魅力: </string>
+    <string name="confidence">自信: </string>
+    <string name="dominance">强势: </string>
+    <string name="competence">能干: </string>
+    <string name="approachability">亲切: </string>
+    <string name="trustworthiness">值得信任: </string>
+    <string name="healthy">健康: </string>
+    <string name="maturity">成熟: </string>
+    <string name="intelligence">聪明: </string>
+    <string name="manliness">阳刚: </string>
+    <string name="warm">热情: </string>
+    <string name="social">爱交际: </string>
+</resources>

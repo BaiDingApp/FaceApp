@@ -32,7 +32,8 @@
         <activity android:name=".EliminationRulesActivity" />
         <activity android:name=".SelfLoveInformationActivity" />
         <activity android:name=".SelfHateInformationActivity" />
-        <activity android:name=".OutputRateFaceActivity"></activity>
+        <activity android:name=".OutputRateFaceActivity" />
+        <activity android:name=".PredictImprssionFaceActivity"></activity>
     </application>
 
 </manifest>

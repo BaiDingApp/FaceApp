@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:fillViewport="false">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/who_is_it"
+            android:padding="10dp"
+            android:textSize="16sp"/>
+
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="0">
+
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+            <TableRow
+                android:padding="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/basic_age"
+                    android:textSize="16sp"/>
+                <Spinner
+                    android:id="@+id/action_basic_age"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/spinner_age_interval"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/basic_education"
+                    android:textSize="16sp"/>
+                <Spinner
+                    android:id="@+id/action_basic_education"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/spinner_education_levels"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/basic_occupation"
+                    android:textSize="16sp"/>
+                <Spinner
+                    android:id="@+id/action_basic_occupation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/spinner_occupations"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/basic_birth_place"
+                    android:textSize="16sp"/>
+                <Spinner
+                    android:id="@+id/action_basic_birth_place"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/spinner_place"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/basic_work_place"
+                    android:textSize="16sp"/>
+                <Spinner
+                    android:id="@+id/action_basic_work_place"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/spinner_place"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/basic_oversea"
+                    android:textSize="16sp"/>
+                <Spinner
+                    android:id="@+id/action_basic_oversea"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/spinner_yes_no"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/basic_single"
+                    android:textSize="16sp"/>
+                <Spinner
+                    android:id="@+id/action_basic_single"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/spinner_yes_no"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/basic_religion"
+                    android:textSize="16sp"/>
+                <Spinner
+                    android:id="@+id/action_basic_religion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/spinner_yes_no"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/basic_pet"
+                    android:textSize="16sp"/>
+                <Spinner
+                    android:id="@+id/action_basic_pet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/spinner_yes_no"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+        </TableLayout>
+
+
+        <Button
+            android:id="@+id/action_submit_basic_info_default"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:padding="10dp"
+            android:textSize="16sp"
+            android:text="@string/predict_impression_face"/>
+
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:rowCount="11"
+            android:columnCount="2">
+
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+            <TableRow>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/attractiveness"
+                    android:padding="10dp"
+                    android:textSize="16sp"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/confidence"
+                    android:padding="10dp"
+                    android:textSize="16sp"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dominance"
+                    android:padding="10dp"
+                    android:textSize="16sp"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/competence"
+                    android:padding="10dp"
+                    android:textSize="16sp"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/approachability"
+                    android:padding="10dp"
+                    android:textSize="16sp"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/trustworthiness"
+                    android:padding="10dp"
+                    android:textSize="16sp"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/healthy"
+                    android:padding="10dp"
+                    android:textSize="16sp"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/maturity"
+                    android:padding="10dp"
+                    android:textSize="16sp"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/intelligence"
+                    android:padding="10dp"
+                    android:textSize="16sp"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/warm"
+                    android:padding="10dp"
+                    android:textSize="16sp"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/social"
+                    android:padding="10dp"
+                    android:textSize="16sp"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+        </TableLayout>
+
+    </LinearLayout>
+
+</ScrollView>
