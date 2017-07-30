@@ -42,6 +42,11 @@ public class InputRateFaceActivity extends AppCompatActivity {
         updateFaceImage(imageUrl1);
 
 
+        // Plot the rates by others
+        mBarChart = (BarChart) findViewById(R.id.input_rate_bar_chart);
+        mBarChart.setNoDataText(getResources().getString(R.string.no_result_available));
+        // mBarChart.setNoDataTextColor(R.color.red);
+
         // onCLick the RESULT button
         Button mResultButton = (Button) findViewById(R.id.action_show_result);
         mResultButton.setOnClickListener(new View.OnClickListener() {
@@ -59,7 +64,6 @@ public class InputRateFaceActivity extends AppCompatActivity {
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: Clear what users chose at the last time
                 mRadioGroup.clearCheck();
                 mBarChart.clear();
 
@@ -81,8 +85,6 @@ public class InputRateFaceActivity extends AppCompatActivity {
     }
 
     private void updateResult() {
-        // Plot the rates by others
-        mBarChart = (BarChart) findViewById(R.id.input_rate_bar_chart);
 
         List<BarEntry> barEntries = new ArrayList<>();
         barEntries.add(new BarEntry(1f, 0.05f));

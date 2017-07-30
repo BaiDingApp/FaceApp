@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="what_i_think_others">我眼中的TA: </string>
+    <string name="no_result_available">请先读人，再看结果</string>
 
     <string name="trait_very_untrustworthy">很不可靠</string>
     <string name="trait_very_trustworthy">很可靠</string>
