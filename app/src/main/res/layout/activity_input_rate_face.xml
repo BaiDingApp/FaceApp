@@ -55,6 +55,7 @@
 
 
         <RadioGroup
+            android:id="@+id/radio_group_input_rate_face"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

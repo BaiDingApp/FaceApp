@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 import android.widget.ScrollView;
 
 import com.github.mikephil.charting.charts.BarChart;
@@ -18,30 +19,30 @@ import java.util.List;
 
 public class InputRateFaceActivity extends AppCompatActivity {
 
+    // The URL is used to test Picasso
+    private final String imageUrl2 = "http://bus.sysu.edu.cn/uploads/Head/201101/201101070814308595.jpg";
+
+
+    private ImageView mFaceImageView;
+    private BarChart mBarChart;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input_rate_face);
+
         final ScrollView mScrollView = (ScrollView) findViewById(R.id.input_rate_scroll_view);
+        final RadioGroup mRadioGroup = (RadioGroup) findViewById(R.id.radio_group_input_rate_face);
 
-
-
-        // Upload and show face image
-        ImageView mFaceImageView = (ImageView) findViewById(R.id.face_image_input_rate);
 
         // The URL is used to test Picasso
-        String imageUrl = "http://www.fdsm.fudan.edu.cn/UserWebEditorUploadImage/upload/image/20160428/6359744927934022586120687.jpg";
-
-        Picasso.with(this).load(imageUrl)
-                // show the resource image while downloading images
-                .placeholder(R.drawable.face_image)
-                // show the resource image if there is an error in downloading images
-                .error(R.drawable.face_image)
-                .into(mFaceImageView);
+        String imageUrl1 = "http://www.fdsm.fudan.edu.cn/UserWebEditorUploadImage/upload/image/20160428/6359744927934022586120687.jpg";
+        // Upload and show face image
+        mFaceImageView = (ImageView) findViewById(R.id.face_image_input_rate);
+        updateFaceImage(imageUrl1);
 
 
-
-        // onCLick the "result" button
+        // onCLick the RESULT button
         Button mResultButton = (Button) findViewById(R.id.action_show_result);
         mResultButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,11 +53,36 @@ public class InputRateFaceActivity extends AppCompatActivity {
             }
         });
 
+
+        // onCLick the NEXT button
+        Button mNextButton = (Button) findViewById(R.id.action_show_next);
+        mNextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // TODO: Clear what users chose at the last time
+                mRadioGroup.clearCheck();
+                mBarChart.clear();
+
+                // Reset a new face image
+                mScrollView.fullScroll(ScrollView.FOCUS_UP);
+                updateFaceImage(imageUrl2);
+            }
+        });
+
+    }
+
+    private void updateFaceImage(String imageUrl) {
+        Picasso.with(this).load(imageUrl)
+                // show the resource image while downloading images
+                .placeholder(R.drawable.face_image)
+                // show the resource image if there is an error in downloading images
+                .error(R.drawable.face_image)
+                .into(mFaceImageView);
     }
 
     private void updateResult() {
         // Plot the rates by others
-        BarChart mBarChart = (BarChart) findViewById(R.id.input_rate_bar_chart);
+        mBarChart = (BarChart) findViewById(R.id.input_rate_bar_chart);
 
         List<BarEntry> barEntries = new ArrayList<>();
         barEntries.add(new BarEntry(1f, 0.05f));
@@ -73,7 +99,6 @@ public class InputRateFaceActivity extends AppCompatActivity {
         BarDataSet barDataSet = new BarDataSet(barEntries, "别人眼中的我");
         BarData theData = new BarData(barDataSet);
         mBarChart.setDescription(null);
-        // mBarChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         mBarChart.setData(theData);
         mBarChart.animateY(1000);
         mBarChart.invalidate();
