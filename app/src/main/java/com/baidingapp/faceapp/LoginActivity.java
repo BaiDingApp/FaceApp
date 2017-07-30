@@ -100,7 +100,7 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void done(AVUser avUser, AVException e) {
                     if (e == null) {
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        Intent intent = new Intent(LoginActivity.this, BasicInformationDefaultActivity.class);
                         startActivity(intent);
                         LoginActivity.this.finish();
                     } else {

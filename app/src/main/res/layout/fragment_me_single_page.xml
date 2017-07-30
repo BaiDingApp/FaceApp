@@ -25,12 +25,16 @@
             android:id="@+id/action_open_recommendation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding = "16dp"
+            android:textSize="20sp"
             android:text="@string/open_recommendation"/>
 
         <Button
             android:id="@+id/action_introduction_recommendation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding = "16dp"
+            android:textSize="20sp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:text="@string/introduction_recommendation"/>
@@ -39,21 +43,39 @@
             android:id="@+id/action_close_recommendation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding = "16dp"
+            android:textSize="20sp"
             android:text="@string/close_recommendation"/>
     </LinearLayout>
+
 
     <Button
         android:id="@+id/action_my_information_single"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
+        android:padding = "16dp"
+        android:textSize="20sp"
         android:text="@string/my_information"/>
+
 
     <Button
         android:id="@+id/action_all_other_rate_single"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
+        android:padding = "16dp"
+        android:textSize="20sp"
         android:text="@string/all_other_rate"/>
+
+
+    <Button
+        android:id="@+id/action_logout_single"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:padding = "16dp"
+        android:textSize="20sp"
+        android:text="@string/action_logout"/>
 
 </LinearLayout>
