@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 public class FacePageFragment extends Fragment {
 
@@ -26,8 +25,8 @@ public class FacePageFragment extends Fragment {
         mInputRateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO
-                Toast.makeText(getActivity(),"Hi, 读人", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), InputRateFaceActivity.class);
+                startActivity(intent);
             }
         });
 

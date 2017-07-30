@@ -18,7 +18,8 @@
             android:layout_marginTop="6dp"
             android:layout_marginBottom="30dp"
             android:layout_gravity="center"
-            android:scaleType="fitCenter"/>
+            android:scaleType="fitCenter"
+            android:contentDescription="@string/face_image_output_rate"/>
 
 
         <LinearLayout
@@ -27,17 +28,19 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
-                android:text="很不可靠"/>
+                android:text="@string/trait_very_untrustworthy"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:text="很可靠"/>
+                android:text="@string/trait_very_trustworthy"/>
 
         </LinearLayout>
 
@@ -55,7 +58,7 @@
             android:layout_height="wrap_content"
             android:padding="8dp"
             android:layout_marginTop="30dp"
-            android:text="认为我可靠的人群画像："/>
+            android:text="@string/profile_trustworthy"/>
 
 
         <TextView
@@ -63,7 +66,7 @@
             android:layout_height="wrap_content"
             android:padding="8dp"
             android:layout_marginTop="30dp"
-            android:text="认为我不可靠的人群画像："/>
+            android:text="@string/profile_untrustworthy"/>
 
     </LinearLayout>
 

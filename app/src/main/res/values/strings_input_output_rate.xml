@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="what_i_think_others">我眼中的TA: </string>
+
+    <string name="trait_very_untrustworthy">很不可靠</string>
+    <string name="trait_very_trustworthy">很可靠</string>
+
+    <!-- Content description of face images -->
+    <string name="face_image_input_rate">被评价照片</string>
+    <string name="face_image_output_rate">用户自己的照片</string>
+
+    <!-- profile of people in the output page -->
+    <string name="profile_untrustworthy">认为我不可靠的人群画像：</string>
+    <string name="profile_trustworthy">认为我可靠的人群画像：</string>
+
+    <!-- Action button -->
+    <string name="show_result">结果</string>
+    <string name="show_next">下一个</string>
+
+    <!-- Scale of the rate -->
+    <string name="rate_value_1">1</string>
+    <string name="rate_value_2">2</string>
+    <string name="rate_value_3">3</string>
+    <string name="rate_value_4">4</string>
+    <string name="rate_value_5">5</string>
+    <string name="rate_value_6">6</string>
+    <string name="rate_value_7">7</string>
+    <string name="rate_value_8">8</string>
+    <string name="rate_value_9">9</string>
+    <string name="rate_value_10">10</string>
+</resources>

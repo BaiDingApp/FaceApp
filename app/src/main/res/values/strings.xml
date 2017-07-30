@@ -38,4 +38,5 @@
     <string name="upload_face_photo">上传脸部照片</string>
     <string name="upload_face_info">上传脸部特征</string>
     <string name="measure_face_info">如何自己测量 \"脸部特征\"</string>
+
 </resources>
