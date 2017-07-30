@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
@@ -38,6 +37,12 @@ public class OutputRateFaceActivity extends AppCompatActivity {
 
 
 
+        // Show the rate by others
+        showResult();
+
+    }
+
+    private void showResult() {
         // Plot the rates by others
         BarChart mBarChart = (BarChart) findViewById(R.id.output_rate_bar_chart);
 

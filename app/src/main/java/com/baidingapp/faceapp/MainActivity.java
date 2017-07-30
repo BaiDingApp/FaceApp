@@ -33,10 +33,10 @@ public class MainActivity extends AppCompatActivity {
             mPageIndex = savedInstanceState.getInt(KEY_INDEX, 0);
         }
 
-        setupNavigationView();
+        setupBottomNavigation();
     }
 
-    private void setupNavigationView() {
+    private void setupBottomNavigation() {
 
         BottomNavigationView mBottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
 

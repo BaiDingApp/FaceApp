@@ -1,5 +1,6 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/input_rate_scroll_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -11,11 +12,11 @@
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/photo_input_rate"
+            android:id="@+id/face_image_input_rate"
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:layout_marginTop="6dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="8dp"
             android:layout_gravity="center"
             android:scaleType="fitCenter"
             android:contentDescription="@string/face_image_input_rate"/>
@@ -26,8 +27,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginBottom="10dp"
-            android:textSize="20sp"
+            android:layout_marginBottom="8dp"
+            android:textSize="16sp"
             android:text="@string/what_i_think_others"/>
 
 
@@ -41,14 +42,14 @@
                 android:layout_weight="1"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:text="@string/trait_very_untrustworthy"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:text="@string/trait_very_trustworthy"/>
         </LinearLayout>
 
@@ -164,14 +165,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:text="@string/basic_occupation"/>
             <Spinner
                 android:id="@+id/action_guess_occupations"
@@ -185,8 +185,8 @@
             android:id="@+id/action_show_result"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:text="@string/show_result"/>
 
 
@@ -208,7 +208,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:text="@string/basic_occupation"/>
             <TextView
                 android:id="@+id/set_text_occupation"
@@ -216,7 +216,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
-                android:textSize="20sp"/>
+                android:textSize="16sp"/>
         </LinearLayout>
 
 
@@ -226,6 +226,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
+            android:textSize="16sp"
             android:text="@string/show_next"/>
 
     </LinearLayout>

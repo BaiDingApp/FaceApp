@@ -34,7 +34,7 @@
         <activity android:name=".SelfHateInformationActivity" />
         <activity android:name=".OutputRateFaceActivity" />
         <activity android:name=".PredictImprssionFaceActivity" />
-        <activity android:name=".InputRateFaceActivity"></activity>
+        <activity android:name=".InputRateFaceActivity" />
     </application>
 
 </manifest>
