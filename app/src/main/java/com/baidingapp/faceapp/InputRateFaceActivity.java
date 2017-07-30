@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.ScrollView;
+import android.widget.Spinner;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
@@ -25,6 +26,7 @@ public class InputRateFaceActivity extends AppCompatActivity {
 
     private ImageView mFaceImageView;
     private BarChart mBarChart;
+    private Spinner mSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +61,7 @@ public class InputRateFaceActivity extends AppCompatActivity {
         });
 
 
+        mSpinner = (Spinner) findViewById(R.id.action_guess_occupations);
         // onCLick the NEXT button
         Button mNextButton = (Button) findViewById(R.id.action_show_next);
         mNextButton.setOnClickListener(new View.OnClickListener() {
@@ -66,6 +69,7 @@ public class InputRateFaceActivity extends AppCompatActivity {
             public void onClick(View view) {
                 mRadioGroup.clearCheck();
                 mBarChart.clear();
+                mSpinner.setSelection(0);
 
                 // Reset a new face image
                 mScrollView.fullScroll(ScrollView.FOCUS_UP);

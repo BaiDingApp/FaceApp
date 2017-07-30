@@ -34,7 +34,7 @@
         android:text="@string/output_rate" />
 
     <Button
-        android:id="@+id/action_predict_impression"
+        android:id="@+id/action_predict_impression_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding = "16dp"

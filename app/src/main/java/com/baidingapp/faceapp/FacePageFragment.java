@@ -39,11 +39,11 @@ public class FacePageFragment extends Fragment {
             }
         });
 
-        Button mPredictImpressionButton = (Button) view.findViewById(R.id.action_predict_impression);
+        Button mPredictImpressionButton = (Button) view.findViewById(R.id.action_predict_impression_button);
         mPredictImpressionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), PredictImprssionFaceActivity.class);
+                Intent intent = new Intent(getActivity(), PredictImpressionFaceActivity.class);
                 startActivity(intent);
             }
         });
