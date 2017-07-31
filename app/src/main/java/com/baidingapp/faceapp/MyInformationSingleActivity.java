@@ -57,5 +57,14 @@ public class MyInformationSingleActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Button mFacePreferenceSurveyButton = (Button) findViewById(R.id.action_face_preference_survey);
+        mFacePreferenceSurveyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MyInformationSingleActivity.this, FacePreferenceSurveyActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

@@ -37,7 +37,8 @@
         <activity android:name=".InputRateFaceActivity" />
         <activity android:name=".BasicInformationDefaultActivity" />
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".FacePreferenceSurveyActivity"></activity>
     </application>
 
 </manifest>

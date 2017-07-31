@@ -12,7 +12,7 @@
     <string name="error_invalid_password">密码大于 4 位</string>
     <string name="error_field_required">这个是必填项</string>
     <string name="action_login_short">登录</string>
-    <string name="action_logout">注销</string>
+    <string name="action_logout">退出登录</string>
 
     <string name="statement_privacy_service_regulations">点击 \"注册"\ 即表明你同意我们的</string>
     <string name="details_privacy_service_regulations">隐私和服务条款</string>
