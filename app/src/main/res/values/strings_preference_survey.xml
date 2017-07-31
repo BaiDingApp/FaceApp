@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="face_preference_info">你的考虑集中已经有6张照片，还需4张才能进行 \"人脸擂台"\ 游戏</string>
+    <string name="face_preference_question">你是否喜欢照片中的人? </string>
+
+    <string name="like">喜欢</string>
+    <string name="dislike">不喜欢</string>
+</resources>
