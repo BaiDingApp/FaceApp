@@ -38,7 +38,8 @@
         <activity android:name=".BasicInformationDefaultActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".FacePreferenceSurveyActivity"></activity>
+        <activity android:name=".FacePreferenceSurveyActivity" />
+        <activity android:name=".FacePreferenceChoiceTaskActivity"></activity>
     </application>
 
 </manifest>

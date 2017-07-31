@@ -91,9 +91,12 @@ public class MeSinglePageFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 AVUser.getCurrentUser().logOut();
-                Intent intent = new Intent(getActivity(), LauncherPageActivity.class);
-                startActivity(intent);
                 getActivity().finish();
+                Intent intent = new Intent(getActivity(), LauncherPageActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
             }
         });
 

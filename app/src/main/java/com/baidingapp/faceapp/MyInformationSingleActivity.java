@@ -66,5 +66,15 @@ public class MyInformationSingleActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        // TODO: replace FacePreferenceChoiceTaskActivity.class with ResumePreferenceSurveyActivity.class
+        Button mResumePreferenceSurveyButton = (Button) findViewById(R.id.action_resume_preference_survey);
+        mResumePreferenceSurveyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MyInformationSingleActivity.this, FacePreferenceChoiceTaskActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

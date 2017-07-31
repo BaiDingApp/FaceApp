@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/show_first_photo"
+        android:layout_width="230dp"
+        android:layout_height="230dp"
+        android:layout_marginBottom="8dp"/>
+
+    <ImageView
+        android:id="@+id/show_second_photo"
+        android:layout_width="230dp"
+        android:layout_height="230dp"
+        android:layout_marginBottom="8dp" />
+
+    <Button
+        android:id="@+id/action_stop_face_choice_task"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/stop_face_preference_survey"/>
+
+</LinearLayout>
+
