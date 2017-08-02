@@ -11,14 +11,14 @@ import android.widget.Spinner;
 
 public class BasicInformationDefaultActivity extends AppCompatActivity {
 
-    private boolean mIsSingle=false;
+    private boolean mIsSingle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_basic_information_default);
 
-        Spinner mSingleSpinner = (Spinner) findViewById(R.id.action_basic_single);
+        Spinner mSingleSpinner = (Spinner) findViewById(R.id.action_basic_single_default);
         ArrayAdapter mSingleAdapter = ArrayAdapter.createFromResource(this,
                 R.array.spinner_yes_no, android.R.layout.simple_spinner_item);
         mSingleSpinner.setAdapter(mSingleAdapter);
@@ -40,6 +40,9 @@ public class BasicInformationDefaultActivity extends AppCompatActivity {
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // TODO
+                // If the former context is RegisterActivity, then finish the current context,
+                //     and start the MainActivity.
                 Intent intent = MainActivity.newIntent(BasicInformationDefaultActivity.this, mIsSingle);
                 startActivity(intent);
                 finish();

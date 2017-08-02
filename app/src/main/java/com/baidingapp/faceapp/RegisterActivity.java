@@ -103,7 +103,8 @@ public class RegisterActivity extends AppCompatActivity {
                 public void done(AVException e) {
                     if (e == null) {
                         // 注册成功，把用户对象赋值给当前用户 AVUser.getCurrentUser()
-                        startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                        startActivity(intent);
                         RegisterActivity.this.finish();
                     } else {
                         // 失败的原因可能有多种，常见的是用户名已经存在

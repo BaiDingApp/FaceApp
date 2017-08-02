@@ -289,6 +289,16 @@
 
         </TableLayout>
 
+
+        <Button
+            android:id="@+id/action_submit_elimination_rules"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10pt"
+            android:padding="10dp"
+            android:textSize="16sp"
+            android:text="@string/submit"/>
+
     </LinearLayout>
 
 </ScrollView>

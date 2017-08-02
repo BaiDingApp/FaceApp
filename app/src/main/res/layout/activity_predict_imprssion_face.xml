@@ -36,7 +36,7 @@
                     android:text="@string/basic_age"
                     android:textSize="16sp"/>
                 <Spinner
-                    android:id="@+id/action_basic_age"
+                    android:id="@+id/action_age"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:entries="@array/spinner_age_interval"/>
@@ -54,7 +54,7 @@
                     android:text="@string/basic_education"
                     android:textSize="16sp"/>
                 <Spinner
-                    android:id="@+id/action_basic_education"
+                    android:id="@+id/action_education"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:entries="@array/spinner_education_levels"/>
@@ -72,7 +72,7 @@
                     android:text="@string/basic_occupation"
                     android:textSize="16sp"/>
                 <Spinner
-                    android:id="@+id/action_basic_occupation"
+                    android:id="@+id/action_occupation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:entries="@array/spinner_occupations"/>
@@ -90,7 +90,7 @@
                     android:text="@string/basic_birth_place"
                     android:textSize="16sp"/>
                 <Spinner
-                    android:id="@+id/action_basic_birth_place"
+                    android:id="@+id/action_birth_place"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:entries="@array/spinner_place"/>
@@ -108,7 +108,7 @@
                     android:text="@string/basic_work_place"
                     android:textSize="16sp"/>
                 <Spinner
-                    android:id="@+id/action_basic_work_place"
+                    android:id="@+id/action_work_place"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:entries="@array/spinner_place"/>
@@ -126,7 +126,7 @@
                     android:text="@string/basic_oversea"
                     android:textSize="16sp"/>
                 <Spinner
-                    android:id="@+id/action_basic_oversea"
+                    android:id="@+id/action_oversea"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:entries="@array/spinner_yes_no"/>
@@ -144,7 +144,7 @@
                     android:text="@string/basic_single"
                     android:textSize="16sp"/>
                 <Spinner
-                    android:id="@+id/action_basic_single"
+                    android:id="@+id/action_single"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:entries="@array/spinner_yes_no"/>
@@ -162,7 +162,7 @@
                     android:text="@string/basic_religion"
                     android:textSize="16sp"/>
                 <Spinner
-                    android:id="@+id/action_basic_religion"
+                    android:id="@+id/action_religion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:entries="@array/spinner_yes_no"/>
@@ -180,7 +180,7 @@
                     android:text="@string/basic_pet"
                     android:textSize="16sp"/>
                 <Spinner
-                    android:id="@+id/action_basic_pet"
+                    android:id="@+id/action_pet"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:entries="@array/spinner_yes_no"/>

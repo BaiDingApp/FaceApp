@@ -2,6 +2,8 @@
 <resources>
     <!-- Basic Information Items -->
     <string name="basic_birth">出生日期: </string>
+    <string name="basic_height">身高: </string>
+    <string name="basic_weight">体重: </string>
     <string name="basic_education">教育水平: </string>
     <string name="basic_occupation">职业: </string>
     <string name="basic_birth_place">籍贯: </string>
@@ -10,6 +12,10 @@
     <string name="basic_single">是否单身: </string>
     <string name="basic_religion">是否有宗教信仰: </string>
     <string name="basic_pet">是否养有宠物: </string>
+
+    <string name="hint_birthday"> **** 年 ** 月</string>
+    <string name="hint_height"> *** 厘米</string>
+    <string name="hint_weight"> *** 公斤</string>
 
     <!-- Education Levels -->
     <string-array name="spinner_yes_no">
