@@ -13,14 +13,13 @@ import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class InputRateFaceActivity extends AppCompatActivity {
 
-    // The URL is used to test Picasso
+    // The URL is used to test Glide
     private final String imageUrl2 = "http://bus.sysu.edu.cn/uploads/Head/201101/201101070814308595.jpg";
 
 
@@ -37,11 +36,11 @@ public class InputRateFaceActivity extends AppCompatActivity {
         final RadioGroup mRadioGroup = (RadioGroup) findViewById(R.id.radio_group_input_rate_face);
 
 
-        // The URL is used to test Picasso
+        // The URL is used to test Glide
         String imageUrl1 = "http://www.fdsm.fudan.edu.cn/UserWebEditorUploadImage/upload/image/20160428/6359744927934022586120687.jpg";
         // Upload and show face image
         mFaceImageView = (ImageView) findViewById(R.id.face_image_input_rate);
-        updateFaceImage(imageUrl1);
+        ImageHelper.ImageLoad(InputRateFaceActivity.this, imageUrl1, mFaceImageView);
 
 
         // Plot the rates by others
@@ -73,20 +72,12 @@ public class InputRateFaceActivity extends AppCompatActivity {
 
                 // Reset a new face image
                 mScrollView.fullScroll(ScrollView.FOCUS_UP);
-                updateFaceImage(imageUrl2);
+                ImageHelper.ImageLoad(InputRateFaceActivity.this, imageUrl2, mFaceImageView);
             }
         });
 
     }
 
-    private void updateFaceImage(String imageUrl) {
-        Picasso.with(this).load(imageUrl)
-                // show the resource image while downloading images
-                .placeholder(R.drawable.face_image)
-                // show the resource image if there is an error in downloading images
-                .error(R.drawable.face_image)
-                .into(mFaceImageView);
-    }
 
     private void updateResult() {
 

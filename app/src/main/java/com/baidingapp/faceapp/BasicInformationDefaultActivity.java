@@ -11,12 +11,11 @@ import android.widget.Spinner;
 
 public class BasicInformationDefaultActivity extends AppCompatActivity {
 
-    private boolean mIsSingle;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_basic_information_default);
+
 
         Spinner mSingleSpinner = (Spinner) findViewById(R.id.action_basic_single_default);
         ArrayAdapter mSingleAdapter = ArrayAdapter.createFromResource(this,
@@ -25,9 +24,7 @@ public class BasicInformationDefaultActivity extends AppCompatActivity {
         mSingleSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position==1) {
-                    mIsSingle = true;
-                }
+                MainActivity.mIsSingle = (position==1);
             }
 
             @Override
@@ -36,6 +33,7 @@ public class BasicInformationDefaultActivity extends AppCompatActivity {
             }
         });
 
+
         Button mSubmitButton = (Button) findViewById(R.id.action_submit_basic_info_default);
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,7 +41,7 @@ public class BasicInformationDefaultActivity extends AppCompatActivity {
                 // TODO
                 // If the former context is RegisterActivity, then finish the current context,
                 //     and start the MainActivity.
-                Intent intent = MainActivity.newIntent(BasicInformationDefaultActivity.this, mIsSingle);
+                Intent intent = new Intent(BasicInformationDefaultActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
             }

@@ -11,8 +11,6 @@ import android.widget.Spinner;
 
 public class BasicInformationSingleActivity extends AppCompatActivity {
 
-    private boolean mIsSingle;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,9 +25,7 @@ public class BasicInformationSingleActivity extends AppCompatActivity {
         mSingleSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position==1) {
-                    mIsSingle = true;
-                }
+                MainActivity.mIsSingle = (position==1);
             }
 
             @Override
@@ -40,12 +36,11 @@ public class BasicInformationSingleActivity extends AppCompatActivity {
 
 
         // onClick SUBMIT button
-        // Deliver the mIsSingle variable to MainActivity
         Button mSubmitButton = (Button) findViewById(R.id.action_submit_basic_info_single);
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = MainActivity.newIntent(BasicInformationSingleActivity.this, mIsSingle);
+                Intent intent = new Intent(BasicInformationSingleActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });

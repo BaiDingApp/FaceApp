@@ -8,7 +8,6 @@ import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,16 +24,10 @@ public class OutputRateFaceActivity extends AppCompatActivity {
         // Upload and show face image
         ImageView mFaceImageView = (ImageView) findViewById(R.id.action_upload_photo_output_rate);
 
-        // The URL is used to test Picasso
+        // The URL is used to test Glide
         String imageUrl = "http://www.fdsm.fudan.edu.cn/UserWebEditorUploadImage/upload/image/20160428/6359744927934022586120687.jpg";
 
-        Picasso.with(this).load(imageUrl)
-                // show the resource image while downloading images
-                .placeholder(R.drawable.face_image)
-                // show the resource image if there is an error in downloading images
-                .error(R.drawable.face_image)
-                .into(mFaceImageView);
-
+        ImageHelper.ImageLoad(OutputRateFaceActivity.this, imageUrl, mFaceImageView);
 
 
         // Show the rate by others

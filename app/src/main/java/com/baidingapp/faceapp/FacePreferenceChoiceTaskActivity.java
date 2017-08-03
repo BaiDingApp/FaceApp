@@ -6,8 +6,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
 
 public class FacePreferenceChoiceTaskActivity extends AppCompatActivity {
@@ -44,7 +42,7 @@ public class FacePreferenceChoiceTaskActivity extends AppCompatActivity {
         // Initialize FIRST ImageView
         mFirstFaceImage = (ImageView) findViewById(R.id.show_first_photo);
         mFirstImageUrl = imageUrlList.get(0);
-        updateFaceImage(mFirstImageUrl, mFirstFaceImage);
+        ImageHelper.ImageLoad(FacePreferenceChoiceTaskActivity.this, mFirstImageUrl, mFirstFaceImage);
 
         // onClick FIRST ImageView
         mFirstFaceImage.setOnClickListener(new View.OnClickListener(){
@@ -52,7 +50,7 @@ public class FacePreferenceChoiceTaskActivity extends AppCompatActivity {
             public void onClick(View view){
                 mCurrentIndex = (mCurrentIndex + 1) % imageUrlList.size();
                 mFirstImageUrl = imageUrlList.get(mCurrentIndex);
-                updateFaceImage(mFirstImageUrl, mFirstFaceImage);
+                ImageHelper.ImageLoad(FacePreferenceChoiceTaskActivity.this, mFirstImageUrl, mFirstFaceImage);
 
                 mWinnerPhotoIndex[mClickNumber-1] = mSecondPrevious;
                 mLoserPhotoIndex[mClickNumber-1] = mFirstPrevious;
@@ -65,7 +63,7 @@ public class FacePreferenceChoiceTaskActivity extends AppCompatActivity {
         // Initialize SECOND ImageView
         mSecondFaceImage = (ImageView) findViewById(R.id.show_second_photo);
         mSecondImageUrl = imageUrlList.get(1);
-        updateFaceImage(mSecondImageUrl, mSecondFaceImage);
+        ImageHelper.ImageLoad(FacePreferenceChoiceTaskActivity.this, mSecondImageUrl, mSecondFaceImage);
 
         // onClick SECOND ImageView
         mSecondFaceImage.setOnClickListener(new View.OnClickListener(){
@@ -73,7 +71,7 @@ public class FacePreferenceChoiceTaskActivity extends AppCompatActivity {
             public void onClick(View view){
                 mCurrentIndex = (mCurrentIndex + 1) % imageUrlList.size();
                 mSecondImageUrl = imageUrlList.get(mCurrentIndex);
-                updateFaceImage(mSecondImageUrl, mSecondFaceImage);
+                ImageHelper.ImageLoad(FacePreferenceChoiceTaskActivity.this, mSecondImageUrl, mSecondFaceImage);
 
                 mWinnerPhotoIndex[mClickNumber-1] = mFirstPrevious;
                 mLoserPhotoIndex[mClickNumber-1] = mSecondPrevious;
@@ -113,16 +111,6 @@ public class FacePreferenceChoiceTaskActivity extends AppCompatActivity {
             }
         });
     }
-
-    private void updateFaceImage(String imageUrl, ImageView faceImage) {
-        Picasso.with(this).load(imageUrl)
-                // show the resource image while downloading images
-                .placeholder(R.drawable.face_image)
-                // show the resource image if there is an error in downloading images
-                .error(R.drawable.face_image)
-                .into(faceImage);
-    }
-
 }
 
 
