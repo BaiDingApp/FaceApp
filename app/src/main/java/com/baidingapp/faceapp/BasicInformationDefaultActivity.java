@@ -46,7 +46,5 @@ public class BasicInformationDefaultActivity extends AppCompatActivity {
                 finish();
             }
         });
-
     }
-
 }
