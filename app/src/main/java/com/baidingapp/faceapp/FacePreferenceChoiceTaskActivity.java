@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.baidingapp.faceapp.helper.ImageHelper;
+
 import java.util.ArrayList;
 
 public class FacePreferenceChoiceTaskActivity extends AppCompatActivity {

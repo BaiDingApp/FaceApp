@@ -1,7 +1,10 @@
-package com.baidingapp.faceapp;
+package com.baidingapp.faceapp.helper;
 
 import android.content.Context;
 import android.widget.ImageView;
+
+import com.baidingapp.faceapp.GlideApp;
+import com.baidingapp.faceapp.R;
 
 public class ImageHelper {
 
