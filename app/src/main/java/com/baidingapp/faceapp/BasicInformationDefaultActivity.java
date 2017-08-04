@@ -20,6 +20,7 @@ public class BasicInformationDefaultActivity extends AppCompatActivity {
         Spinner mSingleSpinner = (Spinner) findViewById(R.id.action_basic_single_default);
         ArrayAdapter mSingleAdapter = ArrayAdapter.createFromResource(this,
                 R.array.spinner_yes_no, android.R.layout.simple_spinner_item);
+        mSingleAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mSingleSpinner.setAdapter(mSingleAdapter);
         mSingleSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
