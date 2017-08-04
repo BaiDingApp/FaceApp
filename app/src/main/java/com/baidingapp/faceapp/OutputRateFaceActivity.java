@@ -21,7 +21,6 @@ public class OutputRateFaceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_output_rate_face);
 
 
-
         // Upload and show face image
         ImageView mFaceImageView = (ImageView) findViewById(R.id.action_upload_photo_output_rate);
 

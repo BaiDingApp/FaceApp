@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="upload_self_face_photo">请上传 \"自己\" 的照片</string>
+    <string name="predict_impression_face">人工神入预测TA对你的第一印象</string>
+    <string name="who_is_it">请告诉我们TA是谁？</string>
+
     <string name="basic_age">年龄: </string>
 
     <!-- Age intervals -->
@@ -16,9 +20,6 @@
         <item>56-60岁</item>
         <item>60岁以上</item>
     </string-array>
-
-    <string name="predict_impression_face">人工神入预测TA对你的第一印象</string>
-    <string name="who_is_it">请告诉我们TA是谁？</string>
 
     <!-- Social traits of face -->
     <string name="attractiveness">有魅力: </string>
