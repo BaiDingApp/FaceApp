@@ -15,9 +15,32 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/upload_self_face_photo"
+            android:padding="10dp"
+            android:textSize="16sp"
+            android:textColor="@color/red"/>
+
+
+        <ImageView
+            android:id="@+id/action_upload_photo_prediction_impression"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="center"
+            android:scaleType="fitCenter"
+            android:contentDescription="@string/face_image_output_rate"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:text="@string/who_is_it"
             android:padding="10dp"
-            android:textSize="16sp"/>
+            android:textSize="16sp"
+            android:textColor="@color/red"/>
 
 
         <TableLayout
@@ -203,6 +226,23 @@
             android:text="@string/predict_impression_face"/>
 
 
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/predict_impression_face_bar_chart"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"/>
+
+
+    </LinearLayout>
+
+</ScrollView>
+
+
+
+<!--
+Text format: "dimension: number"
+
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -356,7 +396,4 @@
 
 
         </TableLayout>
-
-    </LinearLayout>
-
-</ScrollView>
+-->

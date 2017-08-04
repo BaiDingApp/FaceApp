@@ -56,7 +56,7 @@ public class InputRateFaceActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Show the results
                 mScrollView.fullScroll(ScrollView.FOCUS_DOWN);
-                updateResult();
+                showResult();
             }
         });
 
@@ -80,7 +80,7 @@ public class InputRateFaceActivity extends AppCompatActivity {
     }
 
 
-    private void updateResult() {
+    private void showResult() {
 
         List<BarEntry> barEntries = new ArrayList<>();
         barEntries.add(new BarEntry(1f, 0.05f));
