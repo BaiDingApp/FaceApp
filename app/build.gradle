@@ -9,7 +9,7 @@ android {
     }
 
     //为了解决部分第三方库重复打包了META-INF的问题
-    packagingOptions{
+    packagingOptions {
         exclude 'META-INF/LICENSE.txt'
         exclude 'META-INF/NOTICE.txt'
     }
@@ -35,24 +35,21 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-
     // LeanCloud Basic Module
     compile 'cn.leancloud.android:avoscloud-sdk:v4.4.4'
     compile 'com.alibaba:fastjson:1.2.30'
     compile 'com.squareup.okhttp3:okhttp:3.8.0'
     compile 'com.squareup.okio:okio:1.13.0'
-
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:design:25.3.1'
     compile 'com.android.support:support-v4:25.3.1'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
-    testCompile 'junit:junit:4.12'
-
     compile 'com.github.hotchemi:permissionsdispatcher:2.4.0'
-    annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:2.4.0'
-
     compile 'com.github.bumptech.glide:glide:4.0.0'
+    testCompile 'junit:junit:4.12'
+    annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:2.4.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0'
+    compile 'com.ms-square:expandableTextView:0.1.4'
 }

@@ -60,8 +60,8 @@ public class MeSinglePageFragment extends Fragment {
         mIntroductionRecommendationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO
-                Toast.makeText(getActivity(),"今日推荐功能", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), TodayRecomIntroActivity.class);
+                startActivity(intent);
             }
         });
 
