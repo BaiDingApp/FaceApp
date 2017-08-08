@@ -37,9 +37,13 @@ import permissions.dispatcher.RuntimePermissions;
 @RuntimePermissions
 public class OutputRateFaceActivity extends AppCompatActivity {
 
+    // private static final String KEY_IMAGE_URI_STRING =
+    //         "com.baidingapp.faceapp.Picked_image_uri";
+
     private static final int REQUEST_CODE_IMAGE = 1;
 
     private ImageView mFaceImageView;
+    // private Uri mPickedImageUri;
     private String mImagePath;
     private Button mUploadButton;
 
@@ -49,6 +53,14 @@ public class OutputRateFaceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_output_rate_face);
+
+
+        /*
+        // If use this, then the app will crash after picking the photo
+        if (savedInstanceState != null) {
+            mPickedImageUri = Uri.parse(savedInstanceState.getString(IMAGE_URI_STRING));
+        }
+        */
 
 
         // The URL is used to test Glide
@@ -98,6 +110,9 @@ public class OutputRateFaceActivity extends AppCompatActivity {
             if(data == null) {
                 return;
             }
+
+            // Get the Uri of the Picked image
+            // mPickedImageUri = data.getData();
 
             // Show the Picked image on the imageView
             GlideApp.with(this).load(data.getData()).into(mFaceImageView);
@@ -219,4 +234,13 @@ public class OutputRateFaceActivity extends AppCompatActivity {
         mBarChart.animateY(1000);
         mBarChart.invalidate();
     }
+
+    /*
+    // If use this, then the app will crash after picking the photo
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putString(KEY_IMAGE_URI_STRING, mPickedImageUri.toString());
+    }
+    */
 }

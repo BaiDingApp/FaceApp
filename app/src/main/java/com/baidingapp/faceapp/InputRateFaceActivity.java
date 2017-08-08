@@ -20,9 +20,10 @@ import java.util.List;
 
 public class InputRateFaceActivity extends AppCompatActivity {
 
-    // The URL is used to test Glide
-    private final String imageUrl2 = "http://bus.sysu.edu.cn/uploads/Head/201101/201101070814308595.jpg";
-
+    private ScrollView mScrollView;
+    private RadioGroup mRadioGroup;
+    private ArrayList<String> imageUrlList;
+    private int mImageUrlIndex = 0;
 
     private ImageView mFaceImageView;
     private BarChart mBarChart;
@@ -33,15 +34,23 @@ public class InputRateFaceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input_rate_face);
 
-        final ScrollView mScrollView = (ScrollView) findViewById(R.id.input_rate_scroll_view);
-        final RadioGroup mRadioGroup = (RadioGroup) findViewById(R.id.radio_group_input_rate_face);
+        mScrollView = (ScrollView) findViewById(R.id.input_rate_scroll_view);
+        mRadioGroup = (RadioGroup) findViewById(R.id.radio_group_input_rate_face);
 
 
-        // The URL is used to test Glide
-        String imageUrl1 = "http://www.fdsm.fudan.edu.cn/UserWebEditorUploadImage/upload/image/20160428/6359744927934022586120687.jpg";
+        // Just for testing
+        imageUrlList = new ArrayList<>();
+        imageUrlList.add("http://www.fdsm.fudan.edu.cn/UserWebEditorUploadImage/upload/image/20160428/6359744927934022586120687.jpg");
+        imageUrlList.add("http://www.fdsm.fudan.edu.cn/UserWebEditorUploadImage/upload/image/20160428/6359744866697126501620226.jpg");
+        imageUrlList.add("http://www.fdsm.fudan.edu.cn/UserWebEditorUploadImage/upload/image/20160428/6359744858711401934485062.jpg");
+        imageUrlList.add("http://www.fdsm.fudan.edu.cn/UserWebEditorUploadImage/upload/image/20160428/6359744893747816378981865.jpg");
+        imageUrlList.add("http://www.fdsm.fudan.edu.cn/UserWebEditorUploadImage/upload/image/20160428/6359744881214642035467167.jpg");
+        imageUrlList.add("http://www.fdsm.fudan.edu.cn/UserWebEditorUploadImage/upload/image/20160428/6359744868010661201111709.jpg");
+        imageUrlList.add("http://bus.sysu.edu.cn/uploads/Head/201101/201101070814308595.jpg");
+
         // Upload and show face image
         mFaceImageView = (ImageView) findViewById(R.id.face_image_input_rate);
-        ImageHelper.ImageLoad(InputRateFaceActivity.this, imageUrl1, mFaceImageView);
+        ImageHelper.ImageLoad(InputRateFaceActivity.this, imageUrlList.get(mImageUrlIndex), mFaceImageView);
 
 
         // Plot the rates by others
@@ -67,16 +76,22 @@ public class InputRateFaceActivity extends AppCompatActivity {
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mRadioGroup.clearCheck();
-                mBarChart.clear();
-                mSpinner.setSelection(0);
-
-                // Reset a new face image
-                mScrollView.fullScroll(ScrollView.FOCUS_UP);
-                ImageHelper.ImageLoad(InputRateFaceActivity.this, imageUrl2, mFaceImageView);
+                updateFaceImage();
             }
         });
 
+    }
+
+
+    private void updateFaceImage() {
+        mRadioGroup.clearCheck();
+        mBarChart.clear();
+        mSpinner.setSelection(0);
+
+        // Reset a new face image
+        mScrollView.fullScroll(ScrollView.FOCUS_UP);
+        mImageUrlIndex = mImageUrlIndex + 1;
+        ImageHelper.ImageLoad(InputRateFaceActivity.this, imageUrlList.get(mImageUrlIndex), mFaceImageView);
     }
 
 
