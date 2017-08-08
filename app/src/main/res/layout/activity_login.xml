@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/prompt_password"
             android:imeActionId="@+id/login"
-            android:imeActionLabel="@string/action_login_short"
+            android:imeActionLabel="@string/login_short"
             android:imeOptions="actionUnspecified"
             android:inputType="textPassword"
             android:maxLines="1" />
@@ -62,7 +62,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/action_login"
+            android:text="@string/login"
             android:textSize="20sp"
             android:textStyle="bold"/>
 

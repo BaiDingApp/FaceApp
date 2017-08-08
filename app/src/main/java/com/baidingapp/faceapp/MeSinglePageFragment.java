@@ -86,16 +86,11 @@ public class MeSinglePageFragment extends Fragment {
         });
 
 
-        Button mLogoutButton = (Button) view.findViewById(R.id.action_logout_single);
-        mLogoutButton.setOnClickListener(new View.OnClickListener() {
+        Button mSettingsButton = (Button) view.findViewById(R.id.action_settings_single);
+        mSettingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AVUser.getCurrentUser().logOut();
-                getActivity().finish();
-                Intent intent = new Intent(getActivity(), LauncherPageActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                Intent intent = new Intent(getActivity(), SeetingsActivity.class);
                 startActivity(intent);
             }
         });
