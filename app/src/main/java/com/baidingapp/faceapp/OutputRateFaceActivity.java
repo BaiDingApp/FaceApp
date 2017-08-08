@@ -14,6 +14,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVFile;
@@ -39,6 +41,7 @@ public class OutputRateFaceActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_IMAGE = 1;
 
     private String mImagePath;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +58,8 @@ public class OutputRateFaceActivity extends AppCompatActivity {
             }
         });
 
+
+        progressBar = (ProgressBar) findViewById(R.id.uploading_photo_progressBar_output_face);
 
         Button mUploadButton = (Button) findViewById(R.id.action_upload_face_photo_button);
         mUploadButton.setOnClickListener(new View.OnClickListener() {
@@ -150,19 +155,18 @@ public class OutputRateFaceActivity extends AppCompatActivity {
         photoInfo.put("photo", mImageFile);
         */
 
+        progressBar.setVisibility(View.VISIBLE);
+
         mImageFile.saveInBackground(new SaveCallback() {
             @Override
             public void done(AVException e) {
                 if (e == null) {
-                    Log.d("saved", "文件上传成功！");
+                    progressBar.setVisibility(View.GONE);
+                    Toast.makeText(OutputRateFaceActivity.this, R.string.uploading_photo_success, Toast.LENGTH_SHORT).show();
                 } else {
-                    Log.d("saved", "文件上传失败! " + e.getMessage() + "|" + e.getCause());
+                    progressBar.setVisibility(View.GONE);
+                    Toast.makeText(OutputRateFaceActivity.this, R.string.uploading_photo_fail, Toast.LENGTH_SHORT).show();
                 }
-            }
-        }, new ProgressCallback() {
-            @Override
-            public void done(Integer integer) {
-                // Uploading Progress Indicator，an integer between 0 and 100。
             }
         });
     }

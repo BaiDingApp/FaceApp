@@ -44,5 +44,7 @@
     <string name="upload_face_info">上传脸部特征</string>
     <string name="measure_face_info">如何自己测量 \"脸部特征\"</string>
     <string name="upload">上传</string>
+    <string name="uploading_photo_success">照片上传成功</string>
+    <string name="uploading_photo_fail">照片上传失败</string>
 
 </resources>
