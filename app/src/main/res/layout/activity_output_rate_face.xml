@@ -22,6 +22,7 @@
             android:contentDescription="@string/face_image_output_rate"/>
 
 
+        <!--
         <ProgressBar
             android:id="@+id/uploading_photo_progressBar_output_face"
             style="?android:attr/progressBarStyleLarge"
@@ -31,16 +32,33 @@
             android:visibility="gone"
             android:layout_gravity="center"
             />
+         -->
 
 
-        <Button
-            android:id="@+id/action_upload_face_photo_button"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10pt"
-            android:padding="10dp"
-            android:textSize="16sp"
-            android:text="@string/upload"/>
+            android:orientation="horizontal"
+            android:layout_marginBottom="10pt">
+
+            <Button
+                android:id="@+id/action_pick_face_photo_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textSize="16sp"
+                android:text="@string/pick_face_photo"/>
+
+            <Button
+                android:id="@+id/action_upload_face_photo_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="10dp"
+                android:textSize="16sp"
+                android:text="@string/upload_face_photo"/>
+
+        </LinearLayout>
 
 
         <LinearLayout

@@ -40,11 +40,11 @@
     <string name="title_activity_basic_information_single">BasicInformationSingleActivity</string>
 
     <!-- Button on Face Information Activity -->
+    <string name="pick_face_photo">从手机相册选择脸部照片</string>
     <string name="upload_face_photo">上传脸部照片</string>
     <string name="upload_face_info">上传脸部特征</string>
     <string name="measure_face_info">如何自己测量 \"脸部特征\"</string>
-    <string name="upload">上传</string>
-    <string name="uploading_photo_success">照片上传成功</string>
-    <string name="uploading_photo_fail">照片上传失败</string>
+    <string name="uploading_success">上传成功</string>
+    <string name="uploading_fail">上传失败</string>
 
 </resources>

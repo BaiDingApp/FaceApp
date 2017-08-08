@@ -10,11 +10,10 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
+// import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.avos.avoscloud.AVException;
@@ -40,8 +39,11 @@ public class OutputRateFaceActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE_IMAGE = 1;
 
+    private ImageView mFaceImageView;
     private String mImagePath;
-    private ProgressBar progressBar;
+    private Button mUploadButton;
+
+    // private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +51,18 @@ public class OutputRateFaceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_output_rate_face);
 
 
+        // The URL is used to test Glide
+        // String imageUrl = "http://www.fdsm.fudan.edu.cn/UserWebEditorUploadImage/upload/image/20160428/6359744927934022586120687.jpg";
+
+
+        // Initialize the face image view
+        mFaceImageView = (ImageView) findViewById(R.id.face_image_output_rate);
+        ImageHelper.ImageLoad(OutputRateFaceActivity.this, null, mFaceImageView);
+
+
         // Upload and show face image
-        ImageView mFaceImageView = (ImageView) findViewById(R.id.face_image_output_rate);
-        mFaceImageView.setOnClickListener(new View.OnClickListener(){
+        Button mPickButton = (Button) findViewById(R.id.action_pick_face_photo_button);
+        mPickButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 OutputRateFaceActivityPermissionsDispatcher.pickPhotoFromGalleryWithCheck(OutputRateFaceActivity.this);
@@ -59,21 +70,15 @@ public class OutputRateFaceActivity extends AppCompatActivity {
         });
 
 
-        progressBar = (ProgressBar) findViewById(R.id.uploading_photo_progressBar_output_face);
+        // progressBar = (ProgressBar) findViewById(R.id.uploading_photo_progressBar_output_face);
 
-        Button mUploadButton = (Button) findViewById(R.id.action_upload_face_photo_button);
+        mUploadButton = (Button) findViewById(R.id.action_upload_face_photo_button);
         mUploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 uploadPhotoToLeanCloud();
             }
         });
-
-
-        // The URL is used to test Glide
-        String imageUrl = "http://www.fdsm.fudan.edu.cn/UserWebEditorUploadImage/upload/image/20160428/6359744927934022586120687.jpg";
-
-        ImageHelper.ImageLoad(OutputRateFaceActivity.this, imageUrl, mFaceImageView);
 
 
         // Show the rate by others
@@ -93,6 +98,10 @@ public class OutputRateFaceActivity extends AppCompatActivity {
                 return;
             }
 
+            // Show the Picked image on the imageView
+            GlideApp.with(this).load(data.getData()).into(mFaceImageView);
+
+            // Get the real path of the Picked image from its Uri
             mImagePath = getRealPathFromURI(OutputRateFaceActivity.this, data.getData());
 
         }
@@ -155,18 +164,30 @@ public class OutputRateFaceActivity extends AppCompatActivity {
         photoInfo.put("photo", mImageFile);
         */
 
-        progressBar.setVisibility(View.VISIBLE);
+        // progressBar.setVisibility(View.VISIBLE);
 
         mImageFile.saveInBackground(new SaveCallback() {
             @Override
             public void done(AVException e) {
                 if (e == null) {
-                    progressBar.setVisibility(View.GONE);
-                    Toast.makeText(OutputRateFaceActivity.this, R.string.uploading_photo_success, Toast.LENGTH_SHORT).show();
+                    // progressBar.setVisibility(View.GONE);
+                    mUploadButton.setText(R.string.upload_face_photo);
+                    Toast.makeText(OutputRateFaceActivity.this, R.string.uploading_success, Toast.LENGTH_SHORT).show();
                 } else {
-                    progressBar.setVisibility(View.GONE);
-                    Toast.makeText(OutputRateFaceActivity.this, R.string.uploading_photo_fail, Toast.LENGTH_SHORT).show();
+                    // progressBar.setVisibility(View.GONE);
+                    mUploadButton.setText(R.string.upload_face_photo);
+                    Toast.makeText(OutputRateFaceActivity.this, R.string.uploading_fail, Toast.LENGTH_SHORT).show();
                 }
+            }
+        }, new ProgressCallback() {
+            @Override
+            public void done(final Integer integer) {
+                OutputRateFaceActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mUploadButton.setText("已经上传: " + integer + "%");
+                    }
+                });
             }
         });
     }
