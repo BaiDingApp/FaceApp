@@ -78,6 +78,7 @@ public class OutputRateFaceActivity extends AppCompatActivity {
             @Override
             public void onClick(View view){
                 OutputRateFaceActivityPermissionsDispatcher.pickPhotoFromGalleryWithCheck(OutputRateFaceActivity.this);
+                makeUploadButtonEnabled();
             }
         });
 
@@ -86,6 +87,10 @@ public class OutputRateFaceActivity extends AppCompatActivity {
 
         // on Click the UPLOAD button
         mUploadButton = (Button) findViewById(R.id.action_upload_face_photo_button);
+
+        // The Upload Button is enabled after the Pick Button is clicked
+        mUploadButton.setEnabled(false);
+
         mUploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -234,6 +239,13 @@ public class OutputRateFaceActivity extends AppCompatActivity {
         mBarChart.animateY(1000);
         mBarChart.invalidate();
     }
+
+
+    private void makeUploadButtonEnabled() {
+        mUploadButton.setEnabled(true);
+    }
+
+
 
     /*
     // If use this, then the app will crash after picking the photo
