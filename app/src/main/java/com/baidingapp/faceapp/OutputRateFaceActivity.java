@@ -60,7 +60,7 @@ public class OutputRateFaceActivity extends AppCompatActivity {
         ImageHelper.ImageLoad(OutputRateFaceActivity.this, null, mFaceImageView);
 
 
-        // Upload and show face image
+        // on Click the PICK Button
         Button mPickButton = (Button) findViewById(R.id.action_pick_face_photo_button);
         mPickButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -72,6 +72,7 @@ public class OutputRateFaceActivity extends AppCompatActivity {
 
         // progressBar = (ProgressBar) findViewById(R.id.uploading_photo_progressBar_output_face);
 
+        // on Click the UPLOAD button
         mUploadButton = (Button) findViewById(R.id.action_upload_face_photo_button);
         mUploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,7 +134,7 @@ public class OutputRateFaceActivity extends AppCompatActivity {
     }
 
 
-    // Upload Photo to LeanCloud
+    // Pick Photo from the Phone's gallery
     @NeedsPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
     void pickPhotoFromGallery() {
         Intent photoPickerIntent = new Intent(Intent.ACTION_PICK, null);
@@ -150,6 +151,7 @@ public class OutputRateFaceActivity extends AppCompatActivity {
     }
 
 
+    // Upload the picked photo to LeanCloud
     private void uploadPhotoToLeanCloud() {
         AVFile mImageFile = null;
         try {
