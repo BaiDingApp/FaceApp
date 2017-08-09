@@ -109,7 +109,7 @@ public class InputRateFaceActivity extends AppCompatActivity {
         barEntries.add(new BarEntry(9f, 0.05f));
         barEntries.add(new BarEntry(10f, 0.05f));
 
-        BarDataSet barDataSet = new BarDataSet(barEntries, "别人眼中的我");
+        BarDataSet barDataSet = new BarDataSet(barEntries, "别人眼中的TA");
         BarData theData = new BarData(barDataSet);
         mBarChart.setDescription(null);
         mBarChart.setData(theData);

@@ -47,4 +47,8 @@
     <string name="uploading_success">上传成功</string>
     <string name="uploading_fail">上传失败</string>
 
+    <!-- Today Recommendation Activity -->
+    <string name="chat_with_ta">与TA聊天</string>
+    <string name="not_interested_in_ta">我对TA不感兴趣</string>
+
 </resources>

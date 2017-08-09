@@ -42,7 +42,8 @@
         <activity android:name=".FacePreferenceSurveyActivity" />
         <activity android:name=".FacePreferenceChoiceTaskActivity" />
         <activity android:name=".TodayRecomIntroActivity" />
-        <activity android:name=".SeetingsActivity"></activity>
+        <activity android:name=".SeetingsActivity" />
+        <activity android:name=".TodayRecommendationActivity"></activity>
     </application>
 
 </manifest>

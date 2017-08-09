@@ -26,12 +26,12 @@ public class MeSinglePageFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_me_single_page, container, false);
 
 
-        ImageView mChatRoomImage = (ImageView) view.findViewById(R.id.action_enter_chatroom);
+        ImageView mChatRoomImage = (ImageView) view.findViewById(R.id.action_enter_chat_room);
         mChatRoomImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO
-                Toast.makeText(getActivity(),"进入聊天室", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), TodayRecommendationActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -41,7 +41,7 @@ public class MeSinglePageFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // TODO
-                Toast.makeText(getActivity(),"开通——今日推荐", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),"开通 — 今日推荐", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -51,7 +51,7 @@ public class MeSinglePageFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // TODO
-                Toast.makeText(getActivity(),"暂停——今日推荐", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),"暂停 — 今日推荐", Toast.LENGTH_SHORT).show();
             }
         });
 

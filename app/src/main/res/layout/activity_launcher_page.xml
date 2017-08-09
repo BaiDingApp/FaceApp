@@ -34,7 +34,7 @@
             android:layout_marginRight="15dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/action_register"
+            android:text="@string/register"
             android:textSize="30sp"/>
 
         <Button
@@ -45,7 +45,7 @@
             android:layout_marginRight="20dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/action_login"
+            android:text="@string/login"
             android:textSize="30sp"/>
 
     </LinearLayout>
