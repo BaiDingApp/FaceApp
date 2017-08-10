@@ -17,38 +17,30 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-
         <ProgressBar
             android:id="@+id/login_progress"
             style="?android:attr/progressBarStyleLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginBottom="8dp"
             android:visibility="gone"/>
-
-
-        <AutoCompleteTextView
-            android:id="@+id/email_address_login"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:hint="@string/email_address"
-            android:maxLines="1" />
 
 
         <AutoCompleteTextView
             android:id="@+id/username_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
             android:hint="@string/username"
             android:maxLines="1" />
+
 
         <EditText
             android:id="@+id/password_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:hint="@string/prompt_password"
             android:imeActionId="@+id/login"
             android:imeActionLabel="@string/login_short"
@@ -56,15 +48,34 @@
             android:inputType="textPassword"
             android:maxLines="1" />
 
+
         <Button
             android:id="@+id/action_login_second"
             style="?android:textAppearanceSmall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="10dp"
             android:text="@string/login"
-            android:textSize="20sp"
-            android:textStyle="bold"/>
+            android:textSize="20sp"/>
+
+
+        <AutoCompleteTextView
+            android:id="@+id/email_address_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:hint="@string/email_address"
+            android:maxLines="1" />
+
+
+        <Button
+            android:id="@+id/action_reset_password"
+            style="?android:textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/forget_reset_password"
+            android:textSize="20sp"/>
 
     </LinearLayout>
 

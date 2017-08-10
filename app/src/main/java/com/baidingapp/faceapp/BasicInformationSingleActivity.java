@@ -40,8 +40,10 @@ public class BasicInformationSingleActivity extends AppCompatActivity {
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                /*
                 Intent intent = new Intent(BasicInformationSingleActivity.this, MainActivity.class);
                 startActivity(intent);
+                */
             }
         });
 

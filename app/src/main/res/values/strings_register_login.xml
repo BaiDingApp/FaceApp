@@ -14,9 +14,14 @@
     <string name="login_short">登录</string>
     <string name="logout">退出登录</string>
 
+    <string name="forget_reset_password">忘记/重置密码</string>
+    <string name="please_reset_password">请登录你的注册邮箱，然后重新设置或修改密码</string>
+
     <string name="statement_privacy_service_regulations">点击 \"注册"\ 即表明你同意我们的</string>
     <string name="details_privacy_service_regulations">隐私和服务条款</string>
 
+    <!--
     <string name="title_activity_login">登录</string>
     <string name="title_activity_register">注册</string>
+    -->
 </resources>

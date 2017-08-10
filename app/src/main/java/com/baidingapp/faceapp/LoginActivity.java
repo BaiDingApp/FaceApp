@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.LogInCallback;
+import com.avos.avoscloud.RequestPasswordResetCallback;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -23,7 +24,7 @@ public class LoginActivity extends AppCompatActivity {
     private AutoCompleteTextView mUsernameView;
     private EditText mPasswordView;
     private View mProgressView;
-    private View mLoginFormView;
+    // private View mLoginFormView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,33 +58,29 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        mLoginFormView = findViewById(R.id.login_form);
+
+        Button mResetPasswordButton = (Button) findViewById(R.id.action_reset_password);
+        mResetPasswordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                attemptResetPassword();
+            }
+        });
+
+        // mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
     }
 
+
     private void attemptLogin() {
-        mEmailAddressView.setError(null);
         mUsernameView.setError(null);
         mPasswordView.setError(null);
 
-        final String emailAddress = mEmailAddressView.getText().toString();
         final String username = mUsernameView.getText().toString();
         final String password = mPasswordView.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
-
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
-            mPasswordView.setError(getString(R.string.error_invalid_password));
-            focusView = mPasswordView;
-            cancel = true;
-        }
-
-        if (TextUtils.isEmpty(emailAddress)) {
-            mEmailAddressView.setError(getString(R.string.error_field_required));
-            focusView = mEmailAddressView;
-            cancel = true;
-        }
 
         if (TextUtils.isEmpty(username)) {
             mUsernameView.setError(getString(R.string.error_field_required));
@@ -91,10 +88,16 @@ public class LoginActivity extends AppCompatActivity {
             cancel = true;
         }
 
+        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+            mPasswordView.setError(getString(R.string.error_invalid_password));
+            focusView = mPasswordView;
+            cancel = true;
+        }
+
         if (cancel) {
             focusView.requestFocus();
         } else {
-            // showProgress(true);
+            mProgressView.setVisibility(View.VISIBLE);
 
             AVUser.logInInBackground(username, password, new LogInCallback<AVUser>() {
                 @Override
@@ -104,13 +107,44 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(intent);
                         LoginActivity.this.finish();
                     } else {
-                        // showProgress(false);
+                        mProgressView.setVisibility(View.GONE);
                         Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
             });
         }
     }
+
+
+    private void attemptResetPassword() {
+        mEmailAddressView.setError(null);
+        final String emailAddress = mEmailAddressView.getText().toString();
+
+        boolean cancel = false;
+        View focusView = null;
+
+        if (TextUtils.isEmpty(emailAddress)) {
+            mEmailAddressView.setError(getString(R.string.error_field_required));
+            focusView = mEmailAddressView;
+            cancel = true;
+        }
+
+        if (cancel) {
+            focusView.requestFocus();
+        } else {
+            AVUser.requestPasswordResetInBackground(emailAddress, new RequestPasswordResetCallback() {
+                @Override
+                public void done(AVException e) {
+                    if (e == null) {
+                        Toast.makeText(LoginActivity.this, R.string.please_reset_password, Toast.LENGTH_SHORT).show();
+                    } else {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
+    }
+
 
     private boolean isPasswordValid(String password) {
         //TODO

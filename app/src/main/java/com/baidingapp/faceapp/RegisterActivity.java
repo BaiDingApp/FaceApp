@@ -23,7 +23,7 @@ public class RegisterActivity extends AppCompatActivity {
     private AutoCompleteTextView mUsernameView;
     private EditText mPasswordView;
     private View mProgressView;
-    private View mRegisterFormView;
+    // private View mRegisterFormView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +55,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        mRegisterFormView = findViewById(R.id.register_form);
+        // mRegisterFormView = findViewById(R.id.register_form);
         mProgressView = findViewById(R.id.register_progress);
     }
 
@@ -92,7 +92,7 @@ public class RegisterActivity extends AppCompatActivity {
         if (cancel) {
             focusView.requestFocus();
         } else {
-            // showProgress(true);
+            mProgressView.setVisibility(View.VISIBLE);
 
             AVUser user = new AVUser();    // 新建 AVUser 对象实例
             user.setEmail(emailAddress);   // 设置邮箱
@@ -108,7 +108,7 @@ public class RegisterActivity extends AppCompatActivity {
                         RegisterActivity.this.finish();
                     } else {
                         // 失败的原因可能有多种，常见的是用户名已经存在
-                        // showProgress(false);
+                        mProgressView.setVisibility(View.GONE);
                         Toast.makeText(RegisterActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -116,9 +116,8 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-    private void showProgress(final boolean show) {
-    }
 
+    /*
     private boolean isEmailAddressValid(String emailAddress) {
         //TODO
         return emailAddress.contains("@");
@@ -128,6 +127,7 @@ public class RegisterActivity extends AppCompatActivity {
         //TODO
         return username.contains("@");
     }
+    */
 
     private boolean isPasswordValid(String password) {
         //TODO
