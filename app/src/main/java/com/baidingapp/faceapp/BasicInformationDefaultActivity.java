@@ -109,30 +109,8 @@ public class BasicInformationDefaultActivity extends AppCompatActivity
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Save data into LeanCloud
-                AVObject mBasicInfo = new AVObject("BasicInfo");
-                mBasicInfo.put("username", AVUser.getCurrentUser().getUsername());
-                mBasicInfo.put("educationLevel", mEducationPosition);
-                mBasicInfo.put("occupation", mOccupationPosition);
-                mBasicInfo.put("birthPlace", mBirthPlacePosition);
-                mBasicInfo.put("workPlace", mWorkPlacePosition);
-                mBasicInfo.put("oversea", mOverseaPosition);
-                mBasicInfo.put("single", mSinglePosition);
-                mBasicInfo.put("religion", mReligionPosition);
-                mBasicInfo.put("pet", mPetPosition);
-                mBasicInfo.saveInBackground(new SaveCallback() {
-                    @Override
-                    public void done(AVException e) {
-                        /*
-                        if (e == null) {
-                            // Successfully saved
-                        } else {
-                            // Fail to save
-                        }
-                        */
-                    }
-                });
-
+                // Save data to LeanCloud
+                saveDataToLeanCloud();
 
                 // TODO
                 // If the former context is RegisterActivity, then finish the current context,
@@ -143,6 +121,7 @@ public class BasicInformationDefaultActivity extends AppCompatActivity
             }
         });
     }
+
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -186,5 +165,35 @@ public class BasicInformationDefaultActivity extends AppCompatActivity
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+
+    // Save data to LeanCloud
+    private void saveDataToLeanCloud() {
+        AVObject mBasicInfo = new AVObject("BasicInfo");
+
+        mBasicInfo.put("username", AVUser.getCurrentUser());
+
+        mBasicInfo.put("educationLevel", mEducationPosition);
+        mBasicInfo.put("occupation", mOccupationPosition);
+        mBasicInfo.put("birthPlace", mBirthPlacePosition);
+        mBasicInfo.put("workPlace", mWorkPlacePosition);
+        mBasicInfo.put("oversea", mOverseaPosition);
+        mBasicInfo.put("single", mSinglePosition);
+        mBasicInfo.put("religion", mReligionPosition);
+        mBasicInfo.put("pet", mPetPosition);
+
+        mBasicInfo.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(AVException e) {
+                        /*
+                        if (e == null) {
+                            // Successfully saved
+                        } else {
+                            // Fail to save
+                        }
+                        */
+            }
+        });
     }
 }
