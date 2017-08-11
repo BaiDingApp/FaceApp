@@ -22,12 +22,15 @@ import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.ProgressCallback;
 import com.avos.avoscloud.SaveCallback;
 import com.baidingapp.faceapp.helper.ImageHelper;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,24 +72,33 @@ public class OutputRateFaceActivity extends AppCompatActivity {
 
         // Initialize the face image view
         mFaceImageView = (ImageView) findViewById(R.id.face_image_output_rate);
-        ImageHelper.ImageLoad(OutputRateFaceActivity.this, null, mFaceImageView);
+        // ImageHelper.ImageLoad(OutputRateFaceActivity.this, null, mFaceImageView);
+        File myImage = new File(OutputRateFaceActivity.this.getFilesDir(), "outputImage.jpg");
+        GlideApp.with(OutputRateFaceActivity.this)
+                .load(myImage)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
+                .placeholder(R.drawable.face_image)
+                .error(R.drawable.face_image)
+                .into(mFaceImageView);
 
+
+        // on Click the UPLOAD button
+        mUploadButton = (Button) findViewById(R.id.action_upload_face_photo_button);
 
         // on Click the PICK Button
         Button mPickButton = (Button) findViewById(R.id.action_pick_face_photo_button);
+
         mPickButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 OutputRateFaceActivityPermissionsDispatcher.pickPhotoFromGalleryWithCheck(OutputRateFaceActivity.this);
-                makeUploadButtonEnabled();
+                mUploadButton.setEnabled(true);
             }
         });
 
 
         // progressBar = (ProgressBar) findViewById(R.id.uploading_photo_progressBar_output_face);
-
-        // on Click the UPLOAD button
-        mUploadButton = (Button) findViewById(R.id.action_upload_face_photo_button);
 
         // The Upload Button is enabled after the Pick Button is clicked
         mUploadButton.setEnabled(false);
@@ -95,6 +107,8 @@ public class OutputRateFaceActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 uploadPhotoToLeanCloud();
+                copyPhotoToInternalStorage();
+                mUploadButton.setEnabled(false);
             }
         });
 
@@ -124,7 +138,6 @@ public class OutputRateFaceActivity extends AppCompatActivity {
 
             // Get the real path of the Picked image from its Uri
             mImagePath = getRealPathFromURI(OutputRateFaceActivity.this, data.getData());
-
         }
     }
 
@@ -241,11 +254,19 @@ public class OutputRateFaceActivity extends AppCompatActivity {
     }
 
 
-    private void makeUploadButtonEnabled() {
-        mUploadButton.setEnabled(true);
+    private File copyPhotoToInternalStorage() {
+        File externalImage = new File(mImagePath);
+
+        File internalImage = new File(OutputRateFaceActivity.this.getFilesDir(), "outputImage.jpg");
+
+        try {
+            ImageHelper.copyImage(externalImage, internalImage);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return internalImage;
     }
-
-
 
     /*
     // If use this, then the app will crash after picking the photo
