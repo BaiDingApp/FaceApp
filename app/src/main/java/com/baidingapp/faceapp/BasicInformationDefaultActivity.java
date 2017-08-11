@@ -13,6 +13,7 @@ import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.SaveCallback;
+import com.baidingapp.faceapp.helper.MyInfoPreference;
 
 public class BasicInformationDefaultActivity extends AppCompatActivity
         implements AdapterView.OnItemSelectedListener {
@@ -109,6 +110,9 @@ public class BasicInformationDefaultActivity extends AppCompatActivity
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Save data to SharedPreference
+                saveDataToSharedPreference();
+
                 // Save data to LeanCloud
                 saveDataToLeanCloud();
 
@@ -148,7 +152,7 @@ public class BasicInformationDefaultActivity extends AppCompatActivity
 
             case R.id.action_basic_single_default:
                 mSinglePosition = position;
-                MainActivity.mIsSingle = (position==1);
+                // MainActivity.mIsSingle = (position==1);
                 break;
 
             case R.id.action_basic_religion_default:
@@ -165,6 +169,12 @@ public class BasicInformationDefaultActivity extends AppCompatActivity
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+
+    // Save data to SharedPreference
+    private void saveDataToSharedPreference() {
+        MyInfoPreference.setStoredSingle(this, mSinglePosition);
     }
 
 

@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.baidingapp.faceapp.helper.MyInfoPreference;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String KEY_INDEX =
@@ -20,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     // mIsSingle can be modified in both BasicInformationDefault and BasicInformationSingle Activities
     //     So define it as a static variable
-    public static boolean mIsSingle;
+    // public static boolean mIsSingle;
 
 
     @Override
@@ -86,6 +88,11 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.action_me:
                 mPageIndex = 3;
+                // Get the position of Single Spinner from SharedPreference
+                // Update mIsSinge at every time when clicking Me page
+                int mSinglePosition = MyInfoPreference.getStoredSingle(this);
+                boolean mIsSingle = (mSinglePosition==1);
+
                 // Action to perform when Me Menu item is selected
                 // Push different fragments for different Me Pages
                 if (mIsSingle) {

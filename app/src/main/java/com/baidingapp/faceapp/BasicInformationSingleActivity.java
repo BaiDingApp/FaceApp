@@ -9,7 +9,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
+import com.baidingapp.faceapp.helper.MyInfoPreference;
+
 public class BasicInformationSingleActivity extends AppCompatActivity {
+
+
+    private int mSinglePosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +30,9 @@ public class BasicInformationSingleActivity extends AppCompatActivity {
         mSingleSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                MainActivity.mIsSingle = (position==1);
+                // MainActivity.mIsSingle = (position==1);
+                mSinglePosition = position;
+                saveDataToSharedPreference();
             }
 
             @Override
@@ -46,6 +53,11 @@ public class BasicInformationSingleActivity extends AppCompatActivity {
                 */
             }
         });
+    }
 
+
+    // Save data to SharedPreference
+    private void saveDataToSharedPreference() {
+        MyInfoPreference.setStoredSingle(this, mSinglePosition);
     }
 }
