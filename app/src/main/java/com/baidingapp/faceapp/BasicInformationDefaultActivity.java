@@ -27,6 +27,8 @@ public class BasicInformationDefaultActivity extends AppCompatActivity
     private int mReligionPosition;
     private int mPetPosition;
 
+    private Spinner mSingleSpinner;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +82,7 @@ public class BasicInformationDefaultActivity extends AppCompatActivity
 
 
         // onClick Single spinner
-        Spinner mSingleSpinner = (Spinner) findViewById(R.id.action_basic_single_default);
+        mSingleSpinner = (Spinner) findViewById(R.id.action_basic_single_default);
         ArrayAdapter mSingleAdapter = ArrayAdapter.createFromResource(this,
                 R.array.spinner_yes_no, android.R.layout.simple_spinner_item);
         mSingleAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -104,6 +106,10 @@ public class BasicInformationDefaultActivity extends AppCompatActivity
         mPetAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mPetSpinner.setAdapter(mPetAdapter);
         mPetSpinner.setOnItemSelectedListener(this);
+
+
+        // Create the profile by using info saved in SharedPreference when onCreate
+        createProfileUsingSavedData();
 
 
         Button mSubmitButton = (Button) findViewById(R.id.action_submit_basic_info_default);
@@ -172,9 +178,16 @@ public class BasicInformationDefaultActivity extends AppCompatActivity
     }
 
 
+    // Create the profile by using info saved in SharedPreference when onCreate
+    private void createProfileUsingSavedData() {
+        mSinglePosition = MyInfoPreference.getStoredSingle(BasicInformationDefaultActivity.this);
+        mSingleSpinner.setSelection(mSinglePosition);
+    }
+
+
     // Save data to SharedPreference
     private void saveDataToSharedPreference() {
-        MyInfoPreference.setStoredSingle(this, mSinglePosition);
+        MyInfoPreference.setStoredSingle(BasicInformationDefaultActivity.this, mSinglePosition);
     }
 
 

@@ -13,8 +13,9 @@ import com.baidingapp.faceapp.helper.MyInfoPreference;
 
 public class BasicInformationSingleActivity extends AppCompatActivity {
 
-
     private int mSinglePosition;
+
+    private Spinner mSingleSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +24,7 @@ public class BasicInformationSingleActivity extends AppCompatActivity {
 
 
         // onSelect SINGLE spinner
-        Spinner mSingleSpinner = (Spinner) findViewById(R.id.action_basic_single_single);
+        mSingleSpinner = (Spinner) findViewById(R.id.action_basic_single_single);
         ArrayAdapter mSingleAdapter = ArrayAdapter.createFromResource(this,
                 R.array.spinner_yes_no, android.R.layout.simple_spinner_item);
         mSingleSpinner.setAdapter(mSingleAdapter);
@@ -32,7 +33,6 @@ public class BasicInformationSingleActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 // MainActivity.mIsSingle = (position==1);
                 mSinglePosition = position;
-                saveDataToSharedPreference();
             }
 
             @Override
@@ -40,6 +40,10 @@ public class BasicInformationSingleActivity extends AppCompatActivity {
 
             }
         });
+
+
+        // Create the profile by using info saved in SharedPreference when onCreate
+        createProfileUsingSavedData();
 
 
         // onClick SUBMIT button
@@ -51,8 +55,16 @@ public class BasicInformationSingleActivity extends AppCompatActivity {
                 Intent intent = new Intent(BasicInformationSingleActivity.this, MainActivity.class);
                 startActivity(intent);
                 */
+                saveDataToSharedPreference();
             }
         });
+    }
+
+
+    // Create the profile by using info saved in SharedPreference when onCreate
+    private void createProfileUsingSavedData() {
+        mSinglePosition = MyInfoPreference.getStoredSingle(BasicInformationSingleActivity.this);
+        mSingleSpinner.setSelection(mSinglePosition);
     }
 
 
