@@ -2,7 +2,9 @@
     <string name="app_name">FaceApp</string>
 
     <!-- General -->
-    <string name="submit">提交</string>
+    <string name="save">保存</string>
+    <string name="save_success">保存成功</string>
+    <string name="save_fail">保存失败</string>
 
     <!-- Bottom Navigation Menu Items -->
     <string name="face_page">知面</string>

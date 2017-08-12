@@ -8,15 +8,20 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.AVUser;
+import com.avos.avoscloud.GetCallback;
 import com.avos.avoscloud.SaveCallback;
 import com.baidingapp.faceapp.helper.MyInfoPreference;
 
 public class BasicInformationDefaultActivity extends AppCompatActivity
         implements AdapterView.OnItemSelectedListener {
+
+    private String basicInfoObjectId;
 
     private int mEducationPosition;
     private int mOccupationPosition;
@@ -193,30 +198,60 @@ public class BasicInformationDefaultActivity extends AppCompatActivity
 
     // Save data to LeanCloud
     private void saveDataToLeanCloud() {
-        AVObject mBasicInfo = new AVObject("BasicInfo");
+        basicInfoObjectId = MyInfoPreference.getStoredBasicInfoObjectId(BasicInformationDefaultActivity.this);
 
-        mBasicInfo.put("username", AVUser.getCurrentUser());
+        if (basicInfoObjectId != null) {
+            final AVObject mBasicInfo = AVObject.createWithoutData("BasicInfo", basicInfoObjectId);
 
-        mBasicInfo.put("educationLevel", mEducationPosition);
-        mBasicInfo.put("occupation", mOccupationPosition);
-        mBasicInfo.put("birthPlace", mBirthPlacePosition);
-        mBasicInfo.put("workPlace", mWorkPlacePosition);
-        mBasicInfo.put("oversea", mOverseaPosition);
-        mBasicInfo.put("single", mSinglePosition);
-        mBasicInfo.put("religion", mReligionPosition);
-        mBasicInfo.put("pet", mPetPosition);
+            mBasicInfo.put("educationLevel", mEducationPosition);
+            mBasicInfo.put("occupation", mOccupationPosition);
+            mBasicInfo.put("birthPlace", mBirthPlacePosition);
+            mBasicInfo.put("workPlace", mWorkPlacePosition);
+            mBasicInfo.put("oversea", mOverseaPosition);
+            mBasicInfo.put("single", mSinglePosition);
+            mBasicInfo.put("religion", mReligionPosition);
+            mBasicInfo.put("pet", mPetPosition);
 
-        mBasicInfo.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(AVException e) {
-                        /*
-                        if (e == null) {
-                            // Successfully saved
-                        } else {
-                            // Fail to save
-                        }
-                        */
-            }
-        });
-    }
+            mBasicInfo.saveInBackground(new SaveCallback() {
+                @Override
+                public void done(AVException e) {
+                    if (e == null) {
+                        Toast.makeText(BasicInformationDefaultActivity.this, R.string.save_success, Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(BasicInformationDefaultActivity.this, R.string.save_fail, Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        } else {
+            final AVObject mBasicInfo = new AVObject("BasicInfo");
+
+            // Create the pointer that points to _User
+            mBasicInfo.put("username", AVUser.getCurrentUser());
+
+            mBasicInfo.put("educationLevel", mEducationPosition);
+            mBasicInfo.put("occupation", mOccupationPosition);
+            mBasicInfo.put("birthPlace", mBirthPlacePosition);
+            mBasicInfo.put("workPlace", mWorkPlacePosition);
+            mBasicInfo.put("oversea", mOverseaPosition);
+            mBasicInfo.put("single", mSinglePosition);
+            mBasicInfo.put("religion", mReligionPosition);
+            mBasicInfo.put("pet", mPetPosition);
+
+            mBasicInfo.saveInBackground(new SaveCallback() {
+                @Override
+                public void done(AVException e) {
+                    if (e == null) {
+                        // Save the objectId of BasicInfo to SharedPreference
+                        basicInfoObjectId = mBasicInfo.getObjectId();
+                        MyInfoPreference.setStoredBasicInfoObjectId(BasicInformationDefaultActivity.this, basicInfoObjectId);
+
+                        Toast.makeText(BasicInformationDefaultActivity.this, R.string.save_success, Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(BasicInformationDefaultActivity.this, R.string.save_fail, Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+    }  // End of "Save data to LeanCloud"
+
 }

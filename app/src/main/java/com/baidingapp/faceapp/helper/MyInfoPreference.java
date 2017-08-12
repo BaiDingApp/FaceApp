@@ -5,6 +5,8 @@ import android.preference.PreferenceManager;
 
 public class MyInfoPreference {
 
+    private static final String BASIC_INFO_OBJECT_ID = "basicInfoObjectId";
+
     private static final String PREF_BIRTHDAY = "birthday";
     private static final String PREF_HEIGHT = "height";
     private static final String PREF_WEIGHT = "weight";
@@ -16,6 +18,19 @@ public class MyInfoPreference {
     private static final String PREF_SINGLE = "single";
     private static final String PREF_RELIGION = "religion";
     private static final String PREF_PET = "pet";
+
+
+    // Education
+    public static String  getStoredBasicInfoObjectId(Context context) {
+        return PreferenceManager.getDefaultSharedPreferences(context)
+                .getString(BASIC_INFO_OBJECT_ID, null);
+    }
+    public static void setStoredBasicInfoObjectId(Context context, String basicInfoObjectId) {
+        PreferenceManager.getDefaultSharedPreferences(context)
+                .edit()
+                .putString(BASIC_INFO_OBJECT_ID, basicInfoObjectId)
+                .apply();
+    }
 
 
     // Education
