@@ -18,10 +18,12 @@ import android.widget.Toast;
 
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVFile;
+import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.ProgressCallback;
 import com.avos.avoscloud.SaveCallback;
 import com.baidingapp.faceapp.helper.ImageHelper;
+import com.baidingapp.faceapp.helper.MyInfoPreference;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
@@ -48,7 +50,9 @@ public class OutputRateFaceActivity extends AppCompatActivity {
     private ImageView mFaceImageView;
     // private Uri mPickedImageUri;
     private String mImagePath;
+    private AVFile mImageFile = null;
     private Button mUploadButton;
+    private String rateFacePhotoId;
 
     // private ProgressBar progressBar;
 
@@ -106,7 +110,7 @@ public class OutputRateFaceActivity extends AppCompatActivity {
         mUploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                uploadPhotoToLeanCloud();
+                uploadPhotoToLeanCloud(); 
                 copyPhotoToInternalStorage();
                 mUploadButton.setEnabled(false);
             }
@@ -186,26 +190,48 @@ public class OutputRateFaceActivity extends AppCompatActivity {
 
     // Upload the picked photo to LeanCloud
     private void uploadPhotoToLeanCloud() {
-        AVFile mImageFile = null;
         try {
-            mImageFile = AVFile.withAbsoluteLocalPath(AVUser.getCurrentUser().toString()+".jpg", mImagePath);
+            mImageFile = AVFile.withAbsoluteLocalPath(AVUser.getCurrentUser().getUsername()+".jpg", mImagePath);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
-        /*
-        AVObject photoInfo = new AVObject("PhotoInfo");
-        photoInfo.put("username", AVUser.getCurrentUser());
-        photoInfo.put("photo", mImageFile);
-        */
-
         // progressBar.setVisibility(View.VISIBLE);
 
+        // Upload the face photo to the LeanCloud
         mImageFile.saveInBackground(new SaveCallback() {
             @Override
             public void done(AVException e) {
                 if (e == null) {
                     // progressBar.setVisibility(View.GONE);
+
+                    // Get the URL of the uploaded photo
+                    String mPhotoUrl = mImageFile.getUrl();
+
+                    // Update the last uploaded face photo to the RateFacePhoto table (class in LeanCloud)
+                    rateFacePhotoId = MyInfoPreference.getStoredRateFacePhotoId(OutputRateFaceActivity.this);
+
+                    if (rateFacePhotoId != null) {
+                        final AVObject rateFaceObject = AVObject.createWithoutData("RateFacePhoto", rateFacePhotoId);
+                        rateFaceObject.put("photoUrl", mPhotoUrl);
+
+                        rateFaceObject.saveInBackground();
+                    } else {
+                        final AVObject rateFaceObject = new AVObject("RateFacePhoto");
+                        rateFaceObject.put("username", AVUser.getCurrentUser().getUsername());
+                        rateFaceObject.put("userId", AVUser.getCurrentUser());
+                        rateFaceObject.put("photoUrl", mPhotoUrl);
+
+                        rateFaceObject.saveInBackground(new SaveCallback() {
+                            @Override
+                            public void done(AVException e) {
+                                rateFacePhotoId = rateFaceObject.getObjectId();
+                                MyInfoPreference.setStoredRateFacePhotoId(OutputRateFaceActivity.this, rateFacePhotoId);
+                            }
+                        });
+                    }
+
+
                     mUploadButton.setText(R.string.upload_face_photo);
                     Toast.makeText(OutputRateFaceActivity.this, R.string.uploading_success, Toast.LENGTH_SHORT).show();
                 } else {

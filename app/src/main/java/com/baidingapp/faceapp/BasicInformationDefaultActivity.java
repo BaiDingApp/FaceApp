@@ -12,9 +12,7 @@ import android.widget.Toast;
 
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
-import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.AVUser;
-import com.avos.avoscloud.GetCallback;
 import com.avos.avoscloud.SaveCallback;
 import com.baidingapp.faceapp.helper.MyInfoPreference;
 
@@ -226,7 +224,8 @@ public class BasicInformationDefaultActivity extends AppCompatActivity
             final AVObject mBasicInfo = new AVObject("BasicInfo");
 
             // Create the pointer that points to _User
-            mBasicInfo.put("username", AVUser.getCurrentUser());
+            mBasicInfo.put("username", AVUser.getCurrentUser().getUsername());
+            mBasicInfo.put("userId", AVUser.getCurrentUser());
 
             mBasicInfo.put("educationLevel", mEducationPosition);
             mBasicInfo.put("occupation", mOccupationPosition);

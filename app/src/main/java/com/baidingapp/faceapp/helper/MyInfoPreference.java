@@ -6,6 +6,7 @@ import android.preference.PreferenceManager;
 public class MyInfoPreference {
 
     private static final String BASIC_INFO_OBJECT_ID = "basicInfoObjectId";
+    private static final String RATE_FACE_PHOTO_ID = "rateFacePhotoId";
 
     private static final String PREF_BIRTHDAY = "birthday";
     private static final String PREF_HEIGHT = "height";
@@ -20,7 +21,7 @@ public class MyInfoPreference {
     private static final String PREF_PET = "pet";
 
 
-    // Education
+    // BasicInfoObjectId
     public static String  getStoredBasicInfoObjectId(Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context)
                 .getString(BASIC_INFO_OBJECT_ID, null);
@@ -29,6 +30,19 @@ public class MyInfoPreference {
         PreferenceManager.getDefaultSharedPreferences(context)
                 .edit()
                 .putString(BASIC_INFO_OBJECT_ID, basicInfoObjectId)
+                .apply();
+    }
+
+
+    // RateFacePhotoId
+    public static String  getStoredRateFacePhotoId(Context context) {
+        return PreferenceManager.getDefaultSharedPreferences(context)
+                .getString(RATE_FACE_PHOTO_ID, null);
+    }
+    public static void setStoredRateFacePhotoId(Context context, String rateFacePhotoId) {
+        PreferenceManager.getDefaultSharedPreferences(context)
+                .edit()
+                .putString(RATE_FACE_PHOTO_ID, rateFacePhotoId)
                 .apply();
     }
 
