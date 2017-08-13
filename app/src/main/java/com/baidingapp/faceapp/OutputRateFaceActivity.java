@@ -77,7 +77,9 @@ public class OutputRateFaceActivity extends AppCompatActivity {
         // Initialize the face image view
         mFaceImageView = (ImageView) findViewById(R.id.face_image_output_rate);
         // ImageHelper.ImageLoad(OutputRateFaceActivity.this, null, mFaceImageView);
-        File myImage = new File(OutputRateFaceActivity.this.getFilesDir(), "outputImage.jpg");
+        // File myImage = new File(OutputRateFaceActivity.this.getFilesDir(), "outputImage.jpg");
+        File internalStorage = OutputRateFaceActivity.this.getDir(AVUser.getCurrentUser().getUsername(), MODE_PRIVATE);
+        File myImage = new File(internalStorage.getPath(), "outputImage");
         GlideApp.with(OutputRateFaceActivity.this)
                 .load(myImage)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
@@ -283,7 +285,9 @@ public class OutputRateFaceActivity extends AppCompatActivity {
     private File copyPhotoToInternalStorage() {
         File externalImage = new File(mImagePath);
 
-        File internalImage = new File(OutputRateFaceActivity.this.getFilesDir(), "outputImage.jpg");
+        // File internalImage = new File(OutputRateFaceActivity.this.getFilesDir(), "outputImage.jpg");
+        File internalStorage = OutputRateFaceActivity.this.getDir(AVUser.getCurrentUser().getUsername(), MODE_PRIVATE);
+        File internalImage = new File(internalStorage.getPath(), "outputImage");
 
         try {
             ImageHelper.copyImage(externalImage, internalImage);
