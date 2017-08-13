@@ -3,12 +3,21 @@ package com.baidingapp.faceapp;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.ScrollView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.AVQuery;
+import com.avos.avoscloud.AVUser;
+import com.avos.avoscloud.FindCallback;
 import com.baidingapp.faceapp.helper.ImageHelper;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
@@ -16,18 +25,23 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class InputRateFaceActivity extends AppCompatActivity {
 
     private ScrollView mScrollView;
     private RadioGroup mRadioGroup;
-    private ArrayList<String> imageUrlList;
+    private ArrayList<String> rateFacePhotoUrlList = new ArrayList<>();
+    private ArrayList<AVObject> photoRatedList = new ArrayList<>();
     private int mImageUrlIndex = 0;
 
     private ImageView mFaceImageView;
     private BarChart mBarChart;
     private Spinner mSpinner;
+
+    private int rateFaceScore;
+    private int mSpinnerPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,27 +50,49 @@ public class InputRateFaceActivity extends AppCompatActivity {
 
         mScrollView = (ScrollView) findViewById(R.id.input_rate_scroll_view);
         mRadioGroup = (RadioGroup) findViewById(R.id.radio_group_input_rate_face);
-
-
-        // Just for testing
-        imageUrlList = new ArrayList<>();
-        imageUrlList.add("http://www.fdsm.fudan.edu.cn/UserWebEditorUploadImage/upload/image/20160428/6359744927934022586120687.jpg");
-        imageUrlList.add("http://www.fdsm.fudan.edu.cn/UserWebEditorUploadImage/upload/image/20160428/6359744866697126501620226.jpg");
-        imageUrlList.add("http://www.fdsm.fudan.edu.cn/UserWebEditorUploadImage/upload/image/20160428/6359744858711401934485062.jpg");
-        imageUrlList.add("http://www.fdsm.fudan.edu.cn/UserWebEditorUploadImage/upload/image/20160428/6359744893747816378981865.jpg");
-        imageUrlList.add("http://www.fdsm.fudan.edu.cn/UserWebEditorUploadImage/upload/image/20160428/6359744881214642035467167.jpg");
-        imageUrlList.add("http://www.fdsm.fudan.edu.cn/UserWebEditorUploadImage/upload/image/20160428/6359744868010661201111709.jpg");
-        imageUrlList.add("http://bus.sysu.edu.cn/uploads/Head/201101/201101070814308595.jpg");
-
-        // Upload and show face image
         mFaceImageView = (ImageView) findViewById(R.id.face_image_input_rate);
-        ImageHelper.ImageLoad(InputRateFaceActivity.this, imageUrlList.get(mImageUrlIndex), mFaceImageView);
 
 
-        // Plot the rates by others
-        mBarChart = (BarChart) findViewById(R.id.input_rate_bar_chart);
-        mBarChart.setNoDataText(getResources().getString(R.string.no_result_available));
-        // mBarChart.setNoDataTextColor(R.color.red);
+        // Get photoUrl in the RateFacePhoto table (class in LeanCloud)
+        // Initialize the ImageView in getUrlOfRateFacePhotos()
+        getUrlOfRateFacePhotos();
+
+
+        /*
+        mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.rate_value_1:
+                        break;
+                    case R.id.rate_value_2:
+                        break;
+                    case R.id.rate_value_3:
+                        break;
+                }
+            }
+        });
+        */
+
+
+        // onSelect the Spinner
+        mSpinner = (Spinner) findViewById(R.id.action_objective_question);
+        ArrayAdapter mAdapter = ArrayAdapter.createFromResource(this,
+                R.array.spinner_occupations, android.R.layout.simple_spinner_item);
+        mAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mSpinner.setAdapter(mAdapter);
+        mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                mSpinnerPosition = position;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
 
         // onCLick the RESULT button
         Button mResultButton = (Button) findViewById(R.id.action_show_result);
@@ -70,16 +106,45 @@ public class InputRateFaceActivity extends AppCompatActivity {
         });
 
 
-        mSpinner = (Spinner) findViewById(R.id.action_guess_occupations);
+        // Plot the rates by others
+        mBarChart = (BarChart) findViewById(R.id.input_rate_bar_chart);
+        mBarChart.setNoDataText(getResources().getString(R.string.no_result_available));
+        // mBarChart.setNoDataTextColor(R.color.red);
+
+
         // onCLick the NEXT button
         Button mNextButton = (Button) findViewById(R.id.action_show_next);
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                saveDataToLeanCloud();
                 updateFaceImage();
             }
         });
 
+    }
+
+
+    // Get photoUrl in the RateFacePhoto table (class in LeanCloud)
+    private void getUrlOfRateFacePhotos() {
+        // final ArrayList<String> photoUrlList = new ArrayList<>();
+        AVQuery<AVObject> photoUrlQuery = new AVQuery<>("RateFacePhoto");
+        photoUrlQuery.selectKeys(Arrays.asList("photoUrl", "userId", "username"));
+        photoUrlQuery.whereNotEqualTo("username", AVUser.getCurrentUser().getUsername());
+
+        photoUrlQuery.findInBackground(new FindCallback<AVObject>() {
+            @Override
+            public void done(List<AVObject> list, AVException e) {
+                for (AVObject photo : list) {
+                    rateFacePhotoUrlList.add(photo.getString("photoUrl"));
+                    photoRatedList.add(photo);
+                }
+
+                // Initialize the ImageView
+                ImageHelper.ImageLoad(InputRateFaceActivity.this, rateFacePhotoUrlList.get(mImageUrlIndex), mFaceImageView);
+            }
+        });
+        //return photoUrlList;
     }
 
 
@@ -91,7 +156,35 @@ public class InputRateFaceActivity extends AppCompatActivity {
         // Reset a new face image
         mScrollView.fullScroll(ScrollView.FOCUS_UP);
         mImageUrlIndex = mImageUrlIndex + 1;
-        ImageHelper.ImageLoad(InputRateFaceActivity.this, imageUrlList.get(mImageUrlIndex), mFaceImageView);
+        ImageHelper.ImageLoad(InputRateFaceActivity.this, rateFacePhotoUrlList.get(mImageUrlIndex), mFaceImageView);
+    }
+
+
+
+    // Get the rate score of face photo
+    private void getRateFaceScore() {
+        int selectedButtonId = mRadioGroup.getCheckedRadioButtonId();
+        if (selectedButtonId != -1) {
+            RadioButton radioButton = (RadioButton) findViewById(selectedButtonId);
+            String radioString = radioButton.getText().toString();
+            rateFaceScore = Integer.parseInt(radioString.substring(radioString.length() - 1));
+        }
+    }
+
+
+    // Save data to the RateFaceScore table (class in LeanCloud)
+    private void saveDataToLeanCloud() {
+        getRateFaceScore();
+
+        AVObject rateResult = new AVObject("RateFaceScore");
+
+        rateResult.put("subQues", rateFaceScore);
+        rateResult.put("objQues", mSpinnerPosition);
+        rateResult.put("userRating", AVUser.getCurrentUser());
+        // photoRated's type is Pointer, which points to RateFacePhoto
+        rateResult.put("photoRated", photoRatedList.get(mImageUrlIndex));
+
+        rateResult.saveInBackground();
     }
 
 

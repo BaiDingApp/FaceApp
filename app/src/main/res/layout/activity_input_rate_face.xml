@@ -175,7 +175,7 @@
                 android:textSize="16sp"
                 android:text="@string/basic_occupation"/>
             <Spinner
-                android:id="@+id/action_guess_occupations"
+                android:id="@+id/action_objective_question"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:entries="@array/spinner_occupations"/>
