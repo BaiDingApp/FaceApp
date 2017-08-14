@@ -19,7 +19,9 @@ import android.widget.Toast;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVFile;
 import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.AVUser;
+import com.avos.avoscloud.FindCallback;
 import com.avos.avoscloud.ProgressCallback;
 import com.avos.avoscloud.SaveCallback;
 import com.baidingapp.faceapp.helper.ImageHelper;
@@ -34,6 +36,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import permissions.dispatcher.NeedsPermission;
@@ -48,13 +51,13 @@ public class OutputRateFaceActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_IMAGE = 1;
 
     private ImageView mFaceImageView;
-    // private Uri mPickedImageUri;
     private String mImagePath;
     private AVFile mImageFile = null;
     private Button mUploadButton;
     private String rateFacePhotoId;
 
     // private ProgressBar progressBar;
+    // private Uri mPickedImageUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,8 +122,15 @@ public class OutputRateFaceActivity extends AppCompatActivity {
         });
 
 
-        // Show the rate by others
-        showResult();
+        // Get the rate scores from LeanCloud
+        // Show the results via BarChart
+        rateFacePhotoId = MyInfoPreference.getStoredRateFacePhotoId(OutputRateFaceActivity.this);
+        if (rateFacePhotoId != null) {
+            getAllRateScoresAndShowResult(rateFacePhotoId);
+        } else {
+            Toast.makeText(this, R.string.please_upload_photo_first, Toast.LENGTH_SHORT).show();
+        }
+
     }
 
 
@@ -256,21 +266,54 @@ public class OutputRateFaceActivity extends AppCompatActivity {
     }
 
 
-    private void showResult() {
+    // Get the rate scores from LeanCloud
+    // Show the results via BarChart
+    private void getAllRateScoresAndShowResult(String rateFacePhotoId) {
+        AVObject photoRatedObject = AVObject.createWithoutData("RateFacePhoto", rateFacePhotoId);
+
+        AVQuery<AVObject> rateScoreQuery = new AVQuery<>("RateFaceScore");
+        rateScoreQuery.selectKeys(Arrays.asList("subQues", "photoRated"));
+        rateScoreQuery.whereEqualTo("photoRated", photoRatedObject);
+        rateScoreQuery.findInBackground(new FindCallback<AVObject>() {
+            @Override
+            public void done(List<AVObject> list, AVException e) {
+                int[] allRateScores = new int[list.size()];
+
+                int i = 0;
+                for (AVObject object : list) {
+                    allRateScores[i] = object.getInt("subQues");
+                    i++;
+                }
+
+                plotBarChart(allRateScores);
+            }
+        });
+    }
+
+
+    private void plotBarChart(int[] allRateScores) {
         // Plot the rates by others
         BarChart mBarChart = (BarChart) findViewById(R.id.output_rate_bar_chart);
 
+
+        // Get the frequencies of all rate scores
+        int allSize = allRateScores.length;
+        float[] scoreFreq = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+
+        for (int i=0; i<allSize; i++) {
+            scoreFreq[allRateScores[i]-1]++;
+        }
+        for (int i=0; i<10; i++) {
+            scoreFreq[i] = scoreFreq[i]/allSize;
+        }
+
+
+        // Construct data for plotting BarChart
         List<BarEntry> barEntries = new ArrayList<>();
-        barEntries.add(new BarEntry(1f, 0.05f));
-        barEntries.add(new BarEntry(2f, 0.1f));
-        barEntries.add(new BarEntry(3f, 0.1f));
-        barEntries.add(new BarEntry(4f, 0.33f));
-        barEntries.add(new BarEntry(5f, 0.17f));
-        barEntries.add(new BarEntry(6f, 0.05f));
-        barEntries.add(new BarEntry(7f, 0.05f));
-        barEntries.add(new BarEntry(8f, 0.05f));
-        barEntries.add(new BarEntry(9f, 0.05f));
-        barEntries.add(new BarEntry(10f, 0.05f));
+        for (int i=1; i<=10; i++) {
+            barEntries.add(new BarEntry(i, scoreFreq[i-1]));
+        }
+
 
         BarDataSet barDataSet = new BarDataSet(barEntries, "别人眼中的我");
         BarData theData = new BarData(barDataSet);
@@ -297,6 +340,7 @@ public class OutputRateFaceActivity extends AppCompatActivity {
 
         return internalImage;
     }
+
 
     /*
     // If use this, then the app will crash after picking the photo

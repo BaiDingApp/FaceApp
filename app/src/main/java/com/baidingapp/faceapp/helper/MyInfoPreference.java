@@ -8,8 +8,6 @@ import com.avos.avoscloud.AVUser;
 
 public class MyInfoPreference {
 
-    private static String username = AVUser.getCurrentUser().getUsername();
-
     private static final String BASIC_INFO_OBJECT_ID = "basicInfoObjectId";
     private static final String RATE_FACE_PHOTO_ID = "rateFacePhotoId";
 
@@ -61,10 +59,12 @@ public class MyInfoPreference {
 
     // General method - setStoredString & getStoredString
     private static String GeneralGetString(Context context, String keyString) {
+        String username = AVUser.getCurrentUser().getUsername();
         SharedPreferences sp = context.getSharedPreferences(username, Context.MODE_PRIVATE);
         return sp.getString(keyString, null);
     }
     private static void GeneralSetString(Context context, String stringKey, String stringValue) {
+        String username = AVUser.getCurrentUser().getUsername();
         SharedPreferences sp = context.getSharedPreferences(username, Context.MODE_PRIVATE);
         SharedPreferences.Editor spEditor = sp.edit();
         spEditor.putString(stringKey, stringValue)
@@ -74,10 +74,12 @@ public class MyInfoPreference {
 
     // General method - setStoredInt & getStoredInt
     private static int GeneralGetInt(Context context, String keyString) {
+        String username = AVUser.getCurrentUser().getUsername();
         SharedPreferences sp = context.getSharedPreferences(username, Context.MODE_PRIVATE);
         return sp.getInt(keyString, 0);
     }
     private static void GeneralSetInt(Context context, String stringKey, int intValue) {
+        String username = AVUser.getCurrentUser().getUsername();
         SharedPreferences sp = context.getSharedPreferences(username, Context.MODE_PRIVATE);
         SharedPreferences.Editor spEditor = sp.edit();
         spEditor.putInt(stringKey, intValue)

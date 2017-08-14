@@ -2,6 +2,8 @@
 <resources>
     <string name="what_i_think_others">我眼中的TA: </string>
     <string name="no_result_available">请先读人，再看结果</string>
+    <string name="no_face_photp_available">照片读完了，明天再来吧~</string>
+    <string name="please_upload_photo_first">请先上传照片</string>
 
     <string name="trait_very_untrustworthy">很不可靠</string>
     <string name="trait_very_trustworthy">很可靠</string>

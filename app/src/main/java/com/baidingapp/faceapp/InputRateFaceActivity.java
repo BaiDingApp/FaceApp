@@ -58,23 +58,6 @@ public class InputRateFaceActivity extends AppCompatActivity {
         getUrlOfRateFacePhotos();
 
 
-        /*
-        mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId) {
-                    case R.id.rate_value_1:
-                        break;
-                    case R.id.rate_value_2:
-                        break;
-                    case R.id.rate_value_3:
-                        break;
-                }
-            }
-        });
-        */
-
-
         // onSelect the Spinner
         mSpinner = (Spinner) findViewById(R.id.action_objective_question);
         ArrayAdapter mAdapter = ArrayAdapter.createFromResource(this,
@@ -117,8 +100,17 @@ public class InputRateFaceActivity extends AppCompatActivity {
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                saveDataToLeanCloud();
-                updateFaceImage();
+                // Note the different conditions for the two ifs
+                if (mImageUrlIndex < rateFacePhotoUrlList.size()) {
+                    saveDataToLeanCloud();
+                }
+
+                if ((mImageUrlIndex+1) < rateFacePhotoUrlList.size()) {
+                    updateFaceImage();
+                } else {
+                    Toast.makeText(InputRateFaceActivity.this, R.string.no_face_photp_available, Toast.LENGTH_SHORT).show();
+                    // InputRateFaceActivity.this.finish();
+                }
             }
         });
 
