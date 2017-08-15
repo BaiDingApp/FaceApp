@@ -19,13 +19,16 @@ import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.CloudQueryCallback;
+import com.avos.avoscloud.FindCallback;
 import com.baidingapp.faceapp.helper.ImageHelper;
+import com.baidingapp.faceapp.helper.StatHelper;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class InputRateFaceActivity extends AppCompatActivity {
@@ -85,7 +88,7 @@ public class InputRateFaceActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Show the results
                 mScrollView.fullScroll(ScrollView.FOCUS_DOWN);
-                showResult();
+                getOthersRateScoresAndShowResult(photoRatedList.get(mPhotoIndex).getObjectId());
             }
         });
 
@@ -193,6 +196,48 @@ public class InputRateFaceActivity extends AppCompatActivity {
     }
 
 
+    // Get the rate scores by others from LeanCloud
+    // Show the results via BarChart
+    private void getOthersRateScoresAndShowResult(String rateFacePhotoId) {
+        AVObject photoRatedObject = AVObject.createWithoutData("RateFacePhoto", rateFacePhotoId);
+
+        AVQuery<AVObject> rateScoreQuery = new AVQuery<>("RateFaceScore");
+        rateScoreQuery.selectKeys(Arrays.asList("subQues", "photoIdRated"));
+        rateScoreQuery.whereEqualTo("photoIdRated", photoRatedObject);
+        rateScoreQuery.findInBackground(new FindCallback<AVObject>() {
+            @Override
+            public void done(List<AVObject> list, AVException e) {
+                if (list.size()>0) {
+                    int[] allRateScores = new int[list.size()];
+
+                    int i = 0;
+                    for (AVObject object : list) {
+                        allRateScores[i] = object.getInt("subQues");
+                        i++;
+                    }
+
+                    plotBarChart(allRateScores);
+                } else {
+                    Toast.makeText(InputRateFaceActivity.this,
+                            R.string.no_result_due_to_limited_data, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+
+    private void plotBarChart(int[] allRateScores) {
+        List<BarEntry> barEntries = StatHelper.getBarEntry(allRateScores);
+        BarDataSet barDataSet = new BarDataSet(barEntries, "别人眼中的TA");
+        BarData theData = new BarData(barDataSet);
+        mBarChart.setDescription(null);
+        // mBarChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+        mBarChart.setData(theData);
+        mBarChart.animateY(1000);
+        mBarChart.invalidate();
+    }
+
+/*
     private void showResult() {
 
         List<BarEntry> barEntries = new ArrayList<>();
@@ -214,7 +259,7 @@ public class InputRateFaceActivity extends AppCompatActivity {
         mBarChart.animateY(1000);
         mBarChart.invalidate();
     }
-
+*/
 }
 
 

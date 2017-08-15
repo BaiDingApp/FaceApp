@@ -5,6 +5,7 @@
     <string name="no_face_photo_available">照片读完了，明天再来吧~</string>
     <string name="please_upload_photo_first">请先上传照片</string>
     <string name="please_recheck_later">数据比较少，请过一段时间再来查看</string>
+    <string name="no_result_due_to_limited_data">数据比较少，请过一段时间再来查看</string>
 
     <!-- Social trait of face -->
     <string name="trait_very_untrustworthy">很不可靠</string>

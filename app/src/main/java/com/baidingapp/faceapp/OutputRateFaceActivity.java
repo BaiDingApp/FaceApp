@@ -36,7 +36,6 @@ import com.github.mikephil.charting.data.BarEntry;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -276,7 +275,7 @@ public class OutputRateFaceActivity extends AppCompatActivity {
         AVObject photoRatedObject = AVObject.createWithoutData("RateFacePhoto", rateFacePhotoId);
 
         AVQuery<AVObject> rateScoreQuery = new AVQuery<>("RateFaceScore");
-        rateScoreQuery.selectKeys(Arrays.asList("subQues", "photoRated"));
+        rateScoreQuery.selectKeys(Arrays.asList("subQues", "photoIdRated"));
         rateScoreQuery.whereEqualTo("photoIdRated", photoRatedObject);
         rateScoreQuery.findInBackground(new FindCallback<AVObject>() {
             @Override
@@ -292,6 +291,7 @@ public class OutputRateFaceActivity extends AppCompatActivity {
 
                     plotBarChart(allRateScores);
                 }
+                // else { Toast.makeText(OutputRateFaceActivity.this, R.string.please_recheck_later, Toast.LENGTH_SHORT).show(); }
             }
         });
     }
