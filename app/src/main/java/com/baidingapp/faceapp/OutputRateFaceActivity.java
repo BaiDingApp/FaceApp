@@ -26,6 +26,7 @@ import com.avos.avoscloud.ProgressCallback;
 import com.avos.avoscloud.SaveCallback;
 import com.baidingapp.faceapp.helper.ImageHelper;
 import com.baidingapp.faceapp.helper.MyInfoPreference;
+import com.baidingapp.faceapp.helper.StatHelper;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
@@ -55,6 +56,7 @@ public class OutputRateFaceActivity extends AppCompatActivity {
     private AVFile mImageFile = null;
     private Button mUploadButton;
     private String rateFacePhotoId;
+    private BarChart mBarChart;
 
     // private ProgressBar progressBar;
     // private Uri mPickedImageUri;
@@ -64,7 +66,6 @@ public class OutputRateFaceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_output_rate_face);
 
-
         /*
         // If use this, then the app will crash after picking the photo
         if (savedInstanceState != null) {
@@ -72,10 +73,13 @@ public class OutputRateFaceActivity extends AppCompatActivity {
         }
         */
 
+        // BarChart
+        mBarChart = (BarChart) findViewById(R.id.output_rate_bar_chart);
+        mBarChart.setNoDataText(getResources().getString(R.string.please_recheck_later));
+
 
         // The URL is used to test Glide
         // String imageUrl = "http://www.fdsm.fudan.edu.cn/UserWebEditorUploadImage/upload/image/20160428/6359744927934022586120687.jpg";
-
 
         // Initialize the face image view
         mFaceImageView = (ImageView) findViewById(R.id.face_image_output_rate);
@@ -273,48 +277,28 @@ public class OutputRateFaceActivity extends AppCompatActivity {
 
         AVQuery<AVObject> rateScoreQuery = new AVQuery<>("RateFaceScore");
         rateScoreQuery.selectKeys(Arrays.asList("subQues", "photoRated"));
-        rateScoreQuery.whereEqualTo("photoRated", photoRatedObject);
+        rateScoreQuery.whereEqualTo("photoIdRated", photoRatedObject);
         rateScoreQuery.findInBackground(new FindCallback<AVObject>() {
             @Override
             public void done(List<AVObject> list, AVException e) {
-                int[] allRateScores = new int[list.size()];
+                if (list.size()>0) {
+                    int[] allRateScores = new int[list.size()];
 
-                int i = 0;
-                for (AVObject object : list) {
-                    allRateScores[i] = object.getInt("subQues");
-                    i++;
+                    int i = 0;
+                    for (AVObject object : list) {
+                        allRateScores[i] = object.getInt("subQues");
+                        i++;
+                    }
+
+                    plotBarChart(allRateScores);
                 }
-
-                plotBarChart(allRateScores);
             }
         });
     }
 
 
     private void plotBarChart(int[] allRateScores) {
-        // Plot the rates by others
-        BarChart mBarChart = (BarChart) findViewById(R.id.output_rate_bar_chart);
-
-
-        // Get the frequencies of all rate scores
-        int allSize = allRateScores.length;
-        float[] scoreFreq = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-
-        for (int i=0; i<allSize; i++) {
-            scoreFreq[allRateScores[i]-1]++;
-        }
-        for (int i=0; i<10; i++) {
-            scoreFreq[i] = scoreFreq[i]/allSize;
-        }
-
-
-        // Construct data for plotting BarChart
-        List<BarEntry> barEntries = new ArrayList<>();
-        for (int i=1; i<=10; i++) {
-            barEntries.add(new BarEntry(i, scoreFreq[i-1]));
-        }
-
-
+        List<BarEntry> barEntries = StatHelper.getBarEntry(allRateScores);
         BarDataSet barDataSet = new BarDataSet(barEntries, "别人眼中的我");
         BarData theData = new BarData(barDataSet);
         mBarChart.setDescription(null);
