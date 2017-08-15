@@ -13,10 +13,12 @@ import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.avos.avoscloud.AVCloudQueryResult;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.AVUser;
+import com.avos.avoscloud.CloudQueryCallback;
 import com.avos.avoscloud.FindCallback;
 import com.baidingapp.faceapp.helper.ImageHelper;
 import com.github.mikephil.charting.charts.BarChart;
@@ -32,10 +34,12 @@ public class InputRateFaceActivity extends AppCompatActivity {
 
     private ScrollView mScrollView;
     private RadioGroup mRadioGroup;
-    private ArrayList<String> rateFacePhotoUrlList = new ArrayList<>();
+    // private ArrayList<String> rateFacePhotoUrlList = new ArrayList<>();
     private ArrayList<AVObject> photoRatedList = new ArrayList<>();
     private int mImageUrlIndex = 0;
 
+    private Button mNextButton;
+    private Button mResultButton;
     private ImageView mFaceImageView;
     private BarChart mBarChart;
     private Spinner mSpinner;
@@ -78,7 +82,7 @@ public class InputRateFaceActivity extends AppCompatActivity {
 
 
         // onCLick the RESULT button
-        Button mResultButton = (Button) findViewById(R.id.action_show_result);
+        mResultButton = (Button) findViewById(R.id.action_show_result);
         mResultButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -96,16 +100,16 @@ public class InputRateFaceActivity extends AppCompatActivity {
 
 
         // onCLick the NEXT button
-        Button mNextButton = (Button) findViewById(R.id.action_show_next);
+        mNextButton = (Button) findViewById(R.id.action_show_next);
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Note the different conditions for the two ifs
-                if (mImageUrlIndex < rateFacePhotoUrlList.size()) {
+                if (mImageUrlIndex < photoRatedList.size()) {
                     saveDataToLeanCloud();
                 }
 
-                if ((mImageUrlIndex+1) < rateFacePhotoUrlList.size()) {
+                if ((mImageUrlIndex+1) < photoRatedList.size()) {
                     updateFaceImage();
                 } else {
                     Toast.makeText(InputRateFaceActivity.this, R.string.no_face_photp_available, Toast.LENGTH_SHORT).show();
@@ -117,7 +121,67 @@ public class InputRateFaceActivity extends AppCompatActivity {
     }
 
 
+
     // Get photoUrl in the RateFacePhoto table (class in LeanCloud)
+    private void getUrlOfRateFacePhotos() {
+        // String photoNotRated = "select * from RateFacePhoto where objectId != (select photoRated from RateFaceScore where userRating = AVUser.getCurrentUser().getObjectId()";
+        
+        // String photoNotRated = "select * from RateFacePhoto where objectId !=  '599115cb570c35006b684d5c' ";
+        String currUsername = AVUser.getCurrentUser().getUsername();
+        String photoNotRated = String.format("select * from RateFacePhoto where username != (select userRatedId from RateFaceScore where userRatingId = ? )");
+
+        AVQuery.doCloudQueryInBackground(photoNotRated, new CloudQueryCallback<AVCloudQueryResult>() {
+            @Override
+            public void done(AVCloudQueryResult avCloudQueryResult, AVException e) {
+                for (AVObject photo : (avCloudQueryResult.getResults())) {
+                    // rateFacePhotoUrlList.add(photo.getString("photoUrl"));
+                    photoRatedList.add(photo);
+                }
+
+                // Initialize the ImageView
+                if (photoRatedList.size() != 0) {
+                    ImageHelper.ImageLoad(InputRateFaceActivity.this, photoRatedList.get(mImageUrlIndex).getString("photoUrl"), mFaceImageView);
+                } else {
+                    Toast.makeText(InputRateFaceActivity.this, R.string.no_face_photp_available, Toast.LENGTH_SHORT).show();
+                    mNextButton.setEnabled(false);
+                    mResultButton.setEnabled(false);
+                }
+
+            }
+        }, currUsername);
+    }
+
+    /*
+    private void getUrlOfRateFacePhotos() {
+        // Inner Query
+        AVObject currUser = AVObject.createWithoutData("_User", AVUser.getCurrentUser().getObjectId());
+        AVQuery<AVObject> photoRatedQuery = new AVQuery<>("RateFaceScore");
+        photoRatedQuery.whereEqualTo("userRating", currUser);
+
+        // Main (Outer) Query
+        AVQuery<AVObject> photoNotRatedQuery = new AVQuery<>("RateFacePhoto");
+        photoNotRatedQuery.selectKeys(Arrays.asList("photoUrl", "userId", "username"));
+        photoNotRatedQuery.whereNotEqualTo("username", AVUser.getCurrentUser().getUsername());
+
+        photoNotRatedQuery.whereMatchesQuery("photoRated", photoRatedQuery);
+
+        // Query result
+        photoNotRatedQuery.findInBackground(new FindCallback<AVObject>() {
+            @Override
+            public void done(List<AVObject> list, AVException e) {
+                for (AVObject photo : list) {
+                    rateFacePhotoUrlList.add(photo.getString("photoUrl"));
+                    photoRatedList.add(photo);
+                }
+
+                // Initialize the ImageView
+                ImageHelper.ImageLoad(InputRateFaceActivity.this, rateFacePhotoUrlList.get(mImageUrlIndex), mFaceImageView);
+            }
+        });
+    }
+    */
+
+    /*
     private void getUrlOfRateFacePhotos() {
         // final ArrayList<String> photoUrlList = new ArrayList<>();
         AVQuery<AVObject> photoUrlQuery = new AVQuery<>("RateFacePhoto");
@@ -138,6 +202,7 @@ public class InputRateFaceActivity extends AppCompatActivity {
         });
         //return photoUrlList;
     }
+    */
 
 
     private void updateFaceImage() {
@@ -148,7 +213,7 @@ public class InputRateFaceActivity extends AppCompatActivity {
         // Reset a new face image
         mScrollView.fullScroll(ScrollView.FOCUS_UP);
         mImageUrlIndex = mImageUrlIndex + 1;
-        ImageHelper.ImageLoad(InputRateFaceActivity.this, rateFacePhotoUrlList.get(mImageUrlIndex), mFaceImageView);
+        ImageHelper.ImageLoad(InputRateFaceActivity.this, photoRatedList.get(mImageUrlIndex).getString("photoUrl"), mFaceImageView);
     }
 
 
@@ -172,8 +237,10 @@ public class InputRateFaceActivity extends AppCompatActivity {
 
         rateResult.put("subQues", rateFaceScore);
         rateResult.put("objQues", mSpinnerPosition);
-        rateResult.put("userRating", AVUser.getCurrentUser());
+        rateResult.put("userRatingId", AVUser.getCurrentUser().getUsername());
+        rateResult.put("userRatedId", photoRatedList.get(mImageUrlIndex).getString("username"));
         // photoRated's type is Pointer, which points to RateFacePhoto
+        rateResult.put("userRating", AVUser.getCurrentUser());
         rateResult.put("photoRated", photoRatedList.get(mImageUrlIndex));
 
         rateResult.saveInBackground();
