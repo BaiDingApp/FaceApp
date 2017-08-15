@@ -19,7 +19,6 @@ import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.CloudQueryCallback;
-import com.avos.avoscloud.FindCallback;
 import com.baidingapp.faceapp.helper.ImageHelper;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
@@ -27,7 +26,6 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class InputRateFaceActivity extends AppCompatActivity {
@@ -123,18 +121,18 @@ public class InputRateFaceActivity extends AppCompatActivity {
 
 
     // Get photoUrl in the RateFacePhoto table (class in LeanCloud)
+    // Use CQL query method
+    // 1. Users cannot see the photos they saw before; 2. They can see their own photos once
     private void getUrlOfRateFacePhotos() {
-        // String photoNotRated = "select * from RateFacePhoto where objectId != (select photoRated from RateFaceScore where userRating = AVUser.getCurrentUser().getObjectId()";
-        
         // String photoNotRated = "select * from RateFacePhoto where objectId !=  '599115cb570c35006b684d5c' ";
         String currUsername = AVUser.getCurrentUser().getUsername();
-        String photoNotRated = String.format("select * from RateFacePhoto where username != (select userRatedId from RateFaceScore where userRatingId = ? )");
+        // String photoNotRated = String.format("select * from RateFacePhoto where username != (select userRatedId from RateFaceScore where userRatingId = ? )");
+        String photoNotRated = "select * from RateFacePhoto where username != (select userRatedId from RateFaceScore where userRatingId = ? )";
 
         AVQuery.doCloudQueryInBackground(photoNotRated, new CloudQueryCallback<AVCloudQueryResult>() {
             @Override
             public void done(AVCloudQueryResult avCloudQueryResult, AVException e) {
                 for (AVObject photo : (avCloudQueryResult.getResults())) {
-                    // rateFacePhotoUrlList.add(photo.getString("photoUrl"));
                     photoRatedList.add(photo);
                 }
 
@@ -142,67 +140,14 @@ public class InputRateFaceActivity extends AppCompatActivity {
                 if (photoRatedList.size() != 0) {
                     ImageHelper.ImageLoad(InputRateFaceActivity.this, photoRatedList.get(mImageUrlIndex).getString("photoUrl"), mFaceImageView);
                 } else {
+                    ImageHelper.ImageLoad(InputRateFaceActivity.this, null, mFaceImageView);
                     Toast.makeText(InputRateFaceActivity.this, R.string.no_face_photp_available, Toast.LENGTH_SHORT).show();
                     mNextButton.setEnabled(false);
                     mResultButton.setEnabled(false);
                 }
-
             }
         }, currUsername);
     }
-
-    /*
-    private void getUrlOfRateFacePhotos() {
-        // Inner Query
-        AVObject currUser = AVObject.createWithoutData("_User", AVUser.getCurrentUser().getObjectId());
-        AVQuery<AVObject> photoRatedQuery = new AVQuery<>("RateFaceScore");
-        photoRatedQuery.whereEqualTo("userRating", currUser);
-
-        // Main (Outer) Query
-        AVQuery<AVObject> photoNotRatedQuery = new AVQuery<>("RateFacePhoto");
-        photoNotRatedQuery.selectKeys(Arrays.asList("photoUrl", "userId", "username"));
-        photoNotRatedQuery.whereNotEqualTo("username", AVUser.getCurrentUser().getUsername());
-
-        photoNotRatedQuery.whereMatchesQuery("photoRated", photoRatedQuery);
-
-        // Query result
-        photoNotRatedQuery.findInBackground(new FindCallback<AVObject>() {
-            @Override
-            public void done(List<AVObject> list, AVException e) {
-                for (AVObject photo : list) {
-                    rateFacePhotoUrlList.add(photo.getString("photoUrl"));
-                    photoRatedList.add(photo);
-                }
-
-                // Initialize the ImageView
-                ImageHelper.ImageLoad(InputRateFaceActivity.this, rateFacePhotoUrlList.get(mImageUrlIndex), mFaceImageView);
-            }
-        });
-    }
-    */
-
-    /*
-    private void getUrlOfRateFacePhotos() {
-        // final ArrayList<String> photoUrlList = new ArrayList<>();
-        AVQuery<AVObject> photoUrlQuery = new AVQuery<>("RateFacePhoto");
-        photoUrlQuery.selectKeys(Arrays.asList("photoUrl", "userId", "username"));
-        photoUrlQuery.whereNotEqualTo("username", AVUser.getCurrentUser().getUsername());
-
-        photoUrlQuery.findInBackground(new FindCallback<AVObject>() {
-            @Override
-            public void done(List<AVObject> list, AVException e) {
-                for (AVObject photo : list) {
-                    rateFacePhotoUrlList.add(photo.getString("photoUrl"));
-                    photoRatedList.add(photo);
-                }
-
-                // Initialize the ImageView
-                ImageHelper.ImageLoad(InputRateFaceActivity.this, rateFacePhotoUrlList.get(mImageUrlIndex), mFaceImageView);
-            }
-        });
-        //return photoUrlList;
-    }
-    */
 
 
     private void updateFaceImage() {
@@ -270,3 +215,73 @@ public class InputRateFaceActivity extends AppCompatActivity {
     }
 
 }
+
+
+
+
+
+
+// Backup Code
+// Get photoUrl in the RateFacePhoto table (class in LeanCloud)
+    /*
+    private void getUrlOfRateFacePhotos() {
+        // Inner Query
+        String currUsername = AVUser.getCurrentUser().getUsername();
+        AVQuery<AVObject> photoRatedQuery = new AVQuery<>("RateFaceScore");
+        photoRatedQuery.whereEqualTo("userRatingId", currUsername);
+
+        // Main (Outer) Query
+        AVQuery<AVObject> photoNotRatedQuery = new AVQuery<>("RateFacePhoto");
+        photoNotRatedQuery.selectKeys(Arrays.asList("photoUrl", "userId", "username"));
+        photoNotRatedQuery.whereNotEqualTo("username", currUsername);
+
+        photoNotRatedQuery.whereDoesNotMatchQuery("photoRated", photoRatedQuery);
+
+        // Query result
+        photoNotRatedQuery.findInBackground(new FindCallback<AVObject>() {
+            @Override
+            public void done(List<AVObject> list, AVException e) {
+                for (AVObject photo : list) {
+                    photoRatedList.add(photo);
+                }
+
+                // Initialize the ImageView
+                if (photoRatedList.size() != 0) {
+                    ImageHelper.ImageLoad(InputRateFaceActivity.this, photoRatedList.get(mImageUrlIndex).getString("photoUrl"), mFaceImageView);
+                } else {
+                    Toast.makeText(InputRateFaceActivity.this, R.string.no_face_photp_available, Toast.LENGTH_SHORT).show();
+                    mNextButton.setEnabled(false);
+                    mResultButton.setEnabled(false);
+                }
+            }
+        });
+    }
+    */
+
+
+    /*
+    private void getUrlOfRateFacePhotos() {
+        // final ArrayList<String> photoUrlList = new ArrayList<>();
+        AVQuery<AVObject> photoUrlQuery = new AVQuery<>("RateFacePhoto");
+        photoUrlQuery.selectKeys(Arrays.asList("photoUrl", "userId", "username"));
+        photoUrlQuery.whereNotEqualTo("username", AVUser.getCurrentUser().getUsername());
+
+        photoUrlQuery.findInBackground(new FindCallback<AVObject>() {
+            @Override
+            public void done(List<AVObject> list, AVException e) {
+                for (AVObject photo : list) {
+                    photoRatedList.add(photo);
+                }
+
+                // Initialize the ImageView
+                if (photoRatedList.size() != 0) {
+                    ImageHelper.ImageLoad(InputRateFaceActivity.this, photoRatedList.get(mImageUrlIndex).getString("photoUrl"), mFaceImageView);
+                } else {
+                    Toast.makeText(InputRateFaceActivity.this, R.string.no_face_photp_available, Toast.LENGTH_SHORT).show();
+                    mNextButton.setEnabled(false);
+                    mResultButton.setEnabled(false);
+                }
+            }
+        });
+    }
+    */
