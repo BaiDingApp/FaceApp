@@ -127,7 +127,7 @@ public class InputRateFaceActivity extends AppCompatActivity {
     private void getUrlOfRateFacePhotos() {
         // String photoNotRated = "select * from RateFacePhoto where objectId !=  '599115cb570c35006b684d5c' ";
         String currUsername = AVUser.getCurrentUser().getUsername();
-        String photoNotRated = "select * from RateFacePhoto where username != (select usernameRated from RateFaceScore where usernameRating = ? )" ;
+        String photoNotRated = "select * from RateFacePhoto where username != (select usernameRated from RateFaceScore where usernameRating = ? limit 1000) limit 1000 ";
 
         AVQuery.doCloudQueryInBackground(photoNotRated, new CloudQueryCallback<AVCloudQueryResult>() {
             @Override
@@ -236,30 +236,6 @@ public class InputRateFaceActivity extends AppCompatActivity {
         mBarChart.animateY(1000);
         mBarChart.invalidate();
     }
-
-/*
-    private void showResult() {
-
-        List<BarEntry> barEntries = new ArrayList<>();
-        barEntries.add(new BarEntry(1f, 0.05f));
-        barEntries.add(new BarEntry(2f, 0.1f));
-        barEntries.add(new BarEntry(3f, 0.1f));
-        barEntries.add(new BarEntry(4f, 0.33f));
-        barEntries.add(new BarEntry(5f, 0.17f));
-        barEntries.add(new BarEntry(6f, 0.05f));
-        barEntries.add(new BarEntry(7f, 0.05f));
-        barEntries.add(new BarEntry(8f, 0.05f));
-        barEntries.add(new BarEntry(9f, 0.05f));
-        barEntries.add(new BarEntry(10f, 0.05f));
-
-        BarDataSet barDataSet = new BarDataSet(barEntries, "别人眼中的TA");
-        BarData theData = new BarData(barDataSet);
-        mBarChart.setDescription(null);
-        mBarChart.setData(theData);
-        mBarChart.animateY(1000);
-        mBarChart.invalidate();
-    }
-*/
 }
 
 
@@ -269,6 +245,7 @@ public class InputRateFaceActivity extends AppCompatActivity {
 
 // Backup Code
 // Get photoUrl in the RateFacePhoto table (class in LeanCloud)
+
     /*
     private void getUrlOfRateFacePhotos() {
         // Inner Query
