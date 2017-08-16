@@ -2,10 +2,7 @@ package com.baidingapp.faceapp;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -32,7 +29,6 @@ import com.github.mikephil.charting.data.BarEntry;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -101,7 +97,8 @@ public class PredictImpressionFaceActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 uploadPhotoToLeanCloud();
-                copyPhotoToInternalStorage();
+                // Copy the uploaded photo from External Storage to Internal Storage
+                ImageHelper.copyPhotoToInternalStorage(mImagePath, PredictImpressionFaceActivity.this, "predictImage");
                 mUploadButton.setEnabled(false);
             }
         });
@@ -131,39 +128,11 @@ public class PredictImpressionFaceActivity extends AppCompatActivity {
                 return;
             }
 
-            // Get the Uri of the Picked image
-            // mPickedImageUri = data.getData();
-
             // Show the Picked image on the imageView
             GlideApp.with(this).load(data.getData()).into(mFaceImageView);
 
             // Get the real path of the Picked image from its Uri
-            mImagePath = getRealPathFromURI(PredictImpressionFaceActivity.this, data.getData());
-        }
-    }
-
-
-    // Get the real path of the file from its Uri
-    private String getRealPathFromURI(Context context, Uri contentUri) {
-        if (contentUri.getScheme().equals("file")) {
-            return contentUri.getPath();
-        } else {
-            Cursor cursor = null;
-            try {
-                String[] mDataString = {MediaStore.Images.Media.DATA};
-                cursor = context.getContentResolver().query(contentUri, mDataString, null, null, null);
-                if (null != cursor) {
-                    int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-                    cursor.moveToFirst();
-                    return cursor.getString(column_index);
-                } else {
-                    return "";
-                }
-            } finally {
-                if (cursor != null) {
-                    cursor.close();
-                }
-            }
+            mImagePath = ImageHelper.getRealPathFromURI(PredictImpressionFaceActivity.this, data.getData());
         }
     }
 
@@ -248,23 +217,6 @@ public class PredictImpressionFaceActivity extends AppCompatActivity {
                 });
             }
         });
-    }
-
-
-    private File copyPhotoToInternalStorage() {
-        File externalImage = new File(mImagePath);
-
-        // File internalImage = new File(PredictImpressionFaceActivity.this.getFilesDir(), "predictImage.jpg");
-        File internalStorage = PredictImpressionFaceActivity.this.getDir(AVUser.getCurrentUser().getUsername(), MODE_PRIVATE);
-        File internalImage = new File(internalStorage.getPath(), "predictImage");
-
-        try {
-            ImageHelper.copyImage(externalImage, internalImage);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return internalImage;
     }
 
 
