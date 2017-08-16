@@ -77,7 +77,7 @@ public class OutputRateFaceActivity extends AppCompatActivity {
         mBarChart.setNoDataText(getResources().getString(R.string.please_recheck_later));
 
 
-        // The URL is used to test Glide
+        // The URL is used to test
         // String imageUrl = "http://www.fdsm.fudan.edu.cn/UserWebEditorUploadImage/upload/image/20160428/6359744927934022586120687.jpg";
 
         // Initialize the face image view
@@ -86,13 +86,17 @@ public class OutputRateFaceActivity extends AppCompatActivity {
         // File myImage = new File(OutputRateFaceActivity.this.getFilesDir(), "outputImage.jpg");
         File internalStorage = OutputRateFaceActivity.this.getDir(AVUser.getCurrentUser().getUsername(), MODE_PRIVATE);
         File myImage = new File(internalStorage.getPath(), "outputImage");
-        GlideApp.with(OutputRateFaceActivity.this)
-                .load(myImage)
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .skipMemoryCache(true)
-                .placeholder(R.drawable.face_image)
-                .error(R.drawable.face_image)
-                .into(mFaceImageView);
+        if (myImage.exists() && myImage.length() > 0) {
+            GlideApp.with(OutputRateFaceActivity.this)
+                    .load(myImage)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true)
+                    .placeholder(R.drawable.face_image)
+                    .error(R.drawable.face_image)
+                    .into(mFaceImageView);
+        } else {
+            GlideApp.with(OutputRateFaceActivity.this).load(R.drawable.face_image).into(mFaceImageView);
+        }
 
 
         // on Click the UPLOAD button

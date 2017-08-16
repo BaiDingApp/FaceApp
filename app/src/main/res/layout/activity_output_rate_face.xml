@@ -45,15 +45,17 @@
                 android:id="@+id/action_pick_face_photo_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                style="?android:attr/button"
                 android:padding="10dp"
                 android:textSize="16sp"
                 android:text="@string/pick_face_photo"/>
 
             <Button
                 android:id="@+id/action_upload_face_photo_button"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                style="?android:attr/button"
                 android:padding="10dp"
                 android:textSize="16sp"
                 android:text="@string/upload_face_photo"/>

@@ -12,18 +12,9 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/upload_self_face_photo"
-            android:padding="10dp"
-            android:textSize="16sp"
-            android:textColor="@color/red"/>
-
 
         <ImageView
-            android:id="@+id/action_upload_photo_prediction_impression"
+            android:id="@+id/action_uploaded_photo_prediction_impression"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginTop="6dp"
@@ -31,6 +22,33 @@
             android:layout_gravity="center"
             android:scaleType="fitCenter"
             android:contentDescription="@string/face_image_output_rate"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/action_pick_photo_predict_impression_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?android:attr/button"
+                android:padding="10dp"
+                android:textSize="16sp"
+                android:text="@string/pick_face_photo"/>
+
+            <Button
+                android:id="@+id/action_upload_photo_predict_impression_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                style="?android:attr/button"
+                android:padding="10dp"
+                android:textSize="16sp"
+                android:text="@string/upload_face_photo"/>
+
+        </LinearLayout>
 
 
         <TextView
@@ -241,7 +259,18 @@
 
 
 <!--
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/upload_self_face_photo"
+            android:padding="10dp"
+            android:textSize="16sp"
+            android:textColor="@color/red"/>
+
+
 Text format: "dimension: number"
+
 
         <TableLayout
             android:layout_width="match_parent"
