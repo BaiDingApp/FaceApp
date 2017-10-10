@@ -11,6 +11,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.ScrollView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.avos.avoscloud.AVCloudQueryResult;
@@ -44,6 +45,9 @@ public class InputRateFaceActivity extends AppCompatActivity {
     private BarChart mBarChart;
     private Spinner mSpinner;
 
+    private TextView mOneLeftField;
+    private TextView mOneRightField;
+
     private int rateFaceScore;
     private int mSpinnerPosition;
 
@@ -56,10 +60,15 @@ public class InputRateFaceActivity extends AppCompatActivity {
         mRadioGroup = (RadioGroup) findViewById(R.id.radio_group_input_rate_face);
         mFaceImageView = (ImageView) findViewById(R.id.face_image_input_rate);
 
-
         // Get photoUrl in the RateFacePhoto table (class in LeanCloud)
         // Initialize the ImageView in getUrlOfRateFacePhotos()
         getUrlOfRateFacePhotos();
+
+
+        // Initialize the questions
+        mOneLeftField = (TextView) findViewById(R.id.one_left_field);
+        mOneRightField = (TextView) findViewById(R.id.one_right_field);
+        setTextForQuestion();
 
 
         // onSelect the Spinner
@@ -118,6 +127,30 @@ public class InputRateFaceActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+
+    // Get the questions from LeanCLoud
+    // Write the question, or left and right fields to the TextView
+    private void setTextForQuestion() {
+        AVQuery<AVObject> questions = new AVQuery<>("LikertQuestions");
+        questions.whereEqualTo("questionEn", "Attractiveness");
+
+        questions.findInBackground(new FindCallback<AVObject>() {
+            @Override
+            public void done(List<AVObject> list, AVException e) {
+                String mLeftField = null;
+                String mRightField = null;
+
+                for (AVObject object:list) {
+                    mLeftField = object.getString("leftField");
+                    mRightField = object.getString("rightField");
+                }
+
+                mOneLeftField.setText(mLeftField);
+                mOneRightField.setText(mRightField);
+            }
+        });
     }
 
 
