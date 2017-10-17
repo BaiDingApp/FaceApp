@@ -12,8 +12,15 @@ import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.FindCallback;
+import com.avos.avoscloud.im.v2.AVIMClient;
+import com.avos.avoscloud.im.v2.AVIMException;
+import com.avos.avoscloud.im.v2.callback.AVIMClientCallback;
 
 import java.util.List;
+
+import cn.leancloud.chatkit.LCChatKit;
+import cn.leancloud.chatkit.activity.LCIMConversationActivity;
+import cn.leancloud.chatkit.utils.LCIMConstants;
 
 public class TodayRecommendationActivity extends AppCompatActivity {
 
@@ -45,7 +52,6 @@ public class TodayRecommendationActivity extends AppCompatActivity {
         mChatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO
                 Toast.makeText(TodayRecommendationActivity.this, mMatchedUsername, Toast.LENGTH_SHORT).show();
 /*
                 // Open the Dialog

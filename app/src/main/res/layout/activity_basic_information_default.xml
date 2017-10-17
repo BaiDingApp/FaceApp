@@ -35,6 +35,23 @@
 
 
             <TableRow
+                android:padding="10dp">
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/basic_gender"
+                    android:textSize="16sp"/>
+                <Spinner
+                    android:id="@+id/action_basic_gender_default"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/spinner_gender_levels"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
                 android:padding="10sp">
                 <TextView
                     android:layout_width="wrap_content"

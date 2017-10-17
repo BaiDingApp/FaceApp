@@ -2,6 +2,7 @@
 <resources>
     <!-- Basic Information Items -->
     <string name="basic_birthday">出生日期: </string>
+    <string name="basic_gender">性别: </string>
     <string name="basic_height">身高: </string>
     <string name="basic_weight">体重: </string>
     <string name="basic_education">教育水平: </string>
@@ -22,6 +23,13 @@
         <item>请选择</item>
         <item>是</item>
         <item>否</item>
+    </string-array>
+
+    <!-- Education Levels -->
+    <string-array name="spinner_gender_levels">
+        <item>请选择</item>
+        <item>男</item>
+        <item>女</item>
     </string-array>
 
     <!-- Education Levels -->
