@@ -23,16 +23,73 @@
 
 
         <TextView
+            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginBottom="8dp"
-            android:textSize="16sp"
+            android:textSize="20sp"
             android:text="@string/what_i_think_others"/>
 
+        <include layout="@layout/common_line" />
+
+
+        <include
+            android:id="@+id/first_input_rate"
+            layout="@layout/common_radio_group" />
+
+        <include layout="@layout/common_line" />
+
+
+        <include
+            android:id="@+id/second_input_rate"
+            layout="@layout/common_radio_group" />
+
+        <include layout="@layout/common_line" />
+
+
+        <include
+            android:id="@+id/third_input_rate"
+            layout="@layout/common_radio_group" />
+
+        <include layout="@layout/common_line" />
+
+
+        <include
+            android:id="@+id/fourth_input_rate"
+            layout="@layout/common_radio_group" />
+
+        <include layout="@layout/common_line" />
+
+
+        <include
+            android:id="@+id/fifth_input_rate"
+            layout="@layout/common_radio_group" />
+
+
+        <include layout="@layout/common_line" />
+
+        <Button
+            android:id="@+id/action_show_next"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="16sp"
+            android:text="@string/show_next"/>
+
+    </LinearLayout>
+
+</ScrollView>
+
+
+
+<!--
+Backup Layout
 
         <LinearLayout
+            android:layout_marginTop="6dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -165,25 +222,6 @@
         </RadioGroup>
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:textSize="16sp"
-                android:text="@string/basic_occupation"/>
-            <Spinner
-                android:id="@+id/action_objective_question"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:entries="@array/spinner_occupations"/>
-        </LinearLayout>
-
-
         <Button
             android:id="@+id/action_show_result"
             android:layout_width="match_parent"
@@ -201,37 +239,43 @@
             android:layout_marginRight="8dp"/>
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:textSize="16sp"
-                android:text="@string/basic_occupation"/>
-            <TextView
-                android:id="@+id/set_text_occupation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:textSize="16sp"/>
-        </LinearLayout>
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="horizontal">
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginLeft="8dp"
+    android:textSize="16sp"
+    android:text="@string/basic_occupation"/>
+<Spinner
+    android:id="@+id/action_objective_question"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:entries="@array/spinner_occupations"/>
+</LinearLayout>
 
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:layout_marginTop="10dp"
+android:orientation="horizontal">
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginLeft="8dp"
+    android:textSize="16sp"
+    android:text="@string/basic_occupation"/>
+<TextView
+    android:id="@+id/set_text_occupation"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginLeft="8dp"
+    android:textSize="16sp"/>
+</LinearLayout>
 
-        <Button
-            android:id="@+id/action_show_next"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp"
-            android:textSize="16sp"
-            android:text="@string/show_next"/>
-
-    </LinearLayout>
-
-</ScrollView>
+-->

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="what_i_think_others">我眼中的TA: </string>
+    <string name="what_i_think_others">我眼中的TA </string>
     <string name="no_result_available">请先读人，再看结果</string>
     <string name="no_face_photo_available">照片读完了，明天再来吧~</string>
     <string name="please_upload_photo_first">请先上传照片</string>
@@ -21,7 +21,7 @@
 
     <!-- Action button -->
     <string name="show_result">结果</string>
-    <string name="show_next">下一个</string>
+    <string name="show_next">下一张照片</string>
 
     <!-- Scale of the rate -->
     <string name="rate_value_1">1</string>
