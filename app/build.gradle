@@ -37,6 +37,7 @@ dependencies {
     })
     // LeanCloud Basic Module
     compile 'cn.leancloud.android:avoscloud-sdk:v4.4.4'
+    compile 'cn.leancloud.android:chatkit:1.0.6'
     compile 'com.alibaba:fastjson:1.2.30'
     compile 'com.squareup.okhttp3:okhttp:3.8.0'
     compile 'com.squareup.okio:okio:1.13.0'

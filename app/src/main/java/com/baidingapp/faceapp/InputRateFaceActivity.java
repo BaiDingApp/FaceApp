@@ -3,14 +3,15 @@ package com.baidingapp.faceapp;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+// import android.widget.AdapterView;
+// import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.ScrollView;
-import android.widget.Spinner;
+// import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.avos.avoscloud.AVCloudQueryResult;
@@ -34,34 +35,119 @@ import java.util.List;
 public class InputRateFaceActivity extends AppCompatActivity {
 
     private ScrollView mScrollView;
-    private RadioGroup mRadioGroup;
+    private ImageView mFaceImageView;
+    private Button mNextButton;
     private ArrayList<AVObject> photoRatedList = new ArrayList<>();
     private int mPhotoIndex = 0;
 
-    private Button mNextButton;
-    private Button mResultButton;
-    private ImageView mFaceImageView;
-    private BarChart mBarChart;
-    private Spinner mSpinner;
+    private RadioGroup mFirstRadioGroup;
+    private RadioGroup mSecondRadioGroup;
+    private RadioGroup mThirdRadioGroup;
+    private RadioGroup mFourthRadioGroup;
+    private RadioGroup mFifthRadioGroup;
 
-    private int rateFaceScore;
-    private int mSpinnerPosition;
+    private Button mFirstResultButton;
+    private Button mSecondResultButton;
+    private Button mThirdResultButton;
+    private Button mFourthResultButton;
+    private Button mFifthResultButton;
+
+    private BarChart mFirstBarChart;
+    private BarChart mSecondBarChart;
+    private BarChart mThirdBarChart;
+    private BarChart mFourthBarChart;
+    private BarChart mFifthBarChart;
+
+//    private Spinner mSpinner;
+
+    private TextView mFirstLeftField;
+    private TextView mFirstRightField;
+    private TextView mSecondLeftField;
+    private TextView mSecondRightField;
+    private TextView mThirdLeftField;
+    private TextView mThirdRightField;
+    private TextView mFourthLeftField;
+    private TextView mFourthRightField;
+    private TextView mFifthLeftField;
+    private TextView mFifthRightField;
+
+    private String mFirstTrait;
+    private String mSecondTrait;
+    private String mThirdTrait;
+    private String mFourthTrait;
+    private String mFifthTrait;
+
+    private int mFirstRateFaceScore;
+    private int mSecondRateFaceScore;
+    private int mThirdRateFaceScore;
+    private int mFourthRateFaceScore;
+    private int mFifthRateFaceScore;
+
+
+
+//    private int rateFaceScore;
+//    private int mSpinnerPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input_rate_face);
 
-        mScrollView = (ScrollView) findViewById(R.id.input_rate_scroll_view);
-        mRadioGroup = (RadioGroup) findViewById(R.id.radio_group_input_rate_face);
         mFaceImageView = (ImageView) findViewById(R.id.face_image_input_rate);
-
+        mScrollView = (ScrollView) findViewById(R.id.input_rate_scroll_view);
 
         // Get photoUrl in the RateFacePhoto table (class in LeanCloud)
         // Initialize the ImageView in getUrlOfRateFacePhotos()
         getUrlOfRateFacePhotos();
 
 
+        // Initialize the Questions
+        // The First Question
+        mFirstLeftField = (TextView) findViewById(R.id.first_input_rate).findViewById(R.id.left_field);
+        mFirstRightField = (TextView) findViewById(R.id.first_input_rate).findViewById(R.id.right_field);
+        // The Second Question
+        mSecondLeftField = (TextView) findViewById(R.id.second_input_rate).findViewById(R.id.left_field);
+        mSecondRightField = (TextView) findViewById(R.id.second_input_rate).findViewById(R.id.right_field);
+        // The Third Question
+        mThirdLeftField = (TextView) findViewById(R.id.third_input_rate).findViewById(R.id.left_field);
+        mThirdRightField = (TextView) findViewById(R.id.third_input_rate).findViewById(R.id.right_field);
+        // The Fourth Question
+        mFourthLeftField = (TextView) findViewById(R.id.fourth_input_rate).findViewById(R.id.left_field);
+        mFourthRightField = (TextView) findViewById(R.id.fourth_input_rate).findViewById(R.id.right_field);
+        // The Fifth Question
+        mFifthLeftField = (TextView) findViewById(R.id.fifth_input_rate).findViewById(R.id.left_field);
+        mFifthRightField = (TextView) findViewById(R.id.fifth_input_rate).findViewById(R.id.right_field);
+        // Set the Questions
+        setTextForQuestion();
+
+
+        // RadioGroups
+        mFirstRadioGroup = (RadioGroup) findViewById(R.id.first_input_rate).findViewById(R.id.rate_radio_group);
+        mSecondRadioGroup = (RadioGroup) findViewById(R.id.second_input_rate).findViewById(R.id.rate_radio_group);
+        mThirdRadioGroup = (RadioGroup) findViewById(R.id.third_input_rate).findViewById(R.id.rate_radio_group);
+        mFourthRadioGroup = (RadioGroup) findViewById(R.id.fourth_input_rate).findViewById(R.id.rate_radio_group);
+        mFifthRadioGroup = (RadioGroup) findViewById(R.id.fifth_input_rate).findViewById(R.id.rate_radio_group);
+
+
+        // Plot the BarChart of the rates by others
+        // The first BarChart
+        // mBarChart.setNoDataTextColor(R.color.red);
+        mFirstBarChart = (BarChart) findViewById(R.id.first_input_rate).findViewById(R.id.plot_bar_chart);
+        mFirstBarChart.setNoDataText(getResources().getString(R.string.no_result_available));
+        // The Second BarChart
+        mSecondBarChart = (BarChart) findViewById(R.id.second_input_rate).findViewById(R.id.plot_bar_chart);
+        mSecondBarChart.setNoDataText(getResources().getString(R.string.no_result_available));
+        // The Third BarChart
+        mThirdBarChart = (BarChart) findViewById(R.id.third_input_rate).findViewById(R.id.plot_bar_chart);
+        mThirdBarChart.setNoDataText(getResources().getString(R.string.no_result_available));
+        // The Fourth BarChart
+        mFourthBarChart = (BarChart) findViewById(R.id.fourth_input_rate).findViewById(R.id.plot_bar_chart);
+        mFourthBarChart.setNoDataText(getResources().getString(R.string.no_result_available));
+        // The Fifth BarChart
+        mFifthBarChart = (BarChart) findViewById(R.id.fifth_input_rate).findViewById(R.id.plot_bar_chart);
+        mFifthBarChart.setNoDataText(getResources().getString(R.string.no_result_available));
+
+/*
         // onSelect the Spinner
         mSpinner = (Spinner) findViewById(R.id.action_objective_question);
         ArrayAdapter mAdapter = ArrayAdapter.createFromResource(this,
@@ -79,24 +165,50 @@ public class InputRateFaceActivity extends AppCompatActivity {
 
             }
         });
-
+*/
 
         // onCLick the RESULT button
-        mResultButton = (Button) findViewById(R.id.action_show_result);
-        mResultButton.setOnClickListener(new View.OnClickListener() {
+        // The First Question
+        mFirstResultButton = (Button) findViewById(R.id.first_input_rate).findViewById(R.id.action_show_result);
+        mFirstResultButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Show the results
-                mScrollView.fullScroll(ScrollView.FOCUS_DOWN);
-                getOthersRateScoresAndShowResult(photoRatedList.get(mPhotoIndex).getObjectId());
+                getFirstOthersRateScoresAndShowResult(photoRatedList.get(mPhotoIndex).getObjectId());
             }
         });
-
-
-        // Plot the rates by others
-        mBarChart = (BarChart) findViewById(R.id.input_rate_bar_chart);
-        mBarChart.setNoDataText(getResources().getString(R.string.no_result_available));
-        // mBarChart.setNoDataTextColor(R.color.red);
+        // The Second Question
+        mSecondResultButton = (Button) findViewById(R.id.second_input_rate).findViewById(R.id.action_show_result);
+        mSecondResultButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getSecondOthersRateScoresAndShowResult(photoRatedList.get(mPhotoIndex).getObjectId());
+            }
+        });
+        // The Third Question
+        mThirdResultButton = (Button) findViewById(R.id.third_input_rate).findViewById(R.id.action_show_result);
+        mThirdResultButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getThirdOthersRateScoresAndShowResult(photoRatedList.get(mPhotoIndex).getObjectId());
+            }
+        });
+        // The Fourth Question
+        mFourthResultButton = (Button) findViewById(R.id.fourth_input_rate).findViewById(R.id.action_show_result);
+        mFourthResultButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFourthOthersRateScoresAndShowResult(photoRatedList.get(mPhotoIndex).getObjectId());
+            }
+        });
+        // The Fifth Question
+        mFifthResultButton = (Button) findViewById(R.id.fifth_input_rate).findViewById(R.id.action_show_result);
+        mFifthResultButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFifthOthersRateScoresAndShowResult(photoRatedList.get(mPhotoIndex).getObjectId());
+                mScrollView.fullScroll(ScrollView.FOCUS_DOWN);
+            }
+        });
 
 
         // onCLick the NEXT button
@@ -112,12 +224,49 @@ public class InputRateFaceActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(InputRateFaceActivity.this, R.string.no_face_photo_available, Toast.LENGTH_SHORT).show();
                     mNextButton.setEnabled(false);
-                    mResultButton.setEnabled(false);
+                    mFirstResultButton.setEnabled(false);
+                    mSecondResultButton.setEnabled(false);
+                    mThirdResultButton.setEnabled(false);
+                    mFourthResultButton.setEnabled(false);
+                    mFifthResultButton.setEnabled(false);
                     // InputRateFaceActivity.this.finish();
                 }
             }
         });
 
+    }
+
+
+    // Get the questions from LeanCLoud
+    // Set the question, or left and right fields to the TextView
+    private void setTextForQuestion() {
+        AVQuery<AVObject> questions = new AVQuery<>("LikertQuestions");
+        questions.whereEqualTo("groupId", "First");
+
+        questions.findInBackground(new FindCallback<AVObject>() {
+            @Override
+            public void done(List<AVObject> list, AVException e) {
+                mFirstLeftField.setText(list.get(0).getString("leftField"));
+                mFirstRightField.setText(list.get(0).getString("rightField"));
+                mFirstTrait = list.get(0).getString("questionEn");
+
+                mSecondLeftField.setText(list.get(1).getString("leftField"));
+                mSecondRightField.setText(list.get(1).getString("rightField"));
+                mSecondTrait = list.get(1).getString("questionEn");
+
+                mThirdLeftField.setText(list.get(2).getString("leftField"));
+                mThirdRightField.setText(list.get(2).getString("rightField"));
+                mThirdTrait = list.get(2).getString("questionEn");
+
+                mFourthLeftField.setText(list.get(3).getString("leftField"));
+                mFourthRightField.setText(list.get(3).getString("rightField"));
+                mFourthTrait = list.get(3).getString("questionEn");
+
+                mFifthLeftField.setText(list.get(4).getString("leftField"));
+                mFifthRightField.setText(list.get(4).getString("rightField"));
+                mFifthTrait = list.get(4).getString("questionEn");
+            }
+        });
     }
 
 
@@ -143,7 +292,11 @@ public class InputRateFaceActivity extends AppCompatActivity {
                     ImageHelper.ImageLoad(InputRateFaceActivity.this, null, mFaceImageView);
                     Toast.makeText(InputRateFaceActivity.this, R.string.no_face_photo_available, Toast.LENGTH_SHORT).show();
                     mNextButton.setEnabled(false);
-                    mResultButton.setEnabled(false);
+                    mFirstResultButton.setEnabled(false);
+                    mSecondResultButton.setEnabled(false);
+                    mThirdResultButton.setEnabled(false);
+                    mFourthResultButton.setEnabled(false);
+                    mFifthResultButton.setEnabled(false);
                 }
             }
         }, currUsername);
@@ -151,9 +304,18 @@ public class InputRateFaceActivity extends AppCompatActivity {
 
 
     private void updateFaceImage() {
-        mRadioGroup.clearCheck();
-        mBarChart.clear();
-        mSpinner.setSelection(0);
+        mFirstRadioGroup.clearCheck();
+        mSecondRadioGroup.clearCheck();
+        mThirdRadioGroup.clearCheck();
+        mFourthRadioGroup.clearCheck();
+        mFifthRadioGroup.clearCheck();
+
+        mFirstBarChart.clear();
+        mSecondBarChart.clear();
+        mThirdBarChart.clear();
+        mFourthBarChart.clear();
+        mFifthBarChart.clear();
+        // mSpinner.setSelection(0);
 
         // Reset a new face image
         mScrollView.fullScroll(ScrollView.FOCUS_UP);
@@ -162,30 +324,46 @@ public class InputRateFaceActivity extends AppCompatActivity {
     }
 
 
-    // Get the rate score of face photo
-    private void getRateFaceScore() {
-        int selectedButtonId = mRadioGroup.getCheckedRadioButtonId();
-        RadioButton radioButton = (RadioButton) findViewById(selectedButtonId);
+    // Get All rate scores of face photo
+    private void getAllRateFaceScores() {
+        mFirstRateFaceScore = getRateFaceScore(mFirstRadioGroup);
+        mSecondRateFaceScore = getRateFaceScore(mSecondRadioGroup);
+        mThirdRateFaceScore = getRateFaceScore(mThirdRadioGroup);
+        mFourthRateFaceScore = getRateFaceScore(mFourthRadioGroup);
+        mFifthRateFaceScore = getRateFaceScore(mFifthRadioGroup);
+    }
+    // Get A rate score of the face photo
+    private int getRateFaceScore(RadioGroup mRadioGroup) {
+        int selectedRadioGroup = mRadioGroup.getCheckedRadioButtonId();
+        RadioButton radioButton = (RadioButton) findViewById(selectedRadioGroup);
         String radioString = radioButton.getText().toString();
 
-        if (selectedButtonId != -1) {
-            if (selectedButtonId == R.id.rate_value_10) {
+        int rateFaceScore = 0;
+
+        if (selectedRadioGroup != -1) {
+            if (selectedRadioGroup == R.id.rate_value_10) {
                 rateFaceScore = Integer.parseInt(radioString.substring(radioString.length() - 2));
             } else {
                 rateFaceScore = Integer.parseInt(radioString.substring(radioString.length() - 1));
             }
         }
+
+        return rateFaceScore;
     }
 
 
     // Save data to the RateFaceScore table (class in LeanCloud)
     private void saveDataToLeanCloud() {
-        getRateFaceScore();
+        getAllRateFaceScores();
 
         AVObject rateResult = new AVObject("RateFaceScore");
 
-        rateResult.put("subQues", rateFaceScore);
-        rateResult.put("objQues", mSpinnerPosition);
+        rateResult.put(mFirstTrait,  mFirstRateFaceScore);
+        rateResult.put(mSecondTrait, mSecondRateFaceScore);
+        rateResult.put(mThirdTrait,  mThirdRateFaceScore);
+        rateResult.put(mFourthTrait, mFourthRateFaceScore);
+        rateResult.put(mFifthTrait,  mFifthRateFaceScore);
+        // rateResult.put("objQues", mSpinnerPosition);
         rateResult.put("usernameRating", AVUser.getCurrentUser().getUsername());
         rateResult.put("usernameRated", photoRatedList.get(mPhotoIndex).getString("username"));
         // photoRated's type is Pointer, which points to RateFacePhoto
@@ -198,11 +376,12 @@ public class InputRateFaceActivity extends AppCompatActivity {
 
     // Get the rate scores by others from LeanCloud
     // Show the results via BarChart
-    private void getOthersRateScoresAndShowResult(String rateFacePhotoId) {
+    // Plot the First BarChart
+    private void getFirstOthersRateScoresAndShowResult(String rateFacePhotoId) {
         AVObject photoRatedObject = AVObject.createWithoutData("RateFacePhoto", rateFacePhotoId);
 
         AVQuery<AVObject> rateScoreQuery = new AVQuery<>("RateFaceScore");
-        rateScoreQuery.selectKeys(Arrays.asList("subQues", "photoIdRated"));
+        rateScoreQuery.selectKeys(Arrays.asList(mFirstTrait, "photoIdRated"));
         rateScoreQuery.whereEqualTo("photoIdRated", photoRatedObject);
         rateScoreQuery.findInBackground(new FindCallback<AVObject>() {
             @Override
@@ -212,11 +391,119 @@ public class InputRateFaceActivity extends AppCompatActivity {
 
                     int i = 0;
                     for (AVObject object : list) {
-                        allRateScores[i] = object.getInt("subQues");
+                        allRateScores[i] = object.getInt(mFirstTrait);
                         i++;
                     }
 
-                    plotBarChart(allRateScores);
+                    plotBarChart(allRateScores, mFirstBarChart);
+                } else {
+                    Toast.makeText(InputRateFaceActivity.this,
+                            R.string.no_result_due_to_limited_data, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+    // Plot the Second BarChart
+    private void getSecondOthersRateScoresAndShowResult(String rateFacePhotoId) {
+        AVObject photoRatedObject = AVObject.createWithoutData("RateFacePhoto", rateFacePhotoId);
+
+        AVQuery<AVObject> rateScoreQuery = new AVQuery<>("RateFaceScore");
+        rateScoreQuery.selectKeys(Arrays.asList(mSecondTrait, "photoIdRated"));
+        rateScoreQuery.whereEqualTo("photoIdRated", photoRatedObject);
+        rateScoreQuery.findInBackground(new FindCallback<AVObject>() {
+            @Override
+            public void done(List<AVObject> list, AVException e) {
+                if (list.size()>0) {
+                    int[] allRateScores = new int[list.size()];
+
+                    int i = 0;
+                    for (AVObject object : list) {
+                        allRateScores[i] = object.getInt(mSecondTrait);
+                        i++;
+                    }
+
+                    plotBarChart(allRateScores, mSecondBarChart);
+                } else {
+                    Toast.makeText(InputRateFaceActivity.this,
+                            R.string.no_result_due_to_limited_data, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+    // Plot the Third BarChart
+    private void getThirdOthersRateScoresAndShowResult(String rateFacePhotoId) {
+        AVObject photoRatedObject = AVObject.createWithoutData("RateFacePhoto", rateFacePhotoId);
+
+        AVQuery<AVObject> rateScoreQuery = new AVQuery<>("RateFaceScore");
+        rateScoreQuery.selectKeys(Arrays.asList(mThirdTrait, "photoIdRated"));
+        rateScoreQuery.whereEqualTo("photoIdRated", photoRatedObject);
+        rateScoreQuery.findInBackground(new FindCallback<AVObject>() {
+            @Override
+            public void done(List<AVObject> list, AVException e) {
+                if (list.size()>0) {
+                    int[] allRateScores = new int[list.size()];
+
+                    int i = 0;
+                    for (AVObject object : list) {
+                        allRateScores[i] = object.getInt(mThirdTrait);
+                        i++;
+                    }
+
+                    plotBarChart(allRateScores, mThirdBarChart);
+                } else {
+                    Toast.makeText(InputRateFaceActivity.this,
+                            R.string.no_result_due_to_limited_data, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+    // Plot the Fourth BarChart
+    private void getFourthOthersRateScoresAndShowResult(String rateFacePhotoId) {
+        AVObject photoRatedObject = AVObject.createWithoutData("RateFacePhoto", rateFacePhotoId);
+
+        AVQuery<AVObject> rateScoreQuery = new AVQuery<>("RateFaceScore");
+        rateScoreQuery.selectKeys(Arrays.asList(mFourthTrait, "photoIdRated"));
+        rateScoreQuery.whereEqualTo("photoIdRated", photoRatedObject);
+        rateScoreQuery.findInBackground(new FindCallback<AVObject>() {
+            @Override
+            public void done(List<AVObject> list, AVException e) {
+                if (list.size()>0) {
+                    int[] allRateScores = new int[list.size()];
+
+                    int i = 0;
+                    for (AVObject object : list) {
+                        allRateScores[i] = object.getInt(mFourthTrait);
+                        i++;
+                    }
+
+                    plotBarChart(allRateScores, mFourthBarChart);
+                } else {
+                    Toast.makeText(InputRateFaceActivity.this,
+                            R.string.no_result_due_to_limited_data, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+    // Plot the Fifth BarChart
+    private void getFifthOthersRateScoresAndShowResult(String rateFacePhotoId) {
+        AVObject photoRatedObject = AVObject.createWithoutData("RateFacePhoto", rateFacePhotoId);
+
+        AVQuery<AVObject> rateScoreQuery = new AVQuery<>("RateFaceScore");
+        rateScoreQuery.selectKeys(Arrays.asList(mFifthTrait, "photoIdRated"));
+        rateScoreQuery.whereEqualTo("photoIdRated", photoRatedObject);
+        rateScoreQuery.findInBackground(new FindCallback<AVObject>() {
+            @Override
+            public void done(List<AVObject> list, AVException e) {
+                if (list.size()>0) {
+                    int[] allRateScores = new int[list.size()];
+
+                    int i = 0;
+                    for (AVObject object : list) {
+                        allRateScores[i] = object.getInt(mFifthTrait);
+                        i++;
+                    }
+
+                    plotBarChart(allRateScores, mFifthBarChart);
                 } else {
                     Toast.makeText(InputRateFaceActivity.this,
                             R.string.no_result_due_to_limited_data, Toast.LENGTH_SHORT).show();
@@ -226,7 +513,7 @@ public class InputRateFaceActivity extends AppCompatActivity {
     }
 
 
-    private void plotBarChart(int[] allRateScores) {
+    private void plotBarChart(int[] allRateScores, BarChart mBarChart) {
         List<BarEntry> barEntries = StatHelper.getBarEntry(allRateScores);
         BarDataSet barDataSet = new BarDataSet(barEntries, "别人眼中的TA");
         BarData theData = new BarData(barDataSet);
@@ -243,7 +530,69 @@ public class InputRateFaceActivity extends AppCompatActivity {
 
 
 
-// Backup Code
+// ---------------------------------- Backup Code ------------------------------------ //
+
+/*
+    private void getOthersRateScoresAndShowResult(String rateFacePhotoId) {
+        AVObject photoRatedObject = AVObject.createWithoutData("RateFacePhoto", rateFacePhotoId);
+
+        AVQuery<AVObject> rateScoreQuery = new AVQuery<>("RateFaceScore");
+        rateScoreQuery.selectKeys(Arrays.asList(mFirstTrait, "photoIdRated"));
+        rateScoreQuery.whereEqualTo("photoIdRated", photoRatedObject);
+        rateScoreQuery.findInBackground(new FindCallback<AVObject>() {
+            @Override
+            public void done(List<AVObject> list, AVException e) {
+                if (list.size()>0) {
+                    int[] allRateScores = new int[list.size()];
+
+                    int i = 0;
+                    for (AVObject object : list) {
+                        allRateScores[i] = object.getInt(mFirstTrait);
+                        i++;
+                    }
+
+                    plotBarChart(allRateScores, mFirstBarChart);
+                } else {
+                    Toast.makeText(InputRateFaceActivity.this,
+                            R.string.no_result_due_to_limited_data, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+*/
+
+
+/*
+    private void plotBarChart(int[] allFirstRateScores) {
+        List<BarEntry> barEntries = StatHelper.getBarEntry(allRateScores);
+        BarDataSet barDataSet = new BarDataSet(barEntries, "别人眼中的TA");
+        BarData theData = new BarData(barDataSet);
+        mFirstBarChart.setDescription(null);
+        // mBarChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+        mFirstBarChart.setData(theData);
+        mFirstBarChart.animateY(1000);
+        mFirstBarChart.invalidate();
+    }
+*/
+
+
+/*
+    private void getAllRateFaceScores() {
+        int selectedFirstRadioGroup = mFirstRadioGroup.getCheckedRadioButtonId();
+        RadioButton radioButton = (RadioButton) findViewById(selectedFirstRadioGroup);
+        String radioString = radioButton.getText().toString();
+
+        if (selectedFirstRadioGroup != -1) {
+            if (selectedFirstRadioGroup == R.id.rate_value_10) {
+                rateFaceScore = Integer.parseInt(radioString.substring(radioString.length() - 2));
+            } else {
+                rateFaceScore = Integer.parseInt(radioString.substring(radioString.length() - 1));
+            }
+        }
+    }
+*/
+
+
 // Get photoUrl in the RateFacePhoto table (class in LeanCloud)
 
     /*

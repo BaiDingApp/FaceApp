@@ -21,6 +21,7 @@ public class BasicInformationDefaultActivity extends AppCompatActivity
 
     private String basicInfoObjectId;
 
+    private int mGenderPosition;
     private int mEducationPosition;
     private int mOccupationPosition;
     private int mBirthPlacePosition;
@@ -30,7 +31,15 @@ public class BasicInformationDefaultActivity extends AppCompatActivity
     private int mReligionPosition;
     private int mPetPosition;
 
+    private Spinner mGenderSpinner;
+    private Spinner mEducationSpinner;
+    private Spinner mOccupationSpinner;
+    private Spinner mBirthPlaceSpinner;
+    private Spinner mWorkPlaceSpinner;
+    private Spinner mOverseaSpinner;
     private Spinner mSingleSpinner;
+    private Spinner mReligionSpinner;
+    private Spinner mPetSpinner;
 
 
     @Override
@@ -39,8 +48,17 @@ public class BasicInformationDefaultActivity extends AppCompatActivity
         setContentView(R.layout.activity_basic_information_default);
 
 
+        // onClick Gender spinner
+        mGenderSpinner = (Spinner) findViewById(R.id.action_basic_gender_default);
+        ArrayAdapter mGenderAdapter = ArrayAdapter.createFromResource(this,
+                R.array.spinner_gender_levels, android.R.layout.simple_spinner_item);
+        mGenderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mGenderSpinner.setAdapter(mGenderAdapter);
+        mGenderSpinner.setOnItemSelectedListener(this);
+
+
         // onClick Education spinner
-        Spinner mEducationSpinner = (Spinner) findViewById(R.id.action_basic_education_default);
+        mEducationSpinner = (Spinner) findViewById(R.id.action_basic_education_default);
         ArrayAdapter mEducationAdapter = ArrayAdapter.createFromResource(this,
                 R.array.spinner_education_levels, android.R.layout.simple_spinner_item);
         mEducationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -49,7 +67,7 @@ public class BasicInformationDefaultActivity extends AppCompatActivity
 
 
         // onClick Occupation spinner
-        Spinner mOccupationSpinner = (Spinner) findViewById(R.id.action_basic_occupation_default);
+        mOccupationSpinner = (Spinner) findViewById(R.id.action_basic_occupation_default);
         ArrayAdapter mOccupationAdapter = ArrayAdapter.createFromResource(this,
                 R.array.spinner_occupations, android.R.layout.simple_spinner_item);
         mOccupationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -58,7 +76,7 @@ public class BasicInformationDefaultActivity extends AppCompatActivity
 
 
         // onClick BirthPlace spinner
-        Spinner mBirthPlaceSpinner = (Spinner) findViewById(R.id.action_basic_birth_place_default);
+        mBirthPlaceSpinner = (Spinner) findViewById(R.id.action_basic_birth_place_default);
         ArrayAdapter mBirthPlaceAdapter = ArrayAdapter.createFromResource(this,
                 R.array.spinner_place, android.R.layout.simple_spinner_item);
         mBirthPlaceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -67,7 +85,7 @@ public class BasicInformationDefaultActivity extends AppCompatActivity
 
 
         // onClick WorkPlace spinner
-        Spinner mWorkPlaceSpinner = (Spinner) findViewById(R.id.action_basic_work_place_default);
+        mWorkPlaceSpinner = (Spinner) findViewById(R.id.action_basic_work_place_default);
         ArrayAdapter mWorkPlaceAdapter = ArrayAdapter.createFromResource(this,
                 R.array.spinner_place, android.R.layout.simple_spinner_item);
         mWorkPlaceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -76,7 +94,7 @@ public class BasicInformationDefaultActivity extends AppCompatActivity
 
 
         // onClick Oversea spinner
-        Spinner mOverseaSpinner = (Spinner) findViewById(R.id.action_basic_oversea_default);
+        mOverseaSpinner = (Spinner) findViewById(R.id.action_basic_oversea_default);
         ArrayAdapter mOverseaAdapter = ArrayAdapter.createFromResource(this,
                 R.array.spinner_yes_no, android.R.layout.simple_spinner_item);
         mOverseaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -94,7 +112,7 @@ public class BasicInformationDefaultActivity extends AppCompatActivity
 
 
         // onClick Religion spinner
-        Spinner mReligionSpinner = (Spinner) findViewById(R.id.action_basic_religion_default);
+        mReligionSpinner = (Spinner) findViewById(R.id.action_basic_religion_default);
         ArrayAdapter mReligionAdapter = ArrayAdapter.createFromResource(this,
                 R.array.spinner_yes_no, android.R.layout.simple_spinner_item);
         mReligionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -103,7 +121,7 @@ public class BasicInformationDefaultActivity extends AppCompatActivity
 
 
         // onClick Pet spinner
-        Spinner mPetSpinner = (Spinner) findViewById(R.id.action_basic_pet_default);
+        mPetSpinner = (Spinner) findViewById(R.id.action_basic_pet_default);
         ArrayAdapter mPetAdapter = ArrayAdapter.createFromResource(this,
                 R.array.spinner_yes_no, android.R.layout.simple_spinner_item);
         mPetAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -139,6 +157,10 @@ public class BasicInformationDefaultActivity extends AppCompatActivity
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         switch(parent.getId()){
+            case R.id.action_basic_gender_default:
+                mGenderPosition = position;
+                break;
+
             case R.id.action_basic_education_default:
                 mEducationPosition = position;
                 break;
@@ -183,14 +205,55 @@ public class BasicInformationDefaultActivity extends AppCompatActivity
 
     // Create the profile by using info saved in SharedPreference when onCreate
     private void createProfileUsingSavedData() {
+        // Gender
+        mGenderPosition = MyInfoPreference.getStoredGender(BasicInformationDefaultActivity.this);
+        mGenderSpinner.setSelection(mGenderPosition);
+
+        // Education Level
+        mEducationPosition = MyInfoPreference.getStoredEducation(BasicInformationDefaultActivity.this);
+        mEducationSpinner.setSelection(mEducationPosition);
+
+        // Occupation
+        mOccupationPosition = MyInfoPreference.getStoredOccupation(BasicInformationDefaultActivity.this);
+        mOccupationSpinner.setSelection(mOccupationPosition);
+
+        // Birth Place
+        mBirthPlacePosition = MyInfoPreference.getStoredBirthPlace(BasicInformationDefaultActivity.this);
+        mBirthPlaceSpinner.setSelection(mBirthPlacePosition);
+
+        //Work Place
+        mWorkPlacePosition = MyInfoPreference.getStoredWorkPlace(BasicInformationDefaultActivity.this);
+        mWorkPlaceSpinner.setSelection(mWorkPlacePosition);
+
+        // Oversea
+        mOverseaPosition = MyInfoPreference.getStoredOversea(BasicInformationDefaultActivity.this);
+        mOverseaSpinner.setSelection(mOverseaPosition);
+
+        // Single
         mSinglePosition = MyInfoPreference.getStoredSingle(BasicInformationDefaultActivity.this);
         mSingleSpinner.setSelection(mSinglePosition);
+
+        // Religion
+        mReligionPosition = MyInfoPreference.getStoredReligion(BasicInformationDefaultActivity.this);
+        mReligionSpinner.setSelection(mReligionPosition);
+
+        // Pet
+        mPetPosition = MyInfoPreference.getStoredPet(BasicInformationDefaultActivity.this);
+        mPetSpinner.setSelection(mPetPosition);
     }
 
 
     // Save data to SharedPreference
     private void saveDataToSharedPreference() {
+        MyInfoPreference.setStoredGender(BasicInformationDefaultActivity.this, mGenderPosition);
+        MyInfoPreference.setStoredEducation(BasicInformationDefaultActivity.this, mEducationPosition);
+        MyInfoPreference.setStoredOccupation(BasicInformationDefaultActivity.this, mOccupationPosition);
+        MyInfoPreference.setStoredBirthPlace(BasicInformationDefaultActivity.this, mBirthPlacePosition);
+        MyInfoPreference.setStoredWorkPlace(BasicInformationDefaultActivity.this, mWorkPlacePosition);
+        MyInfoPreference.setStoredOversea(BasicInformationDefaultActivity.this, mOverseaPosition);
         MyInfoPreference.setStoredSingle(BasicInformationDefaultActivity.this, mSinglePosition);
+        MyInfoPreference.setStoredReligion(BasicInformationDefaultActivity.this, mReligionPosition);
+        MyInfoPreference.setStoredPet(BasicInformationDefaultActivity.this, mPetPosition);
     }
 
 
@@ -201,6 +264,7 @@ public class BasicInformationDefaultActivity extends AppCompatActivity
         if (basicInfoObjectId != null) {
             final AVObject mBasicInfo = AVObject.createWithoutData("BasicInfo", basicInfoObjectId);
 
+            mBasicInfo.put("gender", mGenderPosition);
             mBasicInfo.put("educationLevel", mEducationPosition);
             mBasicInfo.put("occupation", mOccupationPosition);
             mBasicInfo.put("birthPlace", mBirthPlacePosition);
@@ -227,6 +291,7 @@ public class BasicInformationDefaultActivity extends AppCompatActivity
             mBasicInfo.put("username", AVUser.getCurrentUser().getUsername());
             mBasicInfo.put("userId", AVUser.getCurrentUser());
 
+            mBasicInfo.put("gender", mGenderPosition);
             mBasicInfo.put("educationLevel", mEducationPosition);
             mBasicInfo.put("occupation", mOccupationPosition);
             mBasicInfo.put("birthPlace", mBirthPlacePosition);

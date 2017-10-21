@@ -15,6 +15,7 @@ public class MyInfoPreference {
     private static final String PREF_BIRTHDAY = "birthday";
     private static final String PREF_HEIGHT = "height";
     private static final String PREF_WEIGHT = "weight";
+    private static final String PREF_GENDER = "gender";
     private static final String PREF_EDUCATION = "education";
     private static final String PREF_OCCUPATION = "occupation";
     private static final String PREF_BIRTH_PLACE = "birth_place";
@@ -52,7 +53,61 @@ public class MyInfoPreference {
     }
 
 
-    // Education
+    // Gender
+    public static int getStoredGender(Context context) {
+        return GeneralGetInt(context, PREF_GENDER);
+    }
+    public static void setStoredGender(Context context, int mGender) {
+        GeneralSetInt(context, PREF_GENDER, mGender);
+    }
+
+
+    // Education Level
+    public static int getStoredEducation(Context context) {
+        return GeneralGetInt(context, PREF_EDUCATION);
+    }
+    public static void setStoredEducation(Context context, int mEducation) {
+        GeneralSetInt(context, PREF_EDUCATION, mEducation);
+    }
+
+
+    // Occupation
+    public static int getStoredOccupation(Context context) {
+        return GeneralGetInt(context, PREF_OCCUPATION);
+    }
+    public static void setStoredOccupation(Context context, int mOccupation) {
+        GeneralSetInt(context, PREF_OCCUPATION, mOccupation);
+    }
+
+
+    // Birth Place
+    public static int getStoredBirthPlace(Context context) {
+        return GeneralGetInt(context, PREF_BIRTH_PLACE);
+    }
+    public static void setStoredBirthPlace(Context context, int mBirthPlace) {
+        GeneralSetInt(context, PREF_BIRTH_PLACE, mBirthPlace);
+    }
+
+
+    // Work Place
+    public static int getStoredWorkPlace(Context context) {
+        return GeneralGetInt(context, PREF_WORK_PLACE);
+    }
+    public static void setStoredWorkPlace(Context context, int mWorkPlace) {
+        GeneralSetInt(context, PREF_WORK_PLACE, mWorkPlace);
+    }
+
+
+    // Oversea
+    public static int getStoredOversea(Context context) {
+        return GeneralGetInt(context, PREF_OVERSEA);
+    }
+    public static void setStoredOversea(Context context, int mOversea) {
+        GeneralSetInt(context, PREF_OVERSEA, mOversea);
+    }
+
+
+    // Single
     public static int getStoredSingle(Context context) {
         return GeneralGetInt(context, PREF_SINGLE);
     }
@@ -62,9 +117,21 @@ public class MyInfoPreference {
 
 
     // Religion
+    public static int getStoredReligion(Context context) {
+        return GeneralGetInt(context, PREF_RELIGION);
+    }
+    public static void setStoredReligion(Context context, int mReligion) {
+        GeneralSetInt(context, PREF_RELIGION, mReligion);
+    }
 
 
     // Pet
+    public static int getStoredPet(Context context) {
+        return GeneralGetInt(context, PREF_PET);
+    }
+    public static void setStoredPet(Context context, int mPet) {
+        GeneralSetInt(context, PREF_PET, mPet);
+    }
 
 
     // General method - setStoredString & getStoredString
