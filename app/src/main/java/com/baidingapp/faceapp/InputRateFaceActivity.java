@@ -28,9 +28,13 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class InputRateFaceActivity extends AppCompatActivity {
 
@@ -83,9 +87,8 @@ public class InputRateFaceActivity extends AppCompatActivity {
     private int mFourthRateFaceScore;
     private int mFifthRateFaceScore;
 
+    private String mGroupId;
 
-
-//    private int rateFaceScore;
 //    private int mSpinnerPosition;
 
     @Override
@@ -117,6 +120,24 @@ public class InputRateFaceActivity extends AppCompatActivity {
         // The Fifth Question
         mFifthLeftField = (TextView) findViewById(R.id.fifth_input_rate).findViewById(R.id.left_field);
         mFifthRightField = (TextView) findViewById(R.id.fifth_input_rate).findViewById(R.id.right_field);
+
+
+        // Determine which social trait group to be used
+        String[] mGroupIdArray = getResources().getStringArray(R.array.group_id_traits);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
+        Date mCurrentDate = new Date(System.currentTimeMillis());  //获取当前时间
+        try {
+            final Date mAppLaunchDate = dateFormat.parse("2017-10-22 00:00:00");
+            long timeDiff = mCurrentDate.getTime() - mAppLaunchDate.getTime();
+            int dayDiff  = (int) timeDiff / (1000 * 3600 * 24);
+
+            mGroupId = mGroupIdArray[dayDiff];
+        } catch (ParseException e) {
+            e.printStackTrace();
+            Toast.makeText(InputRateFaceActivity.this, "无法设定初始时间", Toast.LENGTH_SHORT).show();
+        }
+        
+
         // Set the Questions
         setTextForQuestion();
 
@@ -241,7 +262,7 @@ public class InputRateFaceActivity extends AppCompatActivity {
     // Set the question, or left and right fields to the TextView
     private void setTextForQuestion() {
         AVQuery<AVObject> questions = new AVQuery<>("LikertQuestions");
-        questions.whereEqualTo("groupId", "First");
+        questions.whereEqualTo("groupId", mGroupId);
 
         questions.findInBackground(new FindCallback<AVObject>() {
             @Override
