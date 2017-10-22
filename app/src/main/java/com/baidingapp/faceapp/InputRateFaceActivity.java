@@ -122,7 +122,7 @@ public class InputRateFaceActivity extends AppCompatActivity {
         mFifthRightField = (TextView) findViewById(R.id.fifth_input_rate).findViewById(R.id.right_field);
 
 
-        // Determine which social trait group to be used
+        // Determine the social trait group to be used TODAY
         String[] mGroupIdArray = getResources().getStringArray(R.array.group_id_traits);
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
         Date mCurrentDate = new Date(System.currentTimeMillis());  //获取当前时间
