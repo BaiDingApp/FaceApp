@@ -1,7 +1,6 @@
 package com.baidingapp.faceapp;
 
 import android.content.Intent;
-import android.content.pm.LauncherActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,8 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-
-import com.avos.avoscloud.AVUser;
 
 public class MePageFragment extends Fragment {
 
@@ -39,7 +36,7 @@ public class MePageFragment extends Fragment {
         mSettingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), SeetingsActivity.class);
+                Intent intent = new Intent(getActivity(), SettingsActivity.class);
                 startActivity(intent);
             }
         });

@@ -7,6 +7,7 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/action_about_app"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -17,10 +18,11 @@
         android:layout_marginTop="10dp"
         android:padding="10dp"
         android:textSize="18sp"
-        android:text="@string/about_app" />
+        android:text="@string/title_about_app" />
 
 
     <TextView
+        android:id="@+id/action_new_user_orientation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -31,10 +33,11 @@
         android:layout_marginTop="10dp"
         android:padding="10dp"
         android:textSize="18sp"
-        android:text="@string/new_user_navigation" />
+        android:text="@string/title_new_user_orientation" />
 
 
     <TextView
+        android:id="@+id/action_suggestion_feedback"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"

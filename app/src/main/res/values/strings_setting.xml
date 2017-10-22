@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_new_user_orientation">新手导航</string>
+    <string name="title_about_app">关于App</string>
+    <string name="recommend_to_friends">推荐给好友</string>
+    <string name="suggestion_feedback">建议与反馈</string>
+
+    <string name="about_app">
+
+    </string>
+
+    <string name="new_user_orientation">
+
+    </string>
+</resources>

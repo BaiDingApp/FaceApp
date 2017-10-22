@@ -21,14 +21,10 @@
     <string name="today_recommendation">今日推荐</string>
     <string name="open_recommendation">开通</string>
     <string name="close_recommendation">暂停</string>
-    <string name="introduction_recommendation">今日推荐功能</string>
-    <string name="my_information">我的信息</string>
+    <string name="introduction_recommendation">今日推荐</string>
+    <string name="my_information">我的个人档案</string>
     <string name="all_other_rate">历轮别人眼中的我</string>
     <string name="settings">设置</string>
-    <string name="about_app">关于App</string>
-    <string name="new_user_navigation">新手导航</string>
-    <string name="recommend_to_friends">推荐给好友</string>
-    <string name="suggestion_feedback">建议与反馈</string>
 
     <!-- Button on the My Information (Single and NoSingle) Page -->
     <string name="statement_my_information">请完善以下信息以方便我们向你作高度个性化的约会推荐</string>

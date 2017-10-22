@@ -34,4 +34,14 @@
     <string name="rate_value_8">8</string>
     <string name="rate_value_9">9</string>
     <string name="rate_value_10">10</string>
+
+    <!-- Group ID of Social Traits -->
+    <string-array name="group_id_traits">
+        <item>First</item>
+        <item>Second</item>
+        <item>Third</item>
+        <item>Fourth</item>
+        <item>Fifth</item>
+        <item>Sixth</item>
+    </string-array>
 </resources>
