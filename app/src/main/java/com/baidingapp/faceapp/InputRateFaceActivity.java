@@ -88,6 +88,11 @@ public class InputRateFaceActivity extends AppCompatActivity {
     private int mFifthRateFaceScore;
 
     private String mGroupId;
+    private String mUsernameRating;
+    private String mUsernameRated;
+
+    private final static String AppLaunchDate = "2017-10-22 00:00:00";
+    private final static int mNumberTraitGroup = 6;
 
 //    private int mSpinnerPosition;
 
@@ -98,6 +103,25 @@ public class InputRateFaceActivity extends AppCompatActivity {
 
         mFaceImageView = (ImageView) findViewById(R.id.face_image_input_rate);
         mScrollView = (ScrollView) findViewById(R.id.input_rate_scroll_view);
+
+
+        // Compute the day difference between the AppLaunchDate and the CurrentData
+        // Set the mGroupId
+        // Determine the social trait group to be used TODAY
+        String[] mGroupIdArray = getResources().getStringArray(R.array.group_id_traits);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
+        Date mCurrentDate = new Date(System.currentTimeMillis());  //获取当前时间
+        try {
+            Date mAppLaunchDate = dateFormat.parse(AppLaunchDate);
+            long timeDiff = mCurrentDate.getTime() - mAppLaunchDate.getTime();
+            int dayDiff  = (int) timeDiff / (1000 * 3600 * 24) % mNumberTraitGroup;
+
+            mGroupId = mGroupIdArray[dayDiff];
+        } catch (ParseException e) {
+            e.printStackTrace();
+            Toast.makeText(InputRateFaceActivity.this, "无法设定初始时间", Toast.LENGTH_SHORT).show();
+        }
+
 
         // Get photoUrl in the RateFacePhoto table (class in LeanCloud)
         // Initialize the ImageView in getUrlOfRateFacePhotos()
@@ -120,24 +144,6 @@ public class InputRateFaceActivity extends AppCompatActivity {
         // The Fifth Question
         mFifthLeftField = (TextView) findViewById(R.id.fifth_input_rate).findViewById(R.id.left_field);
         mFifthRightField = (TextView) findViewById(R.id.fifth_input_rate).findViewById(R.id.right_field);
-
-
-        // Determine the social trait group to be used TODAY
-        String[] mGroupIdArray = getResources().getStringArray(R.array.group_id_traits);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
-        Date mCurrentDate = new Date(System.currentTimeMillis());  //获取当前时间
-        try {
-            final Date mAppLaunchDate = dateFormat.parse("2017-10-22 00:00:00");
-            long timeDiff = mCurrentDate.getTime() - mAppLaunchDate.getTime();
-            int dayDiff  = (int) timeDiff / (1000 * 3600 * 24);
-
-            mGroupId = mGroupIdArray[dayDiff];
-        } catch (ParseException e) {
-            e.printStackTrace();
-            Toast.makeText(InputRateFaceActivity.this, "无法设定初始时间", Toast.LENGTH_SHORT).show();
-        }
-        
-
         // Set the Questions
         setTextForQuestion();
 
@@ -262,6 +268,7 @@ public class InputRateFaceActivity extends AppCompatActivity {
     // Set the question, or left and right fields to the TextView
     private void setTextForQuestion() {
         AVQuery<AVObject> questions = new AVQuery<>("LikertQuestions");
+        questions.limit(200);
         questions.whereEqualTo("groupId", mGroupId);
 
         questions.findInBackground(new FindCallback<AVObject>() {
@@ -297,7 +304,7 @@ public class InputRateFaceActivity extends AppCompatActivity {
     private void getUrlOfRateFacePhotos() {
         // String photoNotRated = "select * from RateFacePhoto where objectId !=  '599115cb570c35006b684d5c' ";
         String currUsername = AVUser.getCurrentUser().getUsername();
-        String photoNotRated = "select * from RateFacePhoto where username != (select usernameRated from RateFaceScore where usernameRating = ? limit 1000) limit 1000 ";
+        String photoNotRated = "select * from RateFacePhoto where username != (select usernameRated from RateFaceScore where usernameRating = ? and (roundId = ? or numGroupsRated = ?) limit 1000) limit 30";
 
         AVQuery.doCloudQueryInBackground(photoNotRated, new CloudQueryCallback<AVCloudQueryResult>() {
             @Override
@@ -320,7 +327,8 @@ public class InputRateFaceActivity extends AppCompatActivity {
                     mFifthResultButton.setEnabled(false);
                 }
             }
-        }, currUsername);
+        }, currUsername, mGroupId, mNumberTraitGroup);
+
     }
 
 
@@ -377,21 +385,58 @@ public class InputRateFaceActivity extends AppCompatActivity {
     private void saveDataToLeanCloud() {
         getAllRateFaceScores();
 
-        AVObject rateResult = new AVObject("RateFaceScore");
+        // Get mUsernameRating and mUsernameRated
+        mUsernameRating = AVUser.getCurrentUser().getUsername();
+        mUsernameRated  = photoRatedList.get(mPhotoIndex).getString("username");
 
-        rateResult.put(mFirstTrait,  mFirstRateFaceScore);
-        rateResult.put(mSecondTrait, mSecondRateFaceScore);
-        rateResult.put(mThirdTrait,  mThirdRateFaceScore);
-        rateResult.put(mFourthTrait, mFourthRateFaceScore);
-        rateResult.put(mFifthTrait,  mFifthRateFaceScore);
-        // rateResult.put("objQues", mSpinnerPosition);
-        rateResult.put("usernameRating", AVUser.getCurrentUser().getUsername());
-        rateResult.put("usernameRated", photoRatedList.get(mPhotoIndex).getString("username"));
-        // photoRated's type is Pointer, which points to RateFacePhoto
-        rateResult.put("userIdRating", AVUser.getCurrentUser());
-        rateResult.put("photoIdRated", photoRatedList.get(mPhotoIndex));
+        // Check whether mUsernameRating rated mUsernameRated
+        AVQuery<AVObject> mUserRatingQuery = new AVQuery<>("RateFaceScore");
+        mUserRatingQuery.whereEqualTo("usernameRating", mUsernameRating);
 
-        rateResult.saveInBackground();
+        AVQuery<AVObject> mUserRatedQuery = new AVQuery<>("RateFaceScore");
+        mUserRatedQuery.whereEqualTo("usernameRated", mUsernameRated);
+
+        AVQuery<AVObject> mQuery = AVQuery.and(Arrays.asList(mUserRatingQuery, mUserRatedQuery));
+        mQuery.findInBackground(new FindCallback<AVObject>() {
+            @Override
+            public void done(List<AVObject> list, AVException e) {
+                if (list.size()>0) {
+                    String mObjectId = list.get(0).getObjectId();
+                    int mNumberGroupsRated = list.get(0).getInt("numGroupsRated");
+
+                    AVObject rateResult = AVObject.createWithoutData("RateFaceScore", mObjectId);
+
+                    rateResult.put(mFirstTrait,  mFirstRateFaceScore);
+                    rateResult.put(mSecondTrait, mSecondRateFaceScore);
+                    rateResult.put(mThirdTrait,  mThirdRateFaceScore);
+                    rateResult.put(mFourthTrait, mFourthRateFaceScore);
+                    rateResult.put(mFifthTrait,  mFifthRateFaceScore);
+                    // rateResult.put("objQues", mSpinnerPosition);
+
+                    rateResult.put("numGroupsRated", mNumberGroupsRated + 1);
+                    rateResult.put("roundId", mGroupId);
+                    rateResult.saveInBackground();
+                } else {
+                    AVObject rateResult = new AVObject("RateFaceScore");
+
+                    rateResult.put(mFirstTrait,  mFirstRateFaceScore);
+                    rateResult.put(mSecondTrait, mSecondRateFaceScore);
+                    rateResult.put(mThirdTrait,  mThirdRateFaceScore);
+                    rateResult.put(mFourthTrait, mFourthRateFaceScore);
+                    rateResult.put(mFifthTrait,  mFifthRateFaceScore);
+                    // rateResult.put("objQues", mSpinnerPosition);
+                    rateResult.put("usernameRating", mUsernameRating);
+                    rateResult.put("usernameRated", mUsernameRated);
+                    // photoRated's type is Pointer, which points to RateFacePhoto
+                    rateResult.put("userIdRating", AVUser.getCurrentUser());
+                    rateResult.put("photoIdRated", photoRatedList.get(mPhotoIndex));
+
+                    rateResult.put("numGroupsRated", 1);
+                    rateResult.put("roundId", mGroupId);
+                    rateResult.saveInBackground();
+                }
+            }
+        });
     }
 
 
@@ -402,9 +447,15 @@ public class InputRateFaceActivity extends AppCompatActivity {
         AVObject photoRatedObject = AVObject.createWithoutData("RateFacePhoto", rateFacePhotoId);
 
         AVQuery<AVObject> rateScoreQuery = new AVQuery<>("RateFaceScore");
-        rateScoreQuery.selectKeys(Arrays.asList(mFirstTrait, "photoIdRated"));
         rateScoreQuery.whereEqualTo("photoIdRated", photoRatedObject);
-        rateScoreQuery.findInBackground(new FindCallback<AVObject>() {
+
+        AVQuery<AVObject> notNullQuery = new AVQuery<>("RateFaceScore");
+        notNullQuery.whereExists(mFirstTrait);
+
+        AVQuery<AVObject> mQuery = AVQuery.and(Arrays.asList(rateScoreQuery, notNullQuery));
+        mQuery.selectKeys(Arrays.asList(mFirstTrait, "photoIdRated"));
+        mQuery.limit(1000);
+        mQuery.findInBackground(new FindCallback<AVObject>() {
             @Override
             public void done(List<AVObject> list, AVException e) {
                 if (list.size()>0) {
@@ -429,9 +480,15 @@ public class InputRateFaceActivity extends AppCompatActivity {
         AVObject photoRatedObject = AVObject.createWithoutData("RateFacePhoto", rateFacePhotoId);
 
         AVQuery<AVObject> rateScoreQuery = new AVQuery<>("RateFaceScore");
-        rateScoreQuery.selectKeys(Arrays.asList(mSecondTrait, "photoIdRated"));
         rateScoreQuery.whereEqualTo("photoIdRated", photoRatedObject);
-        rateScoreQuery.findInBackground(new FindCallback<AVObject>() {
+
+        AVQuery<AVObject> notNullQuery = new AVQuery<>("RateFaceScore");
+        notNullQuery.whereExists(mSecondTrait);
+
+        AVQuery<AVObject> mQuery = AVQuery.and(Arrays.asList(rateScoreQuery, notNullQuery));
+        mQuery.selectKeys(Arrays.asList(mSecondTrait, "photoIdRated"));
+        mQuery.limit(1000);
+        mQuery.findInBackground(new FindCallback<AVObject>() {
             @Override
             public void done(List<AVObject> list, AVException e) {
                 if (list.size()>0) {
@@ -456,9 +513,15 @@ public class InputRateFaceActivity extends AppCompatActivity {
         AVObject photoRatedObject = AVObject.createWithoutData("RateFacePhoto", rateFacePhotoId);
 
         AVQuery<AVObject> rateScoreQuery = new AVQuery<>("RateFaceScore");
-        rateScoreQuery.selectKeys(Arrays.asList(mThirdTrait, "photoIdRated"));
         rateScoreQuery.whereEqualTo("photoIdRated", photoRatedObject);
-        rateScoreQuery.findInBackground(new FindCallback<AVObject>() {
+
+        AVQuery<AVObject> notNullQuery = new AVQuery<>("RateFaceScore");
+        notNullQuery.whereExists(mThirdTrait);
+
+        AVQuery<AVObject> mQuery = AVQuery.and(Arrays.asList(rateScoreQuery, notNullQuery));
+        mQuery.selectKeys(Arrays.asList(mThirdTrait, "photoIdRated"));
+        mQuery.limit(1000);
+        mQuery.findInBackground(new FindCallback<AVObject>() {
             @Override
             public void done(List<AVObject> list, AVException e) {
                 if (list.size()>0) {
@@ -483,9 +546,15 @@ public class InputRateFaceActivity extends AppCompatActivity {
         AVObject photoRatedObject = AVObject.createWithoutData("RateFacePhoto", rateFacePhotoId);
 
         AVQuery<AVObject> rateScoreQuery = new AVQuery<>("RateFaceScore");
-        rateScoreQuery.selectKeys(Arrays.asList(mFourthTrait, "photoIdRated"));
         rateScoreQuery.whereEqualTo("photoIdRated", photoRatedObject);
-        rateScoreQuery.findInBackground(new FindCallback<AVObject>() {
+
+        AVQuery<AVObject> notNullQuery = new AVQuery<>("RateFaceScore");
+        notNullQuery.whereExists(mFourthTrait);
+
+        AVQuery<AVObject> mQuery = AVQuery.and(Arrays.asList(rateScoreQuery, notNullQuery));
+        mQuery.selectKeys(Arrays.asList(mFourthTrait, "photoIdRated"));
+        mQuery.limit(1000);
+        mQuery.findInBackground(new FindCallback<AVObject>() {
             @Override
             public void done(List<AVObject> list, AVException e) {
                 if (list.size()>0) {
@@ -510,9 +579,15 @@ public class InputRateFaceActivity extends AppCompatActivity {
         AVObject photoRatedObject = AVObject.createWithoutData("RateFacePhoto", rateFacePhotoId);
 
         AVQuery<AVObject> rateScoreQuery = new AVQuery<>("RateFaceScore");
-        rateScoreQuery.selectKeys(Arrays.asList(mFifthTrait, "photoIdRated"));
         rateScoreQuery.whereEqualTo("photoIdRated", photoRatedObject);
-        rateScoreQuery.findInBackground(new FindCallback<AVObject>() {
+
+        AVQuery<AVObject> notNullQuery = new AVQuery<>("RateFaceScore");
+        notNullQuery.whereExists(mFifthTrait);
+
+        AVQuery<AVObject> mQuery = AVQuery.and(Arrays.asList(rateScoreQuery, notNullQuery));
+        mQuery.selectKeys(Arrays.asList(mFifthTrait, "photoIdRated"));
+        mQuery.limit(1000);
+        mQuery.findInBackground(new FindCallback<AVObject>() {
             @Override
             public void done(List<AVObject> list, AVException e) {
                 if (list.size()>0) {
