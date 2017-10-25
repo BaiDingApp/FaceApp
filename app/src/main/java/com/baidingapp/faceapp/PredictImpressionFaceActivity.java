@@ -42,6 +42,7 @@ public class PredictImpressionFaceActivity extends AppCompatActivity {
 
     private ImageView mFaceImageView;
     private Button mUploadButton;
+    private Button mPredictImpressionButton;
     private String mImagePath;
     private AVFile mImageFile = null;
     private String predictFacePhotoId;
@@ -52,6 +53,10 @@ public class PredictImpressionFaceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_predict_imprssion_face);
 
         final ScrollView mScrollView = (ScrollView) findViewById(R.id.predict_impression_face_scroll_view);
+        // the UPLOAD button
+        mUploadButton = (Button) findViewById(R.id.action_upload_photo_predict_impression_button);
+        // the PredictImpression Button
+        mPredictImpressionButton = (Button) findViewById(R.id.action_predict_impression_face);
 
 
         // The URL is used to test
@@ -70,17 +75,15 @@ public class PredictImpressionFaceActivity extends AppCompatActivity {
                     .placeholder(R.drawable.face_image)
                     .error(R.drawable.face_image)
                     .into(mFaceImageView);
+
+            mPredictImpressionButton.setEnabled(true);
         } else {
             GlideApp.with(PredictImpressionFaceActivity.this).load(R.drawable.face_image).into(mFaceImageView);
         }
 
 
-        // on Click the UPLOAD button
-        mUploadButton = (Button) findViewById(R.id.action_upload_photo_predict_impression_button);
-
         // on Click the PICK Button
         Button mPickButton = (Button) findViewById(R.id.action_pick_photo_predict_impression_button);
-
         mPickButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
@@ -92,19 +95,24 @@ public class PredictImpressionFaceActivity extends AppCompatActivity {
 
         // The Upload Button is enabled after the Pick Button is clicked
         mUploadButton.setEnabled(false);
-
+        // on Click the UPLOAD button
         mUploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                uploadPhotoToLeanCloud();
                 // Copy the uploaded photo from External Storage to Internal Storage
                 ImageHelper.copyPhotoToInternalStorage(mImagePath, PredictImpressionFaceActivity.this, "predictImage");
+
+                uploadPhotoToLeanCloud();
+
                 mUploadButton.setEnabled(false);
+                mPredictImpressionButton.setEnabled(true);
             }
         });
 
 
-        Button mPredictImpressionButton = (Button) findViewById(R.id.action_predict_impression_face);
+        // the PredictImpression Button is enabled if the Upload Button is clicked or there exists a face image
+        mPredictImpressionButton.setEnabled(false);
+        // onClick the PredictImpression Button
         mPredictImpressionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

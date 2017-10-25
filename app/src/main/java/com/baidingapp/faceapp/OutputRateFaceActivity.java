@@ -25,10 +25,13 @@ import com.baidingapp.faceapp.helper.ImageHelper;
 import com.baidingapp.faceapp.helper.MyInfoPreference;
 import com.baidingapp.faceapp.helper.StatHelper;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.HorizontalBarChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -45,13 +48,16 @@ public class OutputRateFaceActivity extends AppCompatActivity {
     //         "com.baidingapp.faceapp.Picked_image_uri";
 
     private static final int REQUEST_CODE_IMAGE = 1;
+    private static final int mNumberQuestions = 30;
 
     private ImageView mFaceImageView;
     private String mImagePath;
     private AVFile mImageFile = null;
     private Button mUploadButton;
     private String rateFacePhotoId;
-    private BarChart mBarChart;
+    private HorizontalBarChart mBarChart;
+    private String[] mQuestionsCn = new String[mNumberQuestions];
+    private String[] mQuestionsEn = new String[mNumberQuestions];
 
     // private ProgressBar progressBar;
     // private Uri mPickedImageUri;
@@ -69,8 +75,7 @@ public class OutputRateFaceActivity extends AppCompatActivity {
         */
 
         // BarChart
-        mBarChart = (BarChart) findViewById(R.id.output_rate_bar_chart);
-        mBarChart.setNoDataText(getResources().getString(R.string.please_recheck_later));
+        mBarChart = (HorizontalBarChart) findViewById(R.id.output_rate_bar_chart);
 
 
         // The URL is used to test
@@ -130,9 +135,10 @@ public class OutputRateFaceActivity extends AppCompatActivity {
         // Show the results via BarChart
         rateFacePhotoId = MyInfoPreference.getStoredRateFacePhotoId(OutputRateFaceActivity.this);
         if (rateFacePhotoId != null) {
+            getQuestions();
             getAllRateScoresAndShowResult(rateFacePhotoId);
         } else {
-            Toast.makeText(this, R.string.please_upload_photo_first, Toast.LENGTH_SHORT).show();
+            mBarChart.setNoDataText(getResources().getString(R.string.please_upload_photo_first));
         }
 
     }
@@ -245,23 +251,45 @@ public class OutputRateFaceActivity extends AppCompatActivity {
     }
 
 
+    // Get the Questions
+    private void getQuestions() {
+        AVQuery<AVObject> questionQuery = new AVQuery<>("LikertQuestions");
+        questionQuery.selectKeys(Arrays.asList("questionEn", "questionCn"));
+        questionQuery.findInBackground(new FindCallback<AVObject>() {
+            @Override
+            public void done(List<AVObject> list, AVException e) {
+                int i=0;
+                for (AVObject object:list) {
+                    mQuestionsEn[i] = object.getString("questionEn");
+                    mQuestionsCn[i] = object.getString("questionCn");
+                    i++;
+                }
+            }
+        });
+    }
+
+
     // Get the rate scores from LeanCloud
     // Show the results via BarChart
     private void getAllRateScoresAndShowResult(String rateFacePhotoId) {
-        AVObject photoRatedObject = AVObject.createWithoutData("RateFacePhoto", rateFacePhotoId);
+        // TODO:
+        // Replace "59929ce8a22b9d0057106c3d" with rateFacePhotoId
+        AVObject photoRatedObject = AVObject.createWithoutData("RateFacePhoto", "59929ce8a22b9d0057106c3d");
 
         AVQuery<AVObject> rateScoreQuery = new AVQuery<>("RateFaceScore");
-        rateScoreQuery.selectKeys(Arrays.asList("subQues", "photoIdRated"));
         rateScoreQuery.whereEqualTo("photoIdRated", photoRatedObject);
+        rateScoreQuery.limit(1000);
         rateScoreQuery.findInBackground(new FindCallback<AVObject>() {
             @Override
             public void done(List<AVObject> list, AVException e) {
                 if (list.size()>0) {
-                    int[] allRateScores = new int[list.size()];
+                    int[][] allRateScores = new int[list.size()][mNumberQuestions];
 
                     int i = 0;
                     for (AVObject object : list) {
-                        allRateScores[i] = object.getInt("subQues");
+                        for (int j=0; j<mNumberQuestions; j++) {
+                            allRateScores[i][j] = object.getInt(mQuestionsEn[j]);
+                        }
                         i++;
                     }
 
@@ -273,8 +301,20 @@ public class OutputRateFaceActivity extends AppCompatActivity {
     }
 
 
-    private void plotBarChart(int[] allRateScores) {
-        List<BarEntry> barEntries = StatHelper.getBarEntry(allRateScores);
+    private void plotBarChart(int[][] allRateScores) {
+        // The labels that will be drawn on the XAxis
+        IAxisValueFormatter formatter = new IAxisValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, AxisBase axis) {
+                return mQuestionsCn[(int) value];
+            }
+        };
+        XAxis xAxis = mBarChart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        // xAxis.setLabelCount(mNumberQuestions);
+        xAxis.setValueFormatter(formatter);
+
+        List<BarEntry> barEntries = StatHelper.getAllBarEntry(allRateScores);
         BarDataSet barDataSet = new BarDataSet(barEntries, "别人眼中的我");
         BarData theData = new BarData(barDataSet);
         mBarChart.setDescription(null);

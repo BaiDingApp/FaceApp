@@ -44,15 +44,9 @@
         <activity android:name=".TodayRecomIntroActivity" />
         <activity android:name=".SettingsActivity" />
         <activity android:name=".TodayRecommendationActivity" />
-        <activity android:name=".PrivacyServiceTermsActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".PrivacyServiceTermsActivity" />
         <activity android:name=".AboutAppActivity" />
-        <activity android:name=".NewUserOrientationActivity"></activity>
+        <activity android:name=".NewUserOrientationActivity" />
     </application>
 
 </manifest>

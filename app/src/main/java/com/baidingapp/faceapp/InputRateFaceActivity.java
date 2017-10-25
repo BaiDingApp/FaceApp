@@ -24,6 +24,7 @@ import com.avos.avoscloud.FindCallback;
 import com.baidingapp.faceapp.helper.ImageHelper;
 import com.baidingapp.faceapp.helper.StatHelper;
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
@@ -268,7 +269,6 @@ public class InputRateFaceActivity extends AppCompatActivity {
     // Set the question, or left and right fields to the TextView
     private void setTextForQuestion() {
         AVQuery<AVObject> questions = new AVQuery<>("LikertQuestions");
-        questions.limit(200);
         questions.whereEqualTo("groupId", mGroupId);
 
         questions.findInBackground(new FindCallback<AVObject>() {
@@ -610,6 +610,9 @@ public class InputRateFaceActivity extends AppCompatActivity {
 
 
     private void plotBarChart(int[] allRateScores, BarChart mBarChart) {
+        // XAxis xAxis = mBarChart.getXAxis();
+        // xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+
         List<BarEntry> barEntries = StatHelper.getBarEntry(allRateScores);
         BarDataSet barDataSet = new BarDataSet(barEntries, "别人眼中的TA");
         BarData theData = new BarData(barDataSet);
