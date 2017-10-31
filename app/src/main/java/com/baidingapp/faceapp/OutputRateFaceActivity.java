@@ -54,6 +54,7 @@ public class OutputRateFaceActivity extends AppCompatActivity {
     private String mImagePath;
     private AVFile mImageFile = null;
     private Button mUploadButton;
+    private Button mShowOtherRates;
     private String rateFacePhotoId;
     private HorizontalBarChart mBarChart;
     private String[] mQuestionsCn = new String[mNumberQuestions];
@@ -74,8 +75,12 @@ public class OutputRateFaceActivity extends AppCompatActivity {
         }
         */
 
-        // BarChart
+        // the BarChart
         mBarChart = (HorizontalBarChart) findViewById(R.id.output_rate_bar_chart);
+        // the UPLOAD Button
+        mUploadButton = (Button) findViewById(R.id.action_upload_face_photo_button);
+        // the ShowOtherRates Button
+        mShowOtherRates = (Button) findViewById(R.id.action_show_other_rates);
 
 
         // The URL is used to test
@@ -99,13 +104,8 @@ public class OutputRateFaceActivity extends AppCompatActivity {
             GlideApp.with(OutputRateFaceActivity.this).load(R.drawable.face_image).into(mFaceImageView);
         }
 
-
-        // on Click the UPLOAD button
-        mUploadButton = (Button) findViewById(R.id.action_upload_face_photo_button);
-
         // on Click the PICK Button
         Button mPickButton = (Button) findViewById(R.id.action_pick_face_photo_button);
-
         mPickButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
@@ -131,15 +131,25 @@ public class OutputRateFaceActivity extends AppCompatActivity {
         });
 
 
+        // onClick the ShowOtherRates Button
         // Get the rate scores from LeanCloud
         // Show the results via BarChart
         rateFacePhotoId = MyInfoPreference.getStoredRateFacePhotoId(OutputRateFaceActivity.this);
         if (rateFacePhotoId != null) {
-            getQuestions();
-            getAllRateScoresAndShowResult(rateFacePhotoId);
+            mShowOtherRates.setEnabled(true);
         } else {
+            mShowOtherRates.setEnabled(false);
             mBarChart.setNoDataText(getResources().getString(R.string.please_upload_photo_first));
+            // Toast.makeText(OutputRateFaceActivity.this, R.string.please_upload_photo_first, Toast.LENGTH_SHORT).show();
         }
+
+        mShowOtherRates.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getQuestions();
+                getAllRateScoresAndShowResult(rateFacePhotoId);
+            }
+        });
 
     }
 

@@ -133,6 +133,7 @@ public class BasicInformationDefaultActivity extends AppCompatActivity
         createProfileUsingSavedData();
 
 
+        // onClick SUBMIT button
         Button mSubmitButton = (Button) findViewById(R.id.action_submit_basic_info_default);
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override

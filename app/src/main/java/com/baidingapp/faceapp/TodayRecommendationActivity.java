@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.avos.avoscloud.AVException;
@@ -26,11 +27,17 @@ public class TodayRecommendationActivity extends AppCompatActivity {
 
     private String mCurrentUsername;
     private String mMatchedUsername;
+    private TextView mShowMatchText;
+    private Button mChatButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_today_recommendation);
+
+
+        // Show the Username of Today's Match
+        mShowMatchText = (TextView) findViewById(R.id.action_show_the_match);
 
 
         // Get the Username of the Current User
@@ -44,16 +51,28 @@ public class TodayRecommendationActivity extends AppCompatActivity {
             @Override
             public void done(List<AVObject> list, AVException e) {
                 mMatchedUsername = list.get(0).getString("MatchedUser");
+
+                // Set the Matched Username
+                // Make sure that the "mMatchedUsername" is queried and sent back to the App
+                // This is why .setText is put here
+                String mMatchInfo = "今日推荐：" + mMatchedUsername;
+                mShowMatchText.setText(mMatchInfo);
+
+                // Make sure that the "mMatchedUsername" is queried and sent back to the App
+                mChatButton.setEnabled(true);
             }
         });
 
 
-        Button mChatButton = (Button) findViewById(R.id.action_chat_with_ta);
+        // onClick the CHAT with TA Button
+        mChatButton = (Button) findViewById(R.id.action_chat_with_ta);
+        mChatButton.setEnabled(false);
+        mChatButton.getBackground().setAlpha(100);
         mChatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(TodayRecommendationActivity.this, mMatchedUsername, Toast.LENGTH_SHORT).show();
-/*
+                // Toast.makeText(TodayRecommendationActivity.this, mMatchedUsername, Toast.LENGTH_SHORT).show();
+
                 // Open the Dialog
                 LCChatKit.getInstance().open(mCurrentUsername, new AVIMClientCallback() {
                     @Override
@@ -68,12 +87,14 @@ public class TodayRecommendationActivity extends AppCompatActivity {
                         }
                     }
                 });
-*/
+
             }
         });
 
 
+        // onClick the NOT Interested in TA Button
         Button mNotInterestedButton = (Button) findViewById(R.id.action_not_interested_in_ta);
+        mNotInterestedButton.getBackground().setAlpha(100);
         mNotInterestedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

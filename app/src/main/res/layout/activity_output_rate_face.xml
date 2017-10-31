@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="10pt">
+            android:layout_marginBottom="5pt">
 
             <Button
                 android:id="@+id/action_pick_face_photo_button"
@@ -61,6 +61,17 @@
                 android:text="@string/upload_face_photo"/>
 
         </LinearLayout>
+
+
+        <Button
+            android:id="@+id/action_show_other_rates"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/button"
+            android:padding="10dp"
+            android:textSize="16sp"
+            android:layout_marginBottom="5pt"
+            android:text="@string/show_other_rates"/>
 
 
         <com.github.mikephil.charting.charts.HorizontalBarChart

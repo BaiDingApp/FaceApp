@@ -36,7 +36,7 @@ public class MyInfoPreference {
 
 
     // RateFacePhotoId
-    public static String  getStoredRateFacePhotoId(Context context) {
+    public static String getStoredRateFacePhotoId(Context context) {
         return GeneralGetString(context, RATE_FACE_PHOTO_ID);
     }
     public static void setStoredRateFacePhotoId(Context context, String rateFacePhotoId) {
@@ -45,11 +45,29 @@ public class MyInfoPreference {
 
 
     // PredictFacePhotoId
-    public static String  getStoredPredictFacePhotoId(Context context) {
+    public static String getStoredPredictFacePhotoId(Context context) {
         return GeneralGetString(context, PREDICT_FACE_PHOTO_ID);
     }
     public static void setStoredPredictFacePhotoId(Context context, String predictFacePhotoId) {
         GeneralSetString(context, PREDICT_FACE_PHOTO_ID, predictFacePhotoId);
+    }
+
+
+    // Height
+    public static int getStoredHeight(Context context) {
+        return GeneralGetInt(context, PREF_HEIGHT);
+    }
+    public static void setStoredHeight(Context context, int mHeight) {
+        GeneralSetInt(context, PREF_HEIGHT, mHeight);
+    }
+
+
+    // Weight
+    public static int getStoredWeight(Context context) {
+        return GeneralGetInt(context, PREF_WEIGHT);
+    }
+    public static void setStoredWeight(Context context, int mWeight) {
+        GeneralSetInt(context, PREF_WEIGHT, mWeight);
     }
 
 
