@@ -14,7 +14,7 @@
 
 
         <ImageView
-            android:id="@+id/action_uploaded_photo_prediction_impression"
+            android:id="@+id/show_face_image_prediction_impression"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginTop="6dp"

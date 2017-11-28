@@ -11,6 +11,7 @@ public class MyInfoPreference {
     private static final String BASIC_INFO_OBJECT_ID = "basicInfoObjectId";
     private static final String RATE_FACE_PHOTO_ID = "rateFacePhotoId";
     private static final String PREDICT_FACE_PHOTO_ID = "predictFacePhotoId";
+    private static final String DATING_FACE_PHOTO_ID = "datingFacePhotoId";
 
     private static final String PREF_BIRTHDAY = "birthday";
     private static final String PREF_HEIGHT = "height";
@@ -50,6 +51,15 @@ public class MyInfoPreference {
     }
     public static void setStoredPredictFacePhotoId(Context context, String predictFacePhotoId) {
         GeneralSetString(context, PREDICT_FACE_PHOTO_ID, predictFacePhotoId);
+    }
+
+
+    // PredictFacePhotoId
+    public static String getStoredDatingFacePhotoId(Context context) {
+        return GeneralGetString(context, DATING_FACE_PHOTO_ID);
+    }
+    public static void setStoredDatingFacePhotoId(Context context, String datingFacePhotoId) {
+        GeneralSetString(context, DATING_FACE_PHOTO_ID, datingFacePhotoId);
     }
 
 

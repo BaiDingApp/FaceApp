@@ -91,7 +91,7 @@ public class PredictImpressionFaceActivity extends AppCompatActivity
         // ImageHelper.ImageLoad(PredictImpressionFaceActivity.this, imageUrl, mFaceImageView);
 
         // Upload and show face image
-        mFaceImageView = (ImageView) findViewById(R.id.action_uploaded_photo_prediction_impression);
+        mFaceImageView = (ImageView) findViewById(R.id.show_face_image_prediction_impression);
         File internalStorage = PredictImpressionFaceActivity.this.getDir(AVUser.getCurrentUser().getUsername(), MODE_PRIVATE);
         File myImage = new File(internalStorage.getPath(), "predictImage");
         if (myImage.exists() && myImage.length() > 0) {
@@ -404,6 +404,8 @@ public class PredictImpressionFaceActivity extends AppCompatActivity
 
 
     private void showResult() {
+        // TODO
+
         // Compute the predictions
         int mAttractivenessValue = mGenderPosition + mAgePosition + mEducationPosition + mOccupationPosition
                 + mBirthPlacePosition + mWorkPlacePosition + mOverseaPosition + mSinglePosition + mReligionPosition + mPetPosition ;

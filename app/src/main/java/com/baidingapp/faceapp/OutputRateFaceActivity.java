@@ -87,7 +87,7 @@ public class OutputRateFaceActivity extends AppCompatActivity {
         // String imageUrl = "http://www.fdsm.fudan.edu.cn/UserWebEditorUploadImage/upload/image/20160428/6359744927934022586120687.jpg";
 
         // Initialize the face image view
-        mFaceImageView = (ImageView) findViewById(R.id.face_image_output_rate);
+        mFaceImageView = (ImageView) findViewById(R.id.show_face_image_output_rate);
         // ImageHelper.ImageLoad(OutputRateFaceActivity.this, null, mFaceImageView);
         // File myImage = new File(OutputRateFaceActivity.this.getFilesDir(), "outputImage.jpg");
         File internalStorage = OutputRateFaceActivity.this.getDir(AVUser.getCurrentUser().getUsername(), MODE_PRIVATE);

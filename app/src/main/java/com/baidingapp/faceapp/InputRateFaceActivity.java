@@ -108,6 +108,7 @@ public class InputRateFaceActivity extends AppCompatActivity {
         String[] mGroupIdArray = getResources().getStringArray(R.array.group_id_traits);
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
         Date mCurrentDate = new Date(System.currentTimeMillis());  //获取当前时间
+
         try {
             Date mAppLaunchDate = dateFormat.parse(MainActivity.AppLaunchDate);
             long timeDiff = mCurrentDate.getTime() - mAppLaunchDate.getTime();
