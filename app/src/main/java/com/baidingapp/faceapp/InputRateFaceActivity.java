@@ -24,7 +24,6 @@ import com.avos.avoscloud.FindCallback;
 import com.baidingapp.faceapp.helper.ImageHelper;
 import com.baidingapp.faceapp.helper.StatHelper;
 import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
@@ -92,9 +91,6 @@ public class InputRateFaceActivity extends AppCompatActivity {
     private String mUsernameRating;
     private String mUsernameRated;
 
-    private final static String AppLaunchDate = "2017-10-22 00:00:00";
-    private final static int mNumberTraitGroup = 6;
-
 //    private int mSpinnerPosition;
 
     @Override
@@ -113,9 +109,9 @@ public class InputRateFaceActivity extends AppCompatActivity {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
         Date mCurrentDate = new Date(System.currentTimeMillis());  //获取当前时间
         try {
-            Date mAppLaunchDate = dateFormat.parse(AppLaunchDate);
+            Date mAppLaunchDate = dateFormat.parse(MainActivity.AppLaunchDate);
             long timeDiff = mCurrentDate.getTime() - mAppLaunchDate.getTime();
-            int dayDiff  = (int) timeDiff / (1000 * 3600 * 24) % mNumberTraitGroup;
+            int dayDiff  = (int) timeDiff / (1000 * 3600 * 24) % MainActivity.mNumberTraitGroup;
 
             mGroupId = mGroupIdArray[dayDiff];
         } catch (ParseException e) {
@@ -327,7 +323,7 @@ public class InputRateFaceActivity extends AppCompatActivity {
                     mFifthResultButton.setEnabled(false);
                 }
             }
-        }, currUsername, mGroupId, mNumberTraitGroup);
+        }, currUsername, mGroupId, MainActivity.mNumberTraitGroup);
 
     }
 

@@ -8,9 +8,12 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ScrollView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.avos.avoscloud.AVException;
@@ -36,7 +39,8 @@ import permissions.dispatcher.NeedsPermission;
 import permissions.dispatcher.RuntimePermissions;
 
 @RuntimePermissions
-public class PredictImpressionFaceActivity extends AppCompatActivity {
+public class PredictImpressionFaceActivity extends AppCompatActivity
+        implements AdapterView.OnItemSelectedListener {
 
     private static final int REQUEST_CODE_IMAGE = 2;
 
@@ -46,6 +50,29 @@ public class PredictImpressionFaceActivity extends AppCompatActivity {
     private String mImagePath;
     private AVFile mImageFile = null;
     private String predictFacePhotoId;
+/*
+    private Spinner mGenderSpinner;
+    private Spinner mAgeSpinner;
+    private Spinner mEducationSpinner;
+    private Spinner mOccupationSpinner;
+    private Spinner mBirthPlaceSpinner;
+    private Spinner mWorkPlaceSpinner;
+    private Spinner mOverseaSpinner;
+    private Spinner mSingleSpinner;
+    private Spinner mReligionSpinner;
+    private Spinner mPetSpinner;
+*/
+    private int mGenderPosition;
+    private int mAgePosition;
+    private int mEducationPosition;
+    private int mOccupationPosition;
+    private int mBirthPlacePosition;
+    private int mWorkPlacePosition;
+    private int mOverseaPosition;
+    private int mSinglePosition;
+    private int mReligionPosition;
+    private int mPetPosition;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,7 +138,7 @@ public class PredictImpressionFaceActivity extends AppCompatActivity {
 
 
         // the PredictImpression Button is enabled if the Upload Button is clicked or there exists a face image
-        mPredictImpressionButton.setEnabled(false);
+        mPredictImpressionButton.setEnabled(true);
         // onClick the PredictImpression Button
         mPredictImpressionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,6 +148,150 @@ public class PredictImpressionFaceActivity extends AppCompatActivity {
                 showResult();
             }
         });
+
+
+        // Set All Spinners
+        // onClick Gender spinner
+        Spinner mGenderSpinner = (Spinner) findViewById(R.id.action_gender);
+        ArrayAdapter mGenderAdapter = ArrayAdapter.createFromResource(this,
+                R.array.spinner_gender_levels, android.R.layout.simple_spinner_item);
+        mGenderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mGenderSpinner.setAdapter(mGenderAdapter);
+        mGenderSpinner.setOnItemSelectedListener(this);
+
+
+        // onClick Gender spinner
+        Spinner mAgeSpinner = (Spinner) findViewById(R.id.action_age);
+        ArrayAdapter mAgeAdapter = ArrayAdapter.createFromResource(this,
+                R.array.spinner_age_interval, android.R.layout.simple_spinner_item);
+        mAgeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mAgeSpinner.setAdapter(mAgeAdapter);
+        mAgeSpinner.setOnItemSelectedListener(this);
+
+
+        // onClick Education spinner
+        Spinner mEducationSpinner = (Spinner) findViewById(R.id.action_education);
+        ArrayAdapter mEducationAdapter = ArrayAdapter.createFromResource(this,
+                R.array.spinner_education_levels, android.R.layout.simple_spinner_item);
+        mEducationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mEducationSpinner.setAdapter(mEducationAdapter);
+        mEducationSpinner.setOnItemSelectedListener(this);
+
+
+        // onClick Occupation spinner
+        Spinner mOccupationSpinner = (Spinner) findViewById(R.id.action_occupation);
+        ArrayAdapter mOccupationAdapter = ArrayAdapter.createFromResource(this,
+                R.array.spinner_occupations, android.R.layout.simple_spinner_item);
+        mOccupationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mOccupationSpinner.setAdapter(mOccupationAdapter);
+        mOccupationSpinner.setOnItemSelectedListener(this);
+
+
+        // onClick BirthPlace spinner
+        Spinner mBirthPlaceSpinner = (Spinner) findViewById(R.id.action_birth_place);
+        ArrayAdapter mBirthPlaceAdapter = ArrayAdapter.createFromResource(this,
+                R.array.spinner_place, android.R.layout.simple_spinner_item);
+        mBirthPlaceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mBirthPlaceSpinner.setAdapter(mBirthPlaceAdapter);
+        mBirthPlaceSpinner.setOnItemSelectedListener(this);
+
+
+        // onClick WorkPlace spinner
+        Spinner mWorkPlaceSpinner = (Spinner) findViewById(R.id.action_work_place);
+        ArrayAdapter mWorkPlaceAdapter = ArrayAdapter.createFromResource(this,
+                R.array.spinner_place, android.R.layout.simple_spinner_item);
+        mWorkPlaceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mWorkPlaceSpinner.setAdapter(mWorkPlaceAdapter);
+        mWorkPlaceSpinner.setOnItemSelectedListener(this);
+
+
+        // onClick Oversea spinner
+        Spinner mOverseaSpinner = (Spinner) findViewById(R.id.action_oversea);
+        ArrayAdapter mOverseaAdapter = ArrayAdapter.createFromResource(this,
+                R.array.spinner_yes_no, android.R.layout.simple_spinner_item);
+        mOverseaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mOverseaSpinner.setAdapter(mOverseaAdapter);
+        mOverseaSpinner.setOnItemSelectedListener(this);
+
+
+        // onClick Single spinner
+        Spinner mSingleSpinner = (Spinner) findViewById(R.id.action_single);
+        ArrayAdapter mSingleAdapter = ArrayAdapter.createFromResource(this,
+                R.array.spinner_yes_no, android.R.layout.simple_spinner_item);
+        mSingleAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mSingleSpinner.setAdapter(mSingleAdapter);
+        mSingleSpinner.setOnItemSelectedListener(this);
+
+
+        // onClick Religion spinner
+        Spinner mReligionSpinner = (Spinner) findViewById(R.id.action_religion);
+        ArrayAdapter mReligionAdapter = ArrayAdapter.createFromResource(this,
+                R.array.spinner_yes_no, android.R.layout.simple_spinner_item);
+        mReligionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mReligionSpinner.setAdapter(mReligionAdapter);
+        mReligionSpinner.setOnItemSelectedListener(this);
+
+
+        // onClick Pet spinner
+        Spinner mPetSpinner = (Spinner) findViewById(R.id.action_pet);
+        ArrayAdapter mPetAdapter = ArrayAdapter.createFromResource(this,
+                R.array.spinner_yes_no, android.R.layout.simple_spinner_item);
+        mPetAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mPetSpinner.setAdapter(mPetAdapter);
+        mPetSpinner.setOnItemSelectedListener(this);
+
+    }
+
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        switch(parent.getId()){
+            case R.id.action_gender:
+                mGenderPosition = position;
+                break;
+
+            case R.id.action_age:
+                mAgePosition = position;
+                break;
+
+            case R.id.action_education:
+                mEducationPosition = position;
+                break;
+
+            case R.id.action_occupation:
+                mOccupationPosition = position;
+                break;
+
+            case R.id.action_birth_place:
+                mBirthPlacePosition = position;
+                break;
+
+            case R.id.action_work_place:
+                mWorkPlacePosition = position;
+                break;
+
+            case R.id.action_oversea:
+                mOverseaPosition = position;
+                break;
+
+            case R.id.action_single:
+                mSinglePosition = position;
+                break;
+
+            case R.id.action_religion:
+                mReligionPosition = position;
+                break;
+
+            case R.id.action_pet:
+                mPetPosition = position;
+                break;
+        }
+    }
+
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 
 
@@ -233,6 +404,12 @@ public class PredictImpressionFaceActivity extends AppCompatActivity {
 
 
     private void showResult() {
+        // Compute the predictions
+        int mAttractivenessValue = mGenderPosition + mAgePosition + mEducationPosition + mOccupationPosition
+                + mBirthPlacePosition + mWorkPlacePosition + mOverseaPosition + mSinglePosition + mReligionPosition + mPetPosition ;
+
+        Toast.makeText(PredictImpressionFaceActivity.this, Integer.toString(mAttractivenessValue), Toast.LENGTH_SHORT).show();
+
         // Plot the BarChart of prediction result
         BarChart mBarChart = (BarChart) findViewById(R.id.predict_impression_face_bar_chart);
 

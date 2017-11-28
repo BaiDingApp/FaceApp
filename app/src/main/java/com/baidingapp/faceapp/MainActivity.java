@@ -14,7 +14,10 @@ import com.baidingapp.faceapp.helper.MyInfoPreference;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String KEY_INDEX =
+    public final static String AppLaunchDate = "2017-11-25 00:00:00";
+    public final static int mNumberTraitGroup = 6;
+
+    private final static String KEY_INDEX =
             "com.baidingapp.faceapp.page_index";
 
     private int mPageIndex = 0;
