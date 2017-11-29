@@ -229,6 +229,11 @@ public class OutputRateFaceActivity extends AppCompatActivity {
                         rateFaceObject.put("userId", AVUser.getCurrentUser());
                         rateFaceObject.put("photoUrl", mPhotoUrl);
 
+                        // The Keyword "gender" help select photos of users with the opposite gender
+                        //   in FacePreferenceSurveyActivity and FacePreferenceChoiceTaskActivity
+                        int mGender = MyInfoPreference.getStoredGender(OutputRateFaceActivity.this);
+                        rateFaceObject.put("gender", mGender);
+
                         rateFaceObject.saveInBackground(new SaveCallback() {
                             @Override
                             public void done(AVException e) {
