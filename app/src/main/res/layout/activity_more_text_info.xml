@@ -12,7 +12,277 @@
         android:orientation="vertical">
 
 
-        <TextView
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="0">
+            <View
+                android:layout_marginTop="5pt"
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10dp">
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/more_income_level"
+                    android:textSize="16sp"/>
+                <Spinner
+                    android:id="@+id/action_more_income_levels"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/spinner_income_levels"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10dp">
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/more_all_religion"
+                    android:textSize="16sp"/>
+                <Spinner
+                    android:id="@+id/action_more_all_religion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/spinner_all_religion"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10dp">
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/more_marital_history"
+                    android:textSize="16sp"/>
+                <Spinner
+                    android:id="@+id/action_more_marital_history"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/spinner_yes_no"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10dp">
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/more_has_kids"
+                    android:textSize="16sp"/>
+                <Spinner
+                    android:id="@+id/action_more_has_kids"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/spinner_yes_no"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10dp">
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/more_has_kids_after_marriage"
+                    android:textSize="16sp"/>
+                <Spinner
+                    android:id="@+id/action_more_has_kids_after_marriage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/spinner_yes_no"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10dp">
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/more_has_house"
+                    android:textSize="16sp"/>
+                <Spinner
+                    android:id="@+id/action_more_has_house"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/spinner_yes_no"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10dp">
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/more_has_car"
+                    android:textSize="16sp"/>
+                <Spinner
+                    android:id="@+id/action_more_has_car"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/spinner_yes_no"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10dp">
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/more_live_with_parents_after_marriage"
+                    android:textSize="16sp"/>
+                <Spinner
+                    android:id="@+id/action_more_live_with_parents_after_marriage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/spinner_yes_no"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10dp">
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/more_face_lift"
+                    android:textSize="16sp"/>
+                <Spinner
+                    android:id="@+id/action_more_face_lift"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/spinner_yes_no"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10dp">
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/more_angry"
+                    android:textSize="16sp"/>
+                <Spinner
+                    android:id="@+id/action_more_angry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/spinner_yes_no"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10dp">
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/more_friends_with_opposite_sex"
+                    android:textSize="16sp"/>
+                <Spinner
+                    android:id="@+id/action_more_friends_with_opposite_sex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/spinner_yes_no"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10dp">
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/more_smoking"
+                    android:textSize="16sp"/>
+                <Spinner
+                    android:id="@+id/action_more_smoking"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/spinner_smoking"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10dp">
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/more_drinking"
+                    android:textSize="16sp"/>
+                <Spinner
+                    android:id="@+id/action_more_drinking"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/spinner_drinking"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10dp">
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/more_gambling"
+                    android:textSize="16sp"/>
+                <Spinner
+                    android:id="@+id/action_more_gambling"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/spinner_gambling"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+        </TableLayout>
+
+
+        <Button
+            android:id="@+id/action_submit_more_text_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10pt"
+            android:padding="10dp"
+            android:textSize="16sp"
+            android:text="@string/save"/>
+
+    </LinearLayout>
+
+</ScrollView>
+
+
+
+<!--
+
+Backup Codes
+
+<TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
@@ -289,16 +559,4 @@
 
         </TableLayout>
 
-
-        <Button
-            android:id="@+id/action_submit_elimination_rules"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10pt"
-            android:padding="10dp"
-            android:textSize="16sp"
-            android:text="@string/save"/>
-
-    </LinearLayout>
-
-</ScrollView>
+-->

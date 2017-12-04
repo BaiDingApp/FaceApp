@@ -32,4 +32,12 @@
         6. 会完善“我的信息”.
         7. 会做“照片/简历约会意愿调查”至少3轮（否则App不会推荐约会对象给我）.
     </string>
+
+    <string name="measure_upload_face_info">
+        请参考下面链接中的方法，自己测量和上传 \"脸部特征\"
+    </string>
+
+    <string name="measure_upload_face_info_link">
+        The Link
+    </string>
 </resources>

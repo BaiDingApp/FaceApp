@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:textColor="@color/red"
@@ -18,8 +19,8 @@
 
     <ImageView
         android:id="@+id/show_face_image_dating"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_marginTop="6dp"
         android:layout_marginBottom="8dp"
         android:layout_gravity="center"
@@ -30,7 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginBottom="5pt">
+        android:layout_marginBottom="10pt">
 
         <Button
             android:id="@+id/action_pick_face_photo_dating"
@@ -53,21 +54,44 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/action_upload_face_info"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding = "16dp"
-        android:layout_marginBottom="8dp"
-        android:textSize="16sp"
-        android:text="@string/upload_face_info" />
 
-    <Button
-        android:id="@+id/action_measure_face_info"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding = "12dp"
-        android:textSize="16sp"
-        android:text="@string/measure_face_info" />
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:textColor="@color/red"
+        android:textSize="18sp"
+        android:text="@string/measure_upload_face_info"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:textSize="18sp"
+        android:text="@string/measure_upload_face_info_link"/>
+
+
+    <!--
+        <Button
+            android:id="@+id/action_upload_face_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding = "16dp"
+            android:layout_marginBottom="8dp"
+            android:textSize="16sp"
+            android:text="@string/upload_face_info" />
+
+        <Button
+            android:id="@+id/action_measure_face_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding = "12dp"
+            android:textSize="16sp"
+            android:text="@string/measure_face_info" />
+    -->
 
 </LinearLayout>

@@ -84,6 +84,15 @@ public class MeSinglePageFragment extends Fragment {
         });
 
 
+        Button mRecommendToFriendsButton = (Button) view.findViewById(R.id.action_recommend_to_friend_single);
+        mRecommendToFriendsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(), "推荐给朋友", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
         Button mSettingsButton = (Button) view.findViewById(R.id.action_settings_single);
         mSettingsButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -36,6 +36,16 @@
 
 
     <Button
+        android:id="@+id/action_more_text_information_single"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:layout_marginBottom="6dp"
+        android:textSize="20sp"
+        android:text="@string/more_text_information" />
+
+
+    <Button
         android:id="@+id/action_self_hate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -53,16 +63,6 @@
         android:layout_marginBottom="6dp"
         android:textSize="20sp"
         android:text="@string/love_information" />
-
-
-    <Button
-        android:id="@+id/action_elimination_rules"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:layout_marginBottom="6dp"
-        android:textSize="20sp"
-        android:text="@string/elimination_rules" />
 
 
     <Button

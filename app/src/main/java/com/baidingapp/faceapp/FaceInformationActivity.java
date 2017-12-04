@@ -92,7 +92,7 @@ public class FaceInformationActivity extends AppCompatActivity {
             }
         });
 
-
+/*
         // on Click the Upload Info Button
         Button mUploadInfoButton = (Button) findViewById(R.id.action_upload_face_info);
         mUploadInfoButton.setOnClickListener(new View.OnClickListener() {
@@ -113,6 +113,8 @@ public class FaceInformationActivity extends AppCompatActivity {
                 Toast.makeText(FaceInformationActivity.this, "TODO - Introduction of Measure", Toast.LENGTH_SHORT).show();
             }
         });
+*/
+
     }
 
 

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Questions -->
+    <string name="more_income_level">月收入水平（元）：</string>
+    <string name="more_all_religion">宗教信仰：</string>
+    <string name="more_marital_history">是否有婚史：</string>
+    <string name="more_has_kids">是否有小孩儿：</string>
+    <string name="more_has_kids_after_marriage">婚后是否要小孩儿：</string>
+    <string name="more_has_house">是否有房：</string>
+    <string name="more_has_car">是否有车：</string>
+    <string name="more_live_with_parents_after_marriage">是否要求婚后不和对方父母一起住：</string>
+    <string name="more_face_lift">是否整过容：</string>
+    <string name="more_angry">是否爱生气：</string>
+    <string name="more_friends_with_opposite_sex">是否有较多异性朋友：</string>
+    <string name="more_smoking">抽烟：</string>
+    <string name="more_drinking">喝酒：</string>
+    <string name="more_gambling">赌博：</string>
+
+
+    <!-- Options -->
+    <string-array name="spinner_income_levels">
+        <item>请选择</item>
+        <item> 低于 4000 </item>
+        <item> 4001 ~ 6000 </item>
+        <item> 6001 ~ 8000 </item>
+        <item> 8001 ~ 10000 </item>
+        <item> 10001 ~ 12000 </item>
+        <item> 12001 ~ 14000 </item>
+        <item> 14001 ~ 16000 </item>
+        <item> 16001 ~ 18000 </item>
+        <item> 18001 ~ 20000 </item>
+        <item> 高于 20000 </item>
+    </string-array>
+
+    <string-array name="spinner_all_religion">
+        <item>请选择</item>
+        <item>道教</item>
+        <item>佛教</item>
+        <item>基督教</item>
+        <item>伊斯兰教</item>
+        <item>其他</item>
+        <item>无</item>
+    </string-array>
+
+    <string-array name="spinner_smoking">
+        <item>请选择</item>
+        <item>从不</item>
+        <item>偶尔</item>
+        <item>经常</item>
+    </string-array>
+
+    <string-array name="spinner_drinking">
+        <item>请选择</item>
+        <item>从不</item>
+        <item>偶尔</item>
+        <item>经常</item>
+    </string-array>
+
+    <string-array name="spinner_gambling">
+        <item>请选择</item>
+        <item>从不</item>
+        <item>偶尔</item>
+        <item>经常</item>
+    </string-array>
+
+
+    <string-array name="spinner_have_or_not">
+        <item>请选择</item>
+        <item>有</item>
+        <item>无</item>
+    </string-array>
+</resources>

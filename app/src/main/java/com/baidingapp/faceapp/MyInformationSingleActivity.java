@@ -31,6 +31,15 @@ public class MyInformationSingleActivity extends AppCompatActivity {
             }
         });
 
+        Button mMoreTextInfoButton = (Button) findViewById(R.id.action_more_text_information_single);
+        mMoreTextInfoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MyInformationSingleActivity.this, MoreTextInformationActivity.class);
+                startActivity(intent);
+            }
+        });
+
         Button mSelfHateButton = (Button) findViewById(R.id.action_self_hate);
         mSelfHateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,15 +54,6 @@ public class MyInformationSingleActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MyInformationSingleActivity.this, SelfLoveInformationActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        Button mEliminationRulesButton = (Button) findViewById(R.id.action_elimination_rules);
-        mEliminationRulesButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MyInformationSingleActivity.this, EliminationRulesActivity.class);
                 startActivity(intent);
             }
         });

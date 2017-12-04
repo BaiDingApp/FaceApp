@@ -30,9 +30,9 @@
     <string name="statement_my_information">请完善以下信息以方便我们向你作高度个性化的约会推荐</string>
     <string name="basic_information">基本信息</string>
     <string name="face_information">脸部信息</string>
-    <string name="hate_information">Hate信息</string>
-    <string name="love_information">Love信息</string>
-    <string name="elimination_rules">Elimination Rules</string>
+    <string name="more_text_information">更多个人信息</string>
+    <string name="hate_information">Hate 信息</string>
+    <string name="love_information">Love 信息</string>
     <string name="face_preference_survey">照片约会意愿调查</string>
     <string name="resume_preference_survey">简历约会意愿调查</string>
     <string name="title_activity_basic_information_single">BasicInformationSingleActivity</string>
@@ -41,7 +41,7 @@
     <string name="pick_face_photo">从手机相册选择脸部照片</string>
     <string name="upload_face_photo">上传脸部照片</string>
     <string name="upload_face_info">上传脸部特征</string>
-    <string name="measure_face_info">如何自己测量 \"脸部特征\"</string>
+    <string name="measure_face_info">如何自己测量和上传 \"脸部特征\"</string>
     <string name="uploading_success">上传成功</string>
     <string name="uploading_fail">上传失败</string>
 
