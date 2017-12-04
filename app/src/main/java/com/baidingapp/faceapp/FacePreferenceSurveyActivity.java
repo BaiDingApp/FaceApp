@@ -14,6 +14,7 @@ import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.CloudQueryCallback;
 import com.baidingapp.faceapp.helper.ImageHelper;
+import com.baidingapp.faceapp.helper.MyInfoPreference;
 
 import java.util.ArrayList;
 
@@ -118,7 +119,8 @@ public class FacePreferenceSurveyActivity extends AppCompatActivity {
     private void getUrlOfRateFacePhotos() {
         // String photoNotRated = "select * from RateFacePhoto where objectId !=  '599115cb570c35006b684d5c' ";
         String currUsername = AVUser.getCurrentUser().getUsername();
-        String photoNotRated = "select * from RateFacePhoto where username != (select usernameRated from FacePreferenceSurvey where usernameRating = ? limit 1000) limit 100";
+        int currGender = MyInfoPreference.getStoredGender(FacePreferenceSurveyActivity.this);
+        String photoNotRated = "select * from RateFacePhoto where gender != ? and username != (select usernameRated from FacePreferenceSurvey where usernameRating = ? limit 1000) limit 100";
 
         AVQuery.doCloudQueryInBackground(photoNotRated, new CloudQueryCallback<AVCloudQueryResult>() {
             @Override
@@ -137,7 +139,7 @@ public class FacePreferenceSurveyActivity extends AppCompatActivity {
                     mDislikeButton.setEnabled(false);
                 }
             }
-        }, currUsername);
+        }, currGender, currUsername);
 
     }
 

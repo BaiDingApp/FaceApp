@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/action_enter_chat_room"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginBottom="16dp"
         android:src="@drawable/heart"
         android:contentDescription="@string/today_recommendation" />
@@ -25,16 +25,16 @@
             android:id="@+id/action_open_recommendation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding = "6dp"
-            android:textSize="16sp"
+            android:padding = "16dp"
+            android:textSize="20sp"
             android:text="@string/open_recommendation"/>
 
         <Button
             android:id="@+id/action_introduction_recommendation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding = "6dp"
-            android:textSize="16sp"
+            android:padding = "16dp"
+            android:textSize="20sp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:text="@string/introduction_recommendation"/>
@@ -43,8 +43,8 @@
             android:id="@+id/action_close_recommendation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding = "6dp"
-            android:textSize="16sp"
+            android:padding = "16dp"
+            android:textSize="20sp"
             android:text="@string/close_recommendation"/>
     </LinearLayout>
 
@@ -54,8 +54,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:padding = "6dp"
-        android:textSize="16sp"
+        android:padding = "16dp"
+        android:textSize="20sp"
         android:text="@string/my_information"/>
 
 
@@ -64,8 +64,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:padding = "6dp"
-        android:textSize="16sp"
+        android:padding = "16dp"
+        android:textSize="20sp"
         android:text="@string/all_other_rate"/>
 
 
@@ -74,8 +74,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:padding = "6dp"
-        android:textSize="16sp"
+        android:padding = "16dp"
+        android:textSize="20sp"
         android:text="@string/recommend_to_friends"/>
 
 
@@ -84,8 +84,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:padding = "6dp"
-        android:textSize="16sp"
+        android:padding = "16dp"
+        android:textSize="20sp"
         android:text="@string/settings"/>
 
 </LinearLayout>
