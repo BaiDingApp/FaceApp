@@ -54,7 +54,7 @@ public class MoreTextInformationActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_more_text_info);
+        setContentView(R.layout.activity_more_text_information);
 
 
         // onClick Income spinner
@@ -168,6 +168,10 @@ public class MoreTextInformationActivity extends AppCompatActivity
         mGamblingAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mGamblingSpinner.setAdapter(mGamblingAdapter);
         mGamblingSpinner.setOnItemSelectedListener(this);
+
+
+        // Create the profile by using info saved in SharedPreference when onCreate
+        createProfileUsingSavedData();
 
 
         // onClick SAVE button

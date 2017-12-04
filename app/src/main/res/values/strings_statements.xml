@@ -7,13 +7,14 @@
         也可以选择自己测量脸部特征，然后上传。
     </string>
 
-    <string name="statement_elimination_rules_activity">
-        请在下面的选项上选 \"是\"（表明你绝不考虑和具有该特征的女士约会）
-        或 \"否\"（表明你会考虑和具有该特征的女士约会）
+    <string name="statement_hate_question">
+        对下面所列的项目（或在什么条件下），无论对方在其他方面多么 \"好\"，你都不会考虑和对方约会，
+        即一票否决。
     </string>
 
-    <string name="statement_love_hate">
-        请问你是否：
+    <string name="statement_love_question">
+        对下面所列的项目（或在什么条件下），无论对方在其他方面多么 \"差\"，你都会考虑和对方约会，
+        即一票接受。
     </string>
 
     <string name="today_recom_intro">
@@ -40,4 +41,12 @@
     <string name="measure_upload_face_info_link">
         The Link
     </string>
+
+
+<!--
+    <string name="statement_elimination_rules_activity">
+        请在下面的选项上选 \"是\"（表明你绝不考虑和具有该特征的女士约会）
+        或 \"否\"（表明你会考虑和具有该特征的女士约会）
+    </string>
+-->
 </resources>

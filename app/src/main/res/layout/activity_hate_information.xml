@@ -18,12 +18,110 @@
             android:layout_marginLeft="10pt"
             android:layout_marginRight="10pt"
             android:layout_marginBottom="8pt"
-            android:text="@string/statement_love_hate"
+            android:text="@string/statement_hate_question"
             android:textColor="@color/red"
             android:textSize="16sp"/>
 
 
         <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="0">
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10dp">
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/hate_age_greater"
+                    android:textSize="16sp"/>
+                <Spinner
+                    android:id="@+id/action_hate_age_greater"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/spinner_age_difference"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10dp">
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/hate_age_less"
+                    android:textSize="16sp"/>
+                <Spinner
+                    android:id="@+id/action_hate_age_less"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/spinner_age_difference"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10dp">
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/hate_height_greater"
+                    android:textSize="16sp"/>
+                <Spinner
+                    android:id="@+id/action_hate_height_greater"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/spinner_height"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10dp">
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/hate_height_less"
+                    android:textSize="16sp"/>
+                <Spinner
+                    android:id="@+id/action_hate_height_less"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/spinner_height"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+        </TableLayout>
+
+
+        <Button
+            android:id="@+id/action_submit_hate_information"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10pt"
+            android:padding="10dp"
+            android:textSize="16sp"
+            android:text="@string/save"/>
+
+    </LinearLayout>
+
+</ScrollView>
+
+
+<!--
+
+Backup Codes
+
+            <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:stretchColumns="0">
@@ -127,17 +225,4 @@
                 android:background="#FF909090" />
 
         </TableLayout>
-
-
-        <Button
-            android:id="@+id/action_submit_self_hate_information"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10pt"
-            android:padding="10dp"
-            android:textSize="16sp"
-            android:text="@string/save"/>
-
-    </LinearLayout>
-
-</ScrollView>
+-->

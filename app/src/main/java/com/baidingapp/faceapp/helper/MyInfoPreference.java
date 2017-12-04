@@ -10,6 +10,8 @@ public class MyInfoPreference {
 
     private static final String BASIC_INFO_OBJECT_ID = "basicInfoObjectId";
     private static final String MORE_TEXT_INFO_OBJECT_ID = "moreTextInfoObjectId";
+    private static final String HATE_INFO_OBJECT_ID = "hateInfoObjectId";
+    private static final String LOVE_INFO_OBJECT_ID = "loveInfoObjectId";
     private static final String RATE_FACE_PHOTO_ID = "rateFacePhotoId";
     private static final String PREDICT_FACE_PHOTO_ID = "predictFacePhotoId";
     private static final String DATING_FACE_PHOTO_ID = "datingFacePhotoId";
@@ -42,6 +44,14 @@ public class MyInfoPreference {
     private static final String PREF_DRINKING = "drinking";
     private static final String PREF_GAMBLING = "gambling";
 
+    private static final String PREF_AGE_GREATER = "age_greater";
+    private static final String PREF_AGE_LESS = "age_less";
+    private static final String PREF_HEIGHT_GREATER = "height_greater";
+    private static final String PREF_HEIGHT_LESS = "height_less";
+
+    private static final String PREF_INCOME_YEAR = "income_year";
+    private static final String PREF_EDU_OVERSEA = "edu_oversea";
+
     // BasicInfoObjectId
     public static String getStoredBasicInfoObjectId(Context context) {
         return GeneralGetString(context, BASIC_INFO_OBJECT_ID);
@@ -56,6 +66,22 @@ public class MyInfoPreference {
     }
     public static void setStoredMoreTextInfoObjectId(Context context, String moreTextInfoObjectId) {
         GeneralSetString(context, MORE_TEXT_INFO_OBJECT_ID, moreTextInfoObjectId);
+    }
+
+    // HateInfoObjectId
+    public static String getStoredHateInfoObjectId(Context context) {
+        return GeneralGetString(context, HATE_INFO_OBJECT_ID);
+    }
+    public static void setStoredHateInfoObjectId(Context context, String hateInfoObjectId) {
+        GeneralSetString(context, HATE_INFO_OBJECT_ID, hateInfoObjectId);
+    }
+
+    // LoveInfoObjectId
+    public static String getStoredLoveInfoObjectId(Context context) {
+        return GeneralGetString(context, LOVE_INFO_OBJECT_ID);
+    }
+    public static void setStoredLoveInfoObjectId(Context context, String loveInfoObjectId) {
+        GeneralSetString(context, LOVE_INFO_OBJECT_ID, loveInfoObjectId);
     }
 
     // RateFacePhotoId
@@ -286,6 +312,60 @@ public class MyInfoPreference {
     }
     public static void setStoredGambling(Context context, int mGambling) {
         GeneralSetInt(context, PREF_GAMBLING, mGambling);
+    }
+
+
+
+    // HATE INFORMATION
+    // AgeGreater
+    public static int getStoredAgeGreater(Context context) {
+        return GeneralGetInt(context, PREF_AGE_GREATER);
+    }
+    public static void setStoredAgeGreater(Context context, int mAgeGreater) {
+        GeneralSetInt(context, PREF_AGE_GREATER, mAgeGreater);
+    }
+
+    // AgeLess
+    public static int getStoredAgeLess(Context context) {
+        return GeneralGetInt(context, PREF_AGE_LESS);
+    }
+    public static void setStoredAgeLess(Context context, int mAgeLess) {
+        GeneralSetInt(context, PREF_AGE_LESS, mAgeLess);
+    }
+
+    // HeightGreater
+    public static int getStoredHeightGreater(Context context) {
+        return GeneralGetInt(context, PREF_HEIGHT_GREATER);
+    }
+    public static void setStoredHeightGreater(Context context, int mHeightGreater) {
+        GeneralSetInt(context, PREF_HEIGHT_GREATER, mHeightGreater);
+    }
+
+    // HeightLess
+    public static int getStoredHeightLess(Context context) {
+        return GeneralGetInt(context, PREF_HEIGHT_LESS);
+    }
+    public static void setStoredHeightLess(Context context, int mHeightLess) {
+        GeneralSetInt(context, PREF_HEIGHT_LESS, mHeightLess);
+    }
+
+
+
+    // LOVE INFORMATION
+    // IncomeYear
+    public static int getStoredIncomeYear(Context context) {
+        return GeneralGetInt(context, PREF_INCOME_YEAR);
+    }
+    public static void setStoredIncomeYear(Context context, int mIncomeYear) {
+        GeneralSetInt(context, PREF_INCOME_YEAR, mIncomeYear);
+    }
+
+    // EduOversea
+    public static int getStoredEduOversea(Context context) {
+        return GeneralGetInt(context, PREF_EDU_OVERSEA);
+    }
+    public static void setStoredEduOversea(Context context, int mEduOversea) {
+        GeneralSetInt(context, PREF_EDU_OVERSEA, mEduOversea);
     }
 
 

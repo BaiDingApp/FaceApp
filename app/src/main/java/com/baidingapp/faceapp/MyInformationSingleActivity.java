@@ -44,7 +44,7 @@ public class MyInformationSingleActivity extends AppCompatActivity {
         mSelfHateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MyInformationSingleActivity.this, SelfHateInformationActivity.class);
+                Intent intent = new Intent(MyInformationSingleActivity.this, HateInformationActivity.class);
                 startActivity(intent);
             }
         });
@@ -53,7 +53,7 @@ public class MyInformationSingleActivity extends AppCompatActivity {
         mSelfLoveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MyInformationSingleActivity.this, SelfLoveInformationActivity.class);
+                Intent intent = new Intent(MyInformationSingleActivity.this, LoveInformationActivity.class);
                 startActivity(intent);
             }
         });

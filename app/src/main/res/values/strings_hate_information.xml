@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Questions -->
+    <string name="hate_age_greater">年龄大我几岁以上：</string>
+    <string name="hate_age_less">年龄小我几岁以上：</string>
+    <string name="hate_height_greater">体重高于多少公斤：</string>
+    <string name="hate_height_less">体重低于多少公斤：</string>
+
+
+    <!-- Options -->
+    <string-array name="spinner_age_difference">
+        <item>请选择</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
+
+    <string-array name="spinner_height">
+        <item>请选择</item>
+        <item>40</item>
+        <item>45</item>
+        <item>50</item>
+        <item>55</item>
+        <item>60</item>
+        <item>65</item>
+        <item>70</item>
+        <item>75</item>
+        <item>80</item>
+        <item>85</item>
+        <item>90</item>
+        <item>95</item>
+        <item>100</item>
+    </string-array>
+
+</resources>

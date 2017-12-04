@@ -31,8 +31,8 @@
         <activity android:name=".BasicInformationSingleActivity" />
         <activity android:name=".FaceInformationActivity" />
         <activity android:name=".MoreTextInformationActivity" />
-        <activity android:name=".SelfLoveInformationActivity" />
-        <activity android:name=".SelfHateInformationActivity" />
+        <activity android:name=".LoveInformationActivity" />
+        <activity android:name=".HateInformationActivity" />
         <activity android:name=".OutputRateFaceActivity" />
         <activity android:name=".PredictImpressionFaceActivity" />
         <activity android:name=".InputRateFaceActivity" />

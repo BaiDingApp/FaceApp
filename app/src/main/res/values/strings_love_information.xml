@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Questions -->
+    <string name="love_income_year">年薪多少万：</string>
+    <string name="love_edu_oversea">留过学：</string>
+
+
+    <!-- Options -->
+    <string-array name="spinner_income_year">
+        <item>请选择</item>
+        <item>50</item>
+        <item>60</item>
+        <item>70</item>
+        <item>80</item>
+        <item>90</item>
+        <item>100</item>
+        <item>多少都不会</item>
+    </string-array>
+</resources>
