@@ -19,7 +19,9 @@ import android.widget.Toast;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVFile;
 import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.AVUser;
+import com.avos.avoscloud.FindCallback;
 import com.avos.avoscloud.ProgressCallback;
 import com.avos.avoscloud.SaveCallback;
 import com.baidingapp.faceapp.helper.ImageHelper;
@@ -405,12 +407,45 @@ public class PredictImpressionFaceActivity extends AppCompatActivity
 
     private void showResult() {
         // TODO
+        // Get the Coefficient Estimates from LeanCloud
+        AVQuery<AVObject> mQuery = new AVQuery<>("CoefEstimation");
+        mQuery.findInBackground(new FindCallback<AVObject>() {
+            @Override
+            public void done(List<AVObject> list, AVException e) {
+                String[] socialTraits = new String[list.size()];
+                float[][] coefEst = new float[list.size()][10];
+                String[] mSocialTraitsList = new String[10];
+                mSocialTraitsList[0] = "coefGender";
+                mSocialTraitsList[1] = "coefAge";
+                mSocialTraitsList[2] = "coefEdu";
+                mSocialTraitsList[3] = "coefOccupation";
+                mSocialTraitsList[4] = "coefBirthPlace";
+                mSocialTraitsList[5] = "coefWorkPlace";
+                mSocialTraitsList[6] = "coefOversea";
+                mSocialTraitsList[7] = "coefSingle";
+                mSocialTraitsList[8] = "coefReligion";
+                mSocialTraitsList[9] = "coefPet";
 
-        // Compute the predictions
-        int mAttractivenessValue = mGenderPosition + mAgePosition + mEducationPosition + mOccupationPosition
-                + mBirthPlacePosition + mWorkPlacePosition + mOverseaPosition + mSinglePosition + mReligionPosition + mPetPosition ;
+                int i = 0;
+                for (AVObject object : list) {
+                    socialTraits[i] = object.getString("socialTrait");
 
-        Toast.makeText(PredictImpressionFaceActivity.this, Integer.toString(mAttractivenessValue), Toast.LENGTH_SHORT).show();
+                    for (int j=0; j<10; j++) {
+                        coefEst[i][j] = Float.valueOf(object.getString(mSocialTraitsList[j]));
+                    }
+
+                    float mTraitValeOne = coefEst[0][0]*mGenderPosition + coefEst[0][1]*mAgePosition + coefEst[0][2]*mEducationPosition + coefEst[0][3]*mOccupationPosition
+                            + coefEst[0][4]*mBirthPlacePosition + coefEst[0][5]*mWorkPlacePosition + coefEst[0][6]*mOverseaPosition + coefEst[0][7]*mSinglePosition + coefEst[0][8]*mReligionPosition + coefEst[0][9]*mPetPosition ;
+                    int a = (int) mTraitValeOne;
+
+                    Toast.makeText(PredictImpressionFaceActivity.this, Integer.toString(a), Toast.LENGTH_SHORT).show();
+
+                    i++;
+                   }
+
+            }
+        });
+
 
         // Plot the BarChart of prediction result
         BarChart mBarChart = (BarChart) findViewById(R.id.predict_impression_face_bar_chart);
