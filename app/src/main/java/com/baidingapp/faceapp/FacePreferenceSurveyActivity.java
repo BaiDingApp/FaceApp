@@ -33,10 +33,10 @@ public class FacePreferenceSurveyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_face_preference_survey);
 
 
-        // Just for testing
         getUrlOfRateFacePhotos();
 
 /*
+        // Just for testing
         imageUrlList.add("http://www.fdsm.fudan.edu.cn/UserWebEditorUploadImage/upload/image/20160428/6359744927934022586120687.jpg");
         imageUrlList.add("http://www.fdsm.fudan.edu.cn/UserWebEditorUploadImage/upload/image/20160428/6359744866697126501620226.jpg");
         imageUrlList.add("http://www.fdsm.fudan.edu.cn/UserWebEditorUploadImage/upload/image/20160428/6359744858711401934485062.jpg");
@@ -120,7 +120,12 @@ public class FacePreferenceSurveyActivity extends AppCompatActivity {
         // String photoNotRated = "select * from RateFacePhoto where objectId !=  '599115cb570c35006b684d5c' ";
         String currUsername = AVUser.getCurrentUser().getUsername();
         int currGender = MyInfoPreference.getStoredGender(FacePreferenceSurveyActivity.this);
-        String photoNotRated = "select * from RateFacePhoto where gender != ? and username != (select usernameRated from FacePreferenceSurvey where usernameRating = ? limit 1000) limit 100";
+        int currGenderInv = 2;
+        if (currGender == 2) {
+            currGenderInv = 1;
+        }
+
+        String photoNotRated = "select * from RateFacePhoto where gender = ? and username != (select usernameRated from FacePreferenceSurvey where usernameRating = ? limit 1000) limit 100";
 
         AVQuery.doCloudQueryInBackground(photoNotRated, new CloudQueryCallback<AVCloudQueryResult>() {
             @Override
@@ -139,7 +144,7 @@ public class FacePreferenceSurveyActivity extends AppCompatActivity {
                     mDislikeButton.setEnabled(false);
                 }
             }
-        }, currGender, currUsername);
+        }, currGenderInv, currUsername);
 
     }
 

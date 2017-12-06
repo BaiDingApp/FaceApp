@@ -26,9 +26,11 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:text="@string/face_preference_question"
-        android:textSize="16sp"/>
+        android:textSize="20sp"/>
 
 
     <LinearLayout

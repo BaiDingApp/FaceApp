@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:fillViewport="false">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="0">
+            <View
+                android:layout_marginTop="6dp"
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/basic_birthday"
+                    android:textSize="16sp"/>
+                <TextView
+                    android:id="@+id/action_resume_preference_birthday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/basic_height"
+                    android:textSize="16sp"/>
+                <TextView
+                    android:id="@+id/action_resume_preference_height"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/basic_weight"
+                    android:textSize="16sp"/>
+                <TextView
+                    android:id="@+id/action_resume_preference_weight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10sp">
+                <TextView
+                    android:layout_width="0px"
+                    android:layout_weight="0.8"
+                    android:layout_height="wrap_content"
+                    android:text="@string/basic_education"
+                    android:textSize="16sp"/>
+                <TextView
+                    android:id="@+id/action_resume_preference_education"
+                    android:layout_width="0px"
+                    android:layout_weight="0.2"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10sp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/basic_occupation"
+                    android:textSize="16sp"/>
+                <TextView
+                    android:id="@+id/action_resume_preference_occupation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10sp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/basic_birth_place"
+                    android:textSize="16sp"/>
+                <TextView
+                    android:id="@+id/action_resume_preference_birth_place"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10sp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/basic_work_place"
+                    android:textSize="16sp"/>
+                <TextView
+                    android:id="@+id/action_resume_preference_work_place"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10sp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/basic_oversea"
+                    android:textSize="16sp"/>
+                <TextView
+                    android:id="@+id/action_resume_preference_oversea"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10sp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/more_all_religion"
+                    android:textSize="16sp"/>
+                <TextView
+                    android:id="@+id/action_resume_preference_religion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10sp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/basic_pet"
+                    android:textSize="16sp"/>
+                <TextView
+                    android:id="@+id/action_resume_preference_pet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10dp">
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/more_income_level"
+                    android:textSize="16sp"/>
+                <TextView
+                    android:id="@+id/action_resume_preference_income"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10dp">
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/more_marital_history"
+                    android:textSize="16sp"/>
+                <TextView
+                    android:id="@+id/action_resume_preference_marital_history"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10dp">
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/more_has_kids"
+                    android:textSize="16sp"/>
+                <TextView
+                    android:id="@+id/action_resume_preference_has_kids"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10dp">
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/more_has_kids_after_marriage"
+                    android:textSize="16sp"/>
+                <TextView
+                    android:id="@+id/action_resume_preference_has_kids_after_marriage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10dp">
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/more_has_house"
+                    android:textSize="16sp"/>
+                <TextView
+                    android:id="@+id/action_resume_preference_has_house"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10dp">
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/more_has_car"
+                    android:textSize="16sp"/>
+                <TextView
+                    android:id="@+id/action_resume_preference_has_car"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10dp">
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/more_live_with_parents_after_marriage"
+                    android:textSize="16sp"/>
+                <TextView
+                    android:id="@+id/action_resume_preference_live_with_parents_after_marriage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10dp">
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/more_face_lift"
+                    android:textSize="16sp"/>
+                <TextView
+                    android:id="@+id/action_resume_preference_face_lift"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10dp">
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/more_smoking"
+                    android:textSize="16sp"/>
+                <TextView
+                    android:id="@+id/action_resume_preference_smoking"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10dp">
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/more_drinking"
+                    android:textSize="16sp"/>
+                <TextView
+                    android:id="@+id/action_resume_preference_drinking"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10dp">
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/more_gambling"
+                    android:textSize="16sp"/>
+                <TextView
+                    android:id="@+id/action_resume_preference_gambling"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+        </TableLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="6dp"
+            android:text="@string/resume_preference_question"
+            android:textSize="20sp"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/action_like_resume"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="40dp"
+                android:layout_marginRight="40dp"
+                android:textSize="20sp"
+                style="?android:attr/button"
+                android:text="@string/like"/>
+
+            <Button
+                android:id="@+id/action_dislike_resume"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="40dp"
+                android:layout_marginLeft="40dp"
+                android:textSize="20sp"
+                style="?android:attr/button"
+                android:text="@string/dislike"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

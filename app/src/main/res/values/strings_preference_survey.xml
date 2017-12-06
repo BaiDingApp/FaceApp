@@ -2,6 +2,7 @@
 <resources>
     <string name="face_preference_info">你还需要选出3张照片才能进行 \"人脸擂台"\ 游戏</string>
     <string name="face_preference_question">你是否愿意和照片中的人约会? </string>
+    <string name="resume_preference_question">你是否愿意和简历中的人约会? </string>
 
     <string name="like">愿意</string>
     <string name="dislike">不愿意</string>
