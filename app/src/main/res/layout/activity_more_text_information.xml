@@ -24,6 +24,44 @@
 
             <TableRow
                 android:padding="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/basic_height"
+                    android:textSize="16sp"/>
+                <EditText
+                    android:id="@+id/action_more_height"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_height"
+                    android:inputType="number"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/basic_weight"
+                    android:textSize="16sp"/>
+                <EditText
+                    android:id="@+id/action_more_weight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_weight"
+                    android:inputType="number"/>
+            </TableRow>
+            <View
+                android:layout_height="1dp"
+                android:background="#FF909090" />
+
+
+            <TableRow
+                android:padding="10dp">
                 <TextView android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/more_income_level"

@@ -33,7 +33,7 @@
                 android:layout_height="1dp"
                 android:background="#FF909090" />
 
-
+<!--
             <TableRow
                 android:padding="10dp">
                 <TextView
@@ -70,7 +70,7 @@
             <View
                 android:layout_height="1dp"
                 android:background="#FF909090" />
-
+-->
 
             <TableRow
                 android:padding="10dp">

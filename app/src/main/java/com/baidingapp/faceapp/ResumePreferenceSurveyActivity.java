@@ -20,7 +20,9 @@ import java.util.ArrayList;
 
 public class ResumePreferenceSurveyActivity extends AppCompatActivity {
 
-    private ArrayList<AVObject> mResumeList = new ArrayList<>();
+    private ArrayList<AVObject> mResumeListBasic = new ArrayList<>();
+    private ArrayList<AVObject> mResumeListMore = new ArrayList<>();
+    private ArrayList<String> mUsernameList = new ArrayList<>();
     private int mResumeIndex = 0;
     private boolean mInitializeIndex = true;
 
@@ -95,7 +97,7 @@ public class ResumePreferenceSurveyActivity extends AppCompatActivity {
             public void onClick(View v){
                 saveResumePreferenceToLeanCloud(1);
 
-                if ((mResumeIndex+1) < mResumeList.size()) {
+                if ((mResumeIndex+1) < mResumeListBasic.size()) {
                     updateResumeProfile();
                 } else {
                     Toast.makeText(ResumePreferenceSurveyActivity.this, "没有新的简历了，明天再来吧", Toast.LENGTH_SHORT).show();
@@ -110,7 +112,7 @@ public class ResumePreferenceSurveyActivity extends AppCompatActivity {
             public void onClick(View v){
                 saveResumePreferenceToLeanCloud(0);
 
-                if ((mResumeIndex+1) < mResumeList.size()) {
+                if ((mResumeIndex+1) < mResumeListBasic.size()) {
                     updateResumeProfile();
                 } else {
                     Toast.makeText(ResumePreferenceSurveyActivity.this, "没有新的简历了，明天再来吧", Toast.LENGTH_SHORT).show();
@@ -132,7 +134,7 @@ public class ResumePreferenceSurveyActivity extends AppCompatActivity {
             mResumeIndex = mResumeIndex + 1;
         }
 
-        int mInt = mResumeList.get(mResumeIndex).getInt("educationLevel");
+        int mInt = mResumeListBasic.get(mResumeIndex).getInt("educationLevel");
         String mString =  getResources().getStringArray(R.array.spinner_education_levels)[mInt];
         mEducationText.setText(mString);
     }
@@ -143,6 +145,7 @@ public class ResumePreferenceSurveyActivity extends AppCompatActivity {
     // 1. Users cannot see the resumes they saw before;
     // 2. They can see their own resume once
     private void getResumeList() {
+        // Get Basic Information
         String currUsername = AVUser.getCurrentUser().getUsername();
         int currGender = MyInfoPreference.getStoredGender(ResumePreferenceSurveyActivity.this);
         int currGenderInv = 2;
@@ -150,17 +153,17 @@ public class ResumePreferenceSurveyActivity extends AppCompatActivity {
             currGenderInv = 1;
         }
 
-        String resumeNotRated = "select * from BasicInfo where gender = ? and username != (select usernameRated from ResumePreferenceSurvey where usernameRating = ? limit 1000) limit 100";
+        String resumeNotRated = "select * from MoreTextInfo where gender = ? and username != (select usernameRated from ResumePreferenceSurvey where usernameRating = ? limit 1000) limit 100";
 
         AVQuery.doCloudQueryInBackground(resumeNotRated, new CloudQueryCallback<AVCloudQueryResult>() {
             @Override
             public void done(AVCloudQueryResult avCloudQueryResult, AVException e) {
                 for (AVObject resume : (avCloudQueryResult.getResults())) {
-                    mResumeList.add(resume);
+                    mResumeListBasic.add(resume);
                 }
 
                 // Initialize the ImageView
-                if (mResumeList.size() != 0) {
+                if (mResumeListBasic.size() != 0) {
                     updateResumeProfile();
                 }
                 else {
@@ -168,6 +171,7 @@ public class ResumePreferenceSurveyActivity extends AppCompatActivity {
                     mLikeButton.setEnabled(false);
                     mDislikeButton.setEnabled(false);
                 }
+
             }
         }, currGenderInv, currUsername);
     }
@@ -177,7 +181,7 @@ public class ResumePreferenceSurveyActivity extends AppCompatActivity {
     private void saveResumePreferenceToLeanCloud(int like) {
         // Get mUsernameRating and mUsernameRated
         String mUsernameRating = AVUser.getCurrentUser().getUsername();
-        String mUsernameRated  = mResumeList.get(mResumeIndex).getString("username");
+        String mUsernameRated  = mResumeListBasic.get(mResumeIndex).getString("username");
 
         // Save Results
         AVObject mResumePreferenceResult = new AVObject("ResumePreferenceSurvey");

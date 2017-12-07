@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
+// import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -21,8 +21,8 @@ public class BasicInformationSingleActivity extends AppCompatActivity
 
     private String basicInfoObjectId;
 
-    private int mHeightValue;
-    private int mWeightValue;
+    // private int mHeightValue;
+    // private int mWeightValue;
     private int mGenderPosition;
     private int mEducationPosition;
     private int mOccupationPosition;
@@ -33,8 +33,8 @@ public class BasicInformationSingleActivity extends AppCompatActivity
     private int mReligionPosition;
     private int mPetPosition;
 
-    private EditText mHeightText;
-    private EditText mWeightText;
+    // private EditText mHeightText;
+    // private EditText mWeightText;
     private Spinner mGenderSpinner;
     private Spinner mEducationSpinner;
     private Spinner mOccupationSpinner;
@@ -52,10 +52,10 @@ public class BasicInformationSingleActivity extends AppCompatActivity
 
 
         // Height EditText
-        mHeightText = (EditText) findViewById(R.id.action_height_single);
+        // mHeightText = (EditText) findViewById(R.id.action_height_single);
 
         // Weight EditText
-        mWeightText = (EditText) findViewById(R.id.action_weight_single);
+        // mWeightText = (EditText) findViewById(R.id.action_weight_single);
 
 
         // onClick Gender spinner
@@ -151,6 +151,7 @@ public class BasicInformationSingleActivity extends AppCompatActivity
                 // Get the Height
                 // If put it out, then Integer.parseInt() will produce 0
                 // As it get the int value before inputting, so ...
+                /*
                 try {
                     mHeightValue = Integer.parseInt(mHeightText.getText().toString(), 10);
                 } catch (NumberFormatException e) {
@@ -163,6 +164,7 @@ public class BasicInformationSingleActivity extends AppCompatActivity
                 } catch (NumberFormatException e) {
                     e.printStackTrace();
                 }
+                */
 
                 // Save data to SharedPreference
                 saveDataToSharedPreference();
@@ -232,12 +234,12 @@ public class BasicInformationSingleActivity extends AppCompatActivity
     // Create the profile by using info saved in SharedPreference when onCreate
     private void createProfileUsingSavedData() {
         // Height
-        mHeightValue = MyInfoPreference.getStoredHeight(BasicInformationSingleActivity.this);
-        mHeightText.setText(String.valueOf(mHeightValue));
+        // mHeightValue = MyInfoPreference.getStoredHeight(BasicInformationSingleActivity.this);
+        // mHeightText.setText(String.valueOf(mHeightValue));
 
         // Weight
-        mWeightValue = MyInfoPreference.getStoredWeight(BasicInformationSingleActivity.this);
-        mWeightText.setText(String.valueOf(mWeightValue));
+        // mWeightValue = MyInfoPreference.getStoredWeight(BasicInformationSingleActivity.this);
+        // mWeightText.setText(String.valueOf(mWeightValue));
 
         // Gender
         mGenderPosition = MyInfoPreference.getStoredGender(BasicInformationSingleActivity.this);
@@ -279,8 +281,8 @@ public class BasicInformationSingleActivity extends AppCompatActivity
 
     // Save data to SharedPreference
     private void saveDataToSharedPreference() {
-        MyInfoPreference.setStoredHeight(BasicInformationSingleActivity.this, mHeightValue);
-        MyInfoPreference.setStoredWeight(BasicInformationSingleActivity.this, mWeightValue);
+        // MyInfoPreference.setStoredHeight(BasicInformationSingleActivity.this, mHeightValue);
+        // MyInfoPreference.setStoredWeight(BasicInformationSingleActivity.this, mWeightValue);
 
         MyInfoPreference.setStoredGender(BasicInformationSingleActivity.this, mGenderPosition);
         MyInfoPreference.setStoredEducation(BasicInformationSingleActivity.this, mEducationPosition);
@@ -301,8 +303,8 @@ public class BasicInformationSingleActivity extends AppCompatActivity
         if (basicInfoObjectId != null) {
             final AVObject mBasicInfo = AVObject.createWithoutData("BasicInfo", basicInfoObjectId);
 
-            mBasicInfo.put("height", mHeightValue);
-            mBasicInfo.put("weight", mWeightValue);
+            // mBasicInfo.put("height", mHeightValue);
+            // mBasicInfo.put("weight", mWeightValue);
             mBasicInfo.put("gender", mGenderPosition);
             mBasicInfo.put("educationLevel", mEducationPosition);
             mBasicInfo.put("occupation", mOccupationPosition);
@@ -330,8 +332,8 @@ public class BasicInformationSingleActivity extends AppCompatActivity
             mBasicInfo.put("username", AVUser.getCurrentUser().getUsername());
             mBasicInfo.put("userId", AVUser.getCurrentUser());
 
-            mBasicInfo.put("height", mHeightValue);
-            mBasicInfo.put("weight", mWeightValue);
+            // mBasicInfo.put("height", mHeightValue);
+            // mBasicInfo.put("weight", mWeightValue);
             mBasicInfo.put("gender", mGenderPosition);
             mBasicInfo.put("educationLevel", mEducationPosition);
             mBasicInfo.put("occupation", mOccupationPosition);

@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -20,6 +21,17 @@ public class MoreTextInformationActivity extends AppCompatActivity
 
     private String moreTextInfoObjectId;
 
+    private int mGenderPosition;
+    private int mEducationPosition;
+    private int mOccupationPosition;
+    private int mBirthPlacePosition;
+    private int mWorkPlacePosition;
+    private int mOverseaPosition;
+    private int mSinglePosition;
+    private int mPetPosition;
+
+    private int mHeightValue;
+    private int mWeightValue;
     private int mIncomePosition;
     private int mReligionPosition;
     private int mMaritalPosition;
@@ -35,6 +47,8 @@ public class MoreTextInformationActivity extends AppCompatActivity
     private int mDrinkingPosition;
     private int mGamblingPosition;
 
+    private EditText mHeightText;
+    private EditText mWeightText;
     private Spinner mIncomeSpinner;
     private Spinner mReligionSpinner;
     private Spinner mMaritalSpinner;
@@ -55,6 +69,13 @@ public class MoreTextInformationActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_more_text_information);
+
+
+        // Height EditText
+        mHeightText = (EditText) findViewById(R.id.action_more_height);
+
+        // Weight EditText
+        mWeightText = (EditText) findViewById(R.id.action_more_weight);
 
 
         // onClick Income spinner
@@ -179,6 +200,22 @@ public class MoreTextInformationActivity extends AppCompatActivity
         mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Get the Height
+                // If put it out, then Integer.parseInt() will produce 0
+                // As it get the int value before inputting, so ...
+                try {
+                    mHeightValue = Integer.parseInt(mHeightText.getText().toString(), 10);
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
+
+                // Get the Weight
+                try {
+                    mWeightValue = Integer.parseInt(mWeightText.getText().toString(), 10);
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
+
                 // Save data to SharedPreference
                 saveDataToSharedPreference();
 
@@ -260,6 +297,14 @@ public class MoreTextInformationActivity extends AppCompatActivity
 
     // Create the profile by using info saved in SharedPreference when onCreate
     private void createProfileUsingSavedData() {
+        // Height
+        mHeightValue = MyInfoPreference.getStoredHeight(MoreTextInformationActivity.this);
+        mHeightText.setText(String.valueOf(mHeightValue));
+
+        // Weight
+        mWeightValue = MyInfoPreference.getStoredWeight(MoreTextInformationActivity.this);
+        mWeightText.setText(String.valueOf(mWeightValue));
+
         // Income
         mIncomePosition = MyInfoPreference.getStoredIncome(MoreTextInformationActivity.this);
         mIncomeSpinner.setSelection(mIncomePosition);
@@ -321,6 +366,9 @@ public class MoreTextInformationActivity extends AppCompatActivity
 
     // Save data to SharedPreference
     private void saveDataToSharedPreference() {
+        MyInfoPreference.setStoredHeight(MoreTextInformationActivity.this, mHeightValue);
+        MyInfoPreference.setStoredWeight(MoreTextInformationActivity.this, mWeightValue);
+
         MyInfoPreference.setStoredIncome(MoreTextInformationActivity.this, mIncomePosition);
         MyInfoPreference.setStoredReligion_More(MoreTextInformationActivity.this, mReligionPosition);
         MyInfoPreference.setStoredMaritalHistory(MoreTextInformationActivity.this, mMaritalPosition);
@@ -338,6 +386,20 @@ public class MoreTextInformationActivity extends AppCompatActivity
     }
 
 
+    // Get Basic Information from MyInfoPreference
+    private void getBasicInformation() {
+        // TODO - Birthday
+        mGenderPosition = MyInfoPreference.getStoredGender(MoreTextInformationActivity.this);
+        mEducationPosition = MyInfoPreference.getStoredEducation(MoreTextInformationActivity.this);
+        mOccupationPosition = MyInfoPreference.getStoredOccupation(MoreTextInformationActivity.this);
+        mBirthPlacePosition = MyInfoPreference.getStoredBirthPlace(MoreTextInformationActivity.this);
+        mWorkPlacePosition = MyInfoPreference.getStoredWorkPlace(MoreTextInformationActivity.this);
+        mOverseaPosition = MyInfoPreference.getStoredOversea(MoreTextInformationActivity.this);
+        mSinglePosition = MyInfoPreference.getStoredSingle(MoreTextInformationActivity.this);
+        mPetPosition = MyInfoPreference.getStoredPet(MoreTextInformationActivity.this);
+    }
+
+
     // Save data to LeanCloud
     private void saveDataToLeanCloud() {
         moreTextInfoObjectId = MyInfoPreference.getStoredMoreTextInfoObjectId(MoreTextInformationActivity.this);
@@ -345,6 +407,21 @@ public class MoreTextInformationActivity extends AppCompatActivity
         if (moreTextInfoObjectId != null) {
             final AVObject mMoreTextInfo = AVObject.createWithoutData("MoreTextInfo", moreTextInfoObjectId);
 
+            // Basic Information
+            getBasicInformation();
+            mMoreTextInfo.put("gender", mGenderPosition);
+            mMoreTextInfo.put("educationLevel", mEducationPosition);
+            mMoreTextInfo.put("occupation", mOccupationPosition);
+            mMoreTextInfo.put("birthPlace", mBirthPlacePosition);
+            mMoreTextInfo.put("workPlace", mWorkPlacePosition);
+            mMoreTextInfo.put("oversea", mOverseaPosition);
+            mMoreTextInfo.put("single", mSinglePosition);
+            mMoreTextInfo.put("pet", mPetPosition);
+
+
+            // More Text Information
+            mMoreTextInfo.put("height", mHeightValue);
+            mMoreTextInfo.put("weight", mWeightValue);
             mMoreTextInfo.put("income", mIncomePosition);
             mMoreTextInfo.put("religion", mReligionPosition);
             mMoreTextInfo.put("maritalHistory", mMaritalPosition);
@@ -377,6 +454,21 @@ public class MoreTextInformationActivity extends AppCompatActivity
             mMoreTextInfo.put("username", AVUser.getCurrentUser().getUsername());
             mMoreTextInfo.put("userId", AVUser.getCurrentUser());
 
+            // Basic Information
+            getBasicInformation();
+            mMoreTextInfo.put("gender", mGenderPosition);
+            mMoreTextInfo.put("educationLevel", mEducationPosition);
+            mMoreTextInfo.put("occupation", mOccupationPosition);
+            mMoreTextInfo.put("birthPlace", mBirthPlacePosition);
+            mMoreTextInfo.put("workPlace", mWorkPlacePosition);
+            mMoreTextInfo.put("oversea", mOverseaPosition);
+            mMoreTextInfo.put("single", mSinglePosition);
+            mMoreTextInfo.put("pet", mPetPosition);
+
+
+            // More Text Information
+            mMoreTextInfo.put("height", mHeightValue);
+            mMoreTextInfo.put("weight", mWeightValue);
             mMoreTextInfo.put("income", mIncomePosition);
             mMoreTextInfo.put("religion", mReligionPosition);
             mMoreTextInfo.put("maritalHistory", mMaritalPosition);
