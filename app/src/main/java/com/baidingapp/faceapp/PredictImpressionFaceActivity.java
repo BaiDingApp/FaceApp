@@ -28,9 +28,12 @@ import com.baidingapp.faceapp.helper.ImageHelper;
 import com.baidingapp.faceapp.helper.MyInfoPreference;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -52,7 +55,9 @@ public class PredictImpressionFaceActivity extends AppCompatActivity
     private String mImagePath;
     private AVFile mImageFile = null;
     private String predictFacePhotoId;
-/*
+    private BarChart mBarChart;
+
+    /*
     private Spinner mGenderSpinner;
     private Spinner mAgeSpinner;
     private Spinner mEducationSpinner;
@@ -75,6 +80,9 @@ public class PredictImpressionFaceActivity extends AppCompatActivity
     private int mReligionPosition;
     private int mPetPosition;
 
+    private int mNumberTraits = 6;
+    private float[] mTraitValue = new float[mNumberTraits];
+    private String[] mSocialTraits = new String[mNumberTraits];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +94,8 @@ public class PredictImpressionFaceActivity extends AppCompatActivity
         mUploadButton = (Button) findViewById(R.id.action_upload_photo_predict_impression_button);
         // the PredictImpression Button
         mPredictImpressionButton = (Button) findViewById(R.id.action_predict_impression_face);
+        // The Bar Chart
+        mBarChart = (BarChart) findViewById(R.id.predict_impression_face_bar_chart);
 
 
         // The URL is used to test
@@ -401,10 +411,6 @@ public class PredictImpressionFaceActivity extends AppCompatActivity
     }
 
 
-
-
-
-
     private void showResult() {
         // TODO
         // Get the Coefficient Estimates from LeanCloud
@@ -412,8 +418,7 @@ public class PredictImpressionFaceActivity extends AppCompatActivity
         mQuery.findInBackground(new FindCallback<AVObject>() {
             @Override
             public void done(List<AVObject> list, AVException e) {
-                String[] socialTraits = new String[list.size()];
-                float[][] coefEst = new float[list.size()][10];
+                float[] coefEst = new float[10];
                 String[] mSocialTraitsList = new String[10];
                 mSocialTraitsList[0] = "coefGender";
                 mSocialTraitsList[1] = "coefAge";
@@ -428,40 +433,47 @@ public class PredictImpressionFaceActivity extends AppCompatActivity
 
                 int i = 0;
                 for (AVObject object : list) {
-                    socialTraits[i] = object.getString("socialTrait");
+                    mSocialTraits[i] = object.getString("socialTraitCn");
 
-                    for (int j=0; j<10; j++) {
-                        coefEst[i][j] = Float.valueOf(object.getString(mSocialTraitsList[j]));
+                    for (int j = 0; j < 10; j++) {
+                        coefEst[j] = Float.valueOf(object.getString(mSocialTraitsList[j]));
                     }
 
-                    float mTraitValeOne = coefEst[0][0]*mGenderPosition + coefEst[0][1]*mAgePosition + coefEst[0][2]*mEducationPosition + coefEst[0][3]*mOccupationPosition
-                            + coefEst[0][4]*mBirthPlacePosition + coefEst[0][5]*mWorkPlacePosition + coefEst[0][6]*mOverseaPosition + coefEst[0][7]*mSinglePosition + coefEst[0][8]*mReligionPosition + coefEst[0][9]*mPetPosition ;
-                    int a = (int) mTraitValeOne;
-
-                    Toast.makeText(PredictImpressionFaceActivity.this, Integer.toString(a), Toast.LENGTH_SHORT).show();
+                    mTraitValue[i] = coefEst[0] * mGenderPosition + coefEst[1] * mAgePosition + coefEst[2] * mEducationPosition + coefEst[3] * mOccupationPosition
+                            + coefEst[4] * mBirthPlacePosition + coefEst[5] * mWorkPlacePosition + coefEst[6] * mOverseaPosition + coefEst[7] * mSinglePosition
+                            + coefEst[8] * mReligionPosition + coefEst[9] * mPetPosition;
 
                     i++;
-                   }
+                }
 
+                plotBarChart();
             }
         });
+    }
 
 
-        // Plot the BarChart of prediction result
-        BarChart mBarChart = (BarChart) findViewById(R.id.predict_impression_face_bar_chart);
+    // Plot the BarChart of prediction result
+    private void plotBarChart() {
+        // The labels that will be drawn on the XAxis
+        IAxisValueFormatter formatter = new IAxisValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, AxisBase axis) {
+                return mSocialTraits[(int) value];
+            }
+        };
+        XAxis xAxis = mBarChart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        // xAxis.setLabelCount(mNumberQuestions);
+        xAxis.setValueFormatter(formatter);
 
+
+        // Get Estimates
         List<BarEntry> barEntries = new ArrayList<>();
-        barEntries.add(new BarEntry(1f, 0.05f));
-        barEntries.add(new BarEntry(2f, 0.1f));
-        barEntries.add(new BarEntry(3f, 0.1f));
-        barEntries.add(new BarEntry(4f, 0.33f));
-        barEntries.add(new BarEntry(5f, 0.17f));
-        barEntries.add(new BarEntry(6f, 0.05f));
-        barEntries.add(new BarEntry(7f, 0.05f));
-        barEntries.add(new BarEntry(8f, 0.05f));
-        barEntries.add(new BarEntry(9f, 0.05f));
-        barEntries.add(new BarEntry(10f, 0.05f));
+        for (int i=0; i<mNumberTraits; i++) {
+            barEntries.add(new BarEntry(i, mTraitValue[i]));
+        }
 
+        // Plot the Figure
         BarDataSet barDataSet = new BarDataSet(barEntries, "TA对我的第一印象");
         BarData theData = new BarData(barDataSet);
         mBarChart.setDescription(null);

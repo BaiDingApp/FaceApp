@@ -121,6 +121,11 @@ public class FacePreferenceSurveyActivity extends AppCompatActivity {
         String currUsername = AVUser.getCurrentUser().getUsername();
         int currGender = MyInfoPreference.getStoredGender(FacePreferenceSurveyActivity.this);
         int currGenderInv = 2;
+        /*
+        if (currGender == 1) {
+            currGenderInv = 2;
+        }
+        */
         if (currGender == 2) {
             currGenderInv = 1;
         }

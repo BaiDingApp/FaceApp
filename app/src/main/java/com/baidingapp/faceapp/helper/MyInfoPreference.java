@@ -16,6 +16,8 @@ public class MyInfoPreference {
     private static final String PREDICT_FACE_PHOTO_ID = "predictFacePhotoId";
     private static final String DATING_FACE_PHOTO_ID = "datingFacePhotoId";
 
+    private static final String BASIC_INFO_COMPLETE = "basicInfoComplete";
+
     private static final String PREF_BIRTHDAY = "birthday";
     private static final String PREF_HEIGHT = "height";
     private static final String PREF_WEIGHT = "weight";
@@ -106,6 +108,17 @@ public class MyInfoPreference {
     }
     public static void setStoredDatingFacePhotoId(Context context, String datingFacePhotoId) {
         GeneralSetString(context, DATING_FACE_PHOTO_ID, datingFacePhotoId);
+    }
+
+
+
+    // IS INFO COMPLETE
+    // Basic Info
+    public static boolean getStoredIsBasicInfoComplete(Context context) {
+        return GeneralGetBoolean(context, BASIC_INFO_COMPLETE);
+    }
+    public static void setStoredIsBasicInfoComplete(Context context, boolean isComplete) {
+        GeneralSetBoolean(context, BASIC_INFO_COMPLETE, isComplete);
     }
 
 
@@ -396,6 +409,20 @@ public class MyInfoPreference {
         SharedPreferences sp = context.getSharedPreferences(username, Context.MODE_PRIVATE);
         SharedPreferences.Editor spEditor = sp.edit();
         spEditor.putInt(stringKey, intValue)
+                .apply();
+    }
+
+    // General method - setStoredBoolean & getStoredBoolean
+    private static boolean GeneralGetBoolean(Context context, String keyString) {
+        String username = AVUser.getCurrentUser().getUsername();
+        SharedPreferences sp = context.getSharedPreferences(username, Context.MODE_PRIVATE);
+        return sp.getBoolean(keyString, false);
+    }
+    private static void GeneralSetBoolean(Context context, String stringKey, boolean booleanValue) {
+        String username = AVUser.getCurrentUser().getUsername();
+        SharedPreferences sp = context.getSharedPreferences(username, Context.MODE_PRIVATE);
+        SharedPreferences.Editor spEditor = sp.edit();
+        spEditor.putBoolean(stringKey, booleanValue)
                 .apply();
     }
 

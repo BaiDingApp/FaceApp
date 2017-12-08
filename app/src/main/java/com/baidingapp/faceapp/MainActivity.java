@@ -14,7 +14,7 @@ import com.baidingapp.faceapp.helper.MyInfoPreference;
 
 public class MainActivity extends AppCompatActivity {
 
-    public final static String AppLaunchDate = "2017-11-25 00:00:00";
+    public final static String AppLaunchDate = "2017-12-06 00:00:00";
     public final static int mNumberTraitGroup = 6;
 
     private final static String KEY_INDEX =

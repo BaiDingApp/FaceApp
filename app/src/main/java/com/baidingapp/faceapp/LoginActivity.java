@@ -17,6 +17,7 @@ import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.LogInCallback;
 import com.avos.avoscloud.RequestPasswordResetCallback;
+import com.baidingapp.faceapp.helper.MyInfoPreference;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -103,7 +104,15 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void done(AVUser avUser, AVException e) {
                     if (e == null) {
-                        Intent intent = new Intent(LoginActivity.this, BasicInformationDefaultActivity.class);
+                        boolean mIsBasicInfoComplete = MyInfoPreference.getStoredIsBasicInfoComplete(LoginActivity.this);
+
+                        Intent intent;
+                        if (mIsBasicInfoComplete) {
+                            intent = new Intent(LoginActivity.this, MainActivity.class);
+                        } else {
+                            intent = new Intent(LoginActivity.this, BasicInformationDefaultActivity.class);
+                        }
+
                         startActivity(intent);
                         LoginActivity.this.finish();
                     } else {

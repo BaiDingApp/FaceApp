@@ -20,6 +20,7 @@ public class BasicInformationDefaultActivity extends AppCompatActivity
         implements AdapterView.OnItemSelectedListener {
 
     private String basicInfoObjectId;
+    private boolean mIsBasicInfoComplete;
 
     private int mGenderPosition;
     private int mEducationPosition;
@@ -138,6 +139,9 @@ public class BasicInformationDefaultActivity extends AppCompatActivity
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Compute Number of Basic Info Completed
+                computeNumberBasicInfoCompleted();
+
                 // Save data to SharedPreference
                 saveDataToSharedPreference();
 
@@ -204,6 +208,23 @@ public class BasicInformationDefaultActivity extends AppCompatActivity
     }
 
 
+    // Compute the Number of Basic Info Completed
+    private void computeNumberBasicInfoCompleted() {
+        int mNumber = 0;
+        if (mGenderPosition >0 )     { mNumber++; }
+        if (mEducationPosition > 0)  { mNumber++; }
+        if (mOccupationPosition > 0) { mNumber++; }
+        if (mBirthPlacePosition > 0) { mNumber++; }
+        if (mWorkPlacePosition > 0)  { mNumber++; }
+        if (mOverseaPosition > 0)    { mNumber++; }
+        if (mSinglePosition > 0)     { mNumber++; }
+        if (mReligionPosition > 0)   { mNumber++; }
+        if (mPetPosition > 0)        { mNumber++; }
+
+        mIsBasicInfoComplete = (mNumber == 9);
+    }
+
+
     // Create the profile by using info saved in SharedPreference when onCreate
     private void createProfileUsingSavedData() {
         // Gender
@@ -255,6 +276,8 @@ public class BasicInformationDefaultActivity extends AppCompatActivity
         MyInfoPreference.setStoredSingle(BasicInformationDefaultActivity.this, mSinglePosition);
         MyInfoPreference.setStoredReligion(BasicInformationDefaultActivity.this, mReligionPosition);
         MyInfoPreference.setStoredPet(BasicInformationDefaultActivity.this, mPetPosition);
+
+        MyInfoPreference.setStoredIsBasicInfoComplete(BasicInformationDefaultActivity.this, mIsBasicInfoComplete);
     }
 
 
