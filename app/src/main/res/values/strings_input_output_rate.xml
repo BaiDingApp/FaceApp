@@ -7,6 +7,7 @@
     <string name="please_recheck_later">数据比较少，请过一段时间再来查看</string>
     <string name="no_result_due_to_limited_data">数据比较少，请过一段时间再来查看</string>
     <string name="show_other_rates">别人眼中的我</string>
+    <string name="number_of_photo">第 * 张</string>
 
     <!-- Social trait of face -->
     <string name="trait_very_untrustworthy">很不可靠</string>

@@ -14,6 +14,7 @@
 
     <!-- Button on the Face Page -->
     <string name="input_rate">读人</string>
+    <string name="all_input_rates">读过的人</string>
     <string name="output_rate">别人眼中的我</string>
     <string name="predict_impression">人工神入 预测第一印象</string>
 

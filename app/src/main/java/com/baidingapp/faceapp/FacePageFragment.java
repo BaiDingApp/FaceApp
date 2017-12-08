@@ -21,6 +21,7 @@ public class FacePageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_face_page, container, false);
 
+        // on Click mInputRateButton
         Button mInputRateButton = (Button) view.findViewById(R.id.action_input_rate);
         mInputRateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -30,6 +31,19 @@ public class FacePageFragment extends Fragment {
             }
         });
 
+
+        // on Click mAllInputRatesButton
+        Button mAllInputRatesButton = (Button) view.findViewById(R.id.action_all_input_rates);
+        mAllInputRatesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), AllInputRateFaceActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+        // on Click mOutputRateButton
         Button mOutputRateButton = (Button) view.findViewById(R.id.action_output_rate);
         mOutputRateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,6 +53,8 @@ public class FacePageFragment extends Fragment {
             }
         });
 
+
+        // on Click m PredictImpressionButton
         Button mPredictImpressionButton = (Button) view.findViewById(R.id.action_predict_impression_button);
         mPredictImpressionButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -25,6 +25,15 @@
         android:text="@string/input_rate" />
 
     <Button
+        android:id="@+id/action_all_input_rates"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding = "16dp"
+        android:layout_marginBottom="10dp"
+        android:textSize="20sp"
+        android:text="@string/all_input_rates" />
+
+    <Button
         android:id="@+id/action_output_rate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
